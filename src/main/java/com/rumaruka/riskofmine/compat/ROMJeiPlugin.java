@@ -16,10 +16,10 @@ import static com.rumaruka.riskofmine.RiskOfMine.rl;
 public class ROMJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        this.registerIngredientInfo(registration, ROMItems.ENERGY_DRINK);
-        this.registerIngredientInfo(registration, ROMItems.GASOLINE);
-        this.registerIngredientInfo(registration, ROMItems.SHAPED_GLASS);
-        this.registerIngredientInfo(registration, ROMItems.CHRONOBAUBLE);
+        registerIngredientInfo(registration, ROMItems.ENERGY_DRINK);
+        registerIngredientInfo(registration, ROMItems.GASOLINE);
+        registerIngredientInfo(registration, ROMItems.SHAPED_GLASS);
+        registerIngredientInfo(registration, ROMItems.CHRONOBAUBLE);
 
 
     }

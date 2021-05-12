@@ -13,14 +13,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class GenerationEventHandler {
     public static final CommonChestFeatureConfig SMALL_CHEST = (new CommonChestFeatureConfig.Builder(new SimpleBlockStateProvider(ROMBlocks.SMALL_CHEST.defaultBlockState()),
-            new SimpleBlockPlacer())).tries(50).xspread(10).yspread(128).zspread(10).build();
+            new SimpleBlockPlacer())).tries(25).xspread(35).yspread(128).zspread(10).build();
 
     @SubscribeEvent
     public void onBiomesLoadingEvent(BiomeLoadingEvent event) {
         //spawn depend on biome type
-        if (event.getCategory() == Biome.Category.FOREST
-                || event.getCategory() == Biome.Category.PLAINS
-                || event.getCategory() == Biome.Category.TAIGA
+        if (
+                 event.getCategory() == Biome.Category.TAIGA
                 || event.getCategory() == Biome.Category.EXTREME_HILLS) {
             //spawn
             event.getGeneration().addFeature(

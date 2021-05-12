@@ -101,4 +101,9 @@ public class ShapedGlassItem extends ItemCollectiblesBase implements ICurioItem 
         defaultModifiers = builder.build();
         return defaultModifiers;
     }
+
+    @Override
+    public boolean showAttributesTooltip(String identifier, ItemStack stack) {
+        return false;
+    }
 }

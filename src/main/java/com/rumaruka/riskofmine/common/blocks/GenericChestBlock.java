@@ -184,7 +184,7 @@ public class GenericChestBlock extends ContainerBlock implements IWaterLoggable 
             TileEntity tileentity = worldIn.getBlockEntity(pos);
             for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                 ItemStack payment = player.inventory.getItem(i);
-                if (tileentity instanceof BaseChestTE &&(payment.getItem() == paymentOneChest(Items.IRON_INGOT,countPay).getItem() || payment.getItem() == paymentOneChest( itemPayment,countPay).getItem())) {
+                if (tileentity instanceof BaseChestTE &&(payment.getItem() == paymentOneChest(itemPayment,countPay).getItem())) {
                     player.openMenu((BaseChestTE) tileentity);
                     player.awardStat(Stats.OPEN_BARREL);
                     PiglinTasks.angerNearbyPiglins(player, true);

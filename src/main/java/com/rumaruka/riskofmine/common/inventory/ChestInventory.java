@@ -13,6 +13,7 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 public class ChestInventory extends Container {
 
@@ -20,7 +21,7 @@ public class ChestInventory extends Container {
 
     private final ChestsTypes chestType;
 
-    public static ChestInventory createLargeContainer(int windowId, PlayerInventory playerInventory) {
+    public static @NotNull ChestInventory createLargeContainer(int windowId, PlayerInventory playerInventory) {
         return new ChestInventory(ROMContainerTypes.LARGE_CHEST, windowId, playerInventory, new Inventory(ChestsTypes.LARGE.size), ChestsTypes.LARGE);
     }
 
@@ -28,7 +29,7 @@ public class ChestInventory extends Container {
         return new ChestInventory(ROMContainerTypes.LARGE_CHEST, windowId, playerInventory, inventory, ChestsTypes.LARGE);
     }
 
-    public static ChestInventory createCommonContainer(int windowId, PlayerInventory playerInventory) {
+    public static @NotNull ChestInventory createCommonContainer(int windowId, PlayerInventory playerInventory) {
         return new ChestInventory(ROMContainerTypes.SMALL_CHEST, windowId, playerInventory, new Inventory(ChestsTypes.SMALL.size), ChestsTypes.SMALL);
     }
 

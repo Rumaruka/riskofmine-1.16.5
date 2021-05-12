@@ -95,4 +95,8 @@ public class EnergyDrinkItem extends ItemCollectiblesBase implements ICurioItem 
         }
     }
 
+    @Override
+    public boolean showAttributesTooltip(String identifier, ItemStack stack) {
+        return false;
+    }
 }

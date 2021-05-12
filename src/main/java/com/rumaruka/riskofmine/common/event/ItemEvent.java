@@ -13,7 +13,6 @@ import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -21,7 +20,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -43,7 +41,9 @@ public class ItemEvent {
      */
     @SubscribeEvent
     public void onEntityDeath(LivingDeathEvent event) {
-
+        /**
+         Player kill Entity
+         */
         if (event.getSource().getEntity() instanceof ServerPlayerEntity) {
             ServerPlayerEntity player = (ServerPlayerEntity) event.getSource().getEntity();
             LivingEntity livingEntity = event.getEntityLiving();
@@ -68,6 +68,9 @@ public class ItemEvent {
 
             }
         }
+        /**
+         Entity kill Player
+         */
         if (event.getSource().getEntity() instanceof CreatureEntity && event.getEntityLiving() instanceof ServerPlayerEntity) {
             CreatureEntity livingEntity = (CreatureEntity) event.getSource().getEntity();
             ServerPlayerEntity player = (ServerPlayerEntity) event.getEntityLiving();
@@ -76,7 +79,6 @@ public class ItemEvent {
                 if (event.getSource().isBypassInvul()) {
                     return;
                 } else {
-
                     if (livingEntity != null) {
                         for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                             ItemStack itemStack = player.inventory.getItem(i);
@@ -141,7 +143,6 @@ public class ItemEvent {
             LivingEntity livingEntity = event.getEntityLiving();
             World world = livingEntity.level;
             if (!world.isClientSide) {
-
                 if (player != null) {
                     for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                         ItemStack itemStack = player.inventory.getItem(i);
@@ -158,7 +159,6 @@ public class ItemEvent {
                         }
                     }
                 }
-
                 if (player != null) {
                     for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                         ItemStack itemStack = player.inventory.getItem(i);
@@ -179,7 +179,6 @@ public class ItemEvent {
                         }
                     }
                 }
-
                 if (player != null) {
                     for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                         ItemStack itemStack = player.inventory.getItem(i);
@@ -212,7 +211,6 @@ public class ItemEvent {
                         }
                     }
                 }
-
                 if (player != null) {
                     for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                         ItemStack itemStack = player.inventory.getItem(i);
@@ -234,8 +232,6 @@ public class ItemEvent {
                         }
                     }
                 }
-
-
                 if (player != null) {
                     for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                         ItemStack itemStack = player.inventory.getItem(i);
@@ -267,7 +263,6 @@ public class ItemEvent {
     public void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
         PlayerEntity player = Minecraft.getInstance().player;
         if (event.getEntityLiving() instanceof CreatureEntity) {
-
             LivingEntity livingEntity = event.getEntityLiving();
             World world = livingEntity.level;
             if (!world.isClientSide) {
@@ -303,6 +298,7 @@ public class ItemEvent {
 
                     }
                 }
+
             }
         }
     }
@@ -314,6 +310,7 @@ public class ItemEvent {
      */
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onPlayerHurt(LivingHurtEvent event) {
+
         if (event.getSource().getEntity() instanceof CreatureEntity && event.getEntityLiving() instanceof ServerPlayerEntity) {
 
             ServerPlayerEntity player = (ServerPlayerEntity) event.getEntityLiving();
@@ -342,19 +339,20 @@ public class ItemEvent {
                         }
                     }
                 }
+
             }
 
 
         }
     }
 
-
+/*
     @SubscribeEvent
     public void onXpLevelUp(PlayerXpEvent.LevelChange event) {
 
         PlayerEntity player = event.getPlayer();
         int levels = event.getLevels();
-        player.experienceLevel+=levels;
+        player.experienceLevel += levels;
         World level = player.level;
         BlockPos pos = player.blockPosition();
         if (levels > 0 && player.experienceLevel % 2 == 0) {
@@ -366,20 +364,22 @@ public class ItemEvent {
                 if (itemStack.getItem() == ROMItems.WARBANNER) {
                     BlockState state = level.getBlockState(pos);
                     Block block = state.getBlock();
-                    if(block == ROMBlocks.WAR_BANNER_BLOCK){
-                       level.setBlock(pos,state,4);
+                    if (block == ROMBlocks.WAR_BANNER_BLOCK) {
+                        level.setBlock(pos, state, 4);
                     }
                 }
             }
         }
 
     }
-
-
+*/
+//TODO: EntityMissiles and Fireworks
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void attacksDronesFireworksMissiles(LivingAttackEvent event) {
 
     }
+
+
 }
 
 
