@@ -3,7 +3,7 @@ package com.rumaruka.riskofmine.utils;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.rumaruka.riskofmine.api.CategoryEnum;
-import com.rumaruka.riskofmine.common.entity.bullets.EntityGoldenIngotBullets;
+
 import com.rumaruka.riskofmine.common.items.equipment.EquipmenShootItemBase;
 import com.rumaruka.riskofmine.common.tiles.CommonChestTE;
 import com.rumaruka.riskofmine.init.ROMBlocks;
@@ -145,9 +145,5 @@ public class ROMUtils {
             }
         }
     }
-    public static EntityGoldenIngotBullets createBullets(World level, ItemStack stack, LivingEntity livingEntity) {
-        EntityGoldenIngotBullets goldenIngotBullets = new EntityGoldenIngotBullets(level,livingEntity);
-        goldenIngotBullets.setItem(stack);
-        return goldenIngotBullets;
-    }
+
 }

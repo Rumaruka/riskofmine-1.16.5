@@ -22,6 +22,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import javax.annotation.Nullable;
@@ -59,7 +60,7 @@ public class EnergyDrinkItem extends ItemCollectiblesBase implements ICurioItem 
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         if (slot == EquipmentSlotType.OFFHAND) {
-            builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_MODIFIER_SPRINTING_UUID, "Speed",Math.abs(Math.tan(Math.PI*stack.getCount()/ 180)) , AttributeModifier.Operation.ADDITION));
+            builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_MODIFIER_SPRINTING_UUID, "Speed",Math.abs(Math.tan(Math.PI*stack.getCount() / 180)) , AttributeModifier.Operation.ADDITION));
         }
 
         defaultModifiers = builder.build();
@@ -80,13 +81,13 @@ public class EnergyDrinkItem extends ItemCollectiblesBase implements ICurioItem 
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 
-        builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_MODIFIER_SPRINTING_UUID, "Speed", Math.abs(Math.tan(Math.PI*stack.getCount()/ 180)), AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_MODIFIER_SPRINTING_UUID, "Speed", Math.abs(Math.tan(Math.PI*stack.getCount() / 180)), AttributeModifier.Operation.ADDITION));
         defaultModifiers = builder.build();
         return defaultModifiers;
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
         tooltip.add(new TranslationTextComponent((getColor() + getTypeName())));
         tooltip.add(new TranslationTextComponent("ror.shiftpress.info"));
         if (Screen.hasShiftDown()) {

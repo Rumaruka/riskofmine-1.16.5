@@ -18,9 +18,7 @@ public class GenerationEventHandler {
     @SubscribeEvent
     public void onBiomesLoadingEvent(BiomeLoadingEvent event) {
         //spawn depend on biome type
-        if (
-                 event.getCategory() == Biome.Category.TAIGA
-                || event.getCategory() == Biome.Category.EXTREME_HILLS) {
+        if ( event.getCategory() == Biome.Category.TAIGA   || event.getCategory() == Biome.Category.EXTREME_HILLS) {
             //spawn
             event.getGeneration().addFeature(
                     GenerationStage.Decoration.LOCAL_MODIFICATIONS,

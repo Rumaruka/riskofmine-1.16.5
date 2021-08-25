@@ -27,8 +27,11 @@ public class ROMTiles {
         private static void register() {
 
             REGISTER.registerSingleBound("small_chest", CommonChestTE::new, () -> ROMBlocks.SMALL_CHEST).regCustomRenderer(() -> CommonChestTESR::new);
+
             REGISTER.registerSingleBound("large_chest", LargeChestTE::new, () -> ROMBlocks.LARGE_CHEST);
 
         }
     }
 }
+
+

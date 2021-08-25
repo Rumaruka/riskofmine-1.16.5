@@ -1,9 +1,7 @@
 package com.rumaruka.riskofmine.common.items.equipment;
 
 import com.rumaruka.riskofmine.api.CategoryEnum;
-import com.rumaruka.riskofmine.common.config.ModConfig;
-import com.rumaruka.riskofmine.common.entity.bullets.EntityGoldenIngotBullets;
-import com.rumaruka.riskofmine.init.ROMItems;
+
 import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -73,26 +71,27 @@ public class TheCrowdFunderItem extends EquipmenShootItemBase {
             if (!((double) f < 0.1D)) {
                 boolean flag1 = player.abilities.instabuild || (itemStack.getItem() instanceof ArrowItem);
                 if (!level.isClientSide) {
-                    Item golditem = (Item) (itemStack.getItem() instanceof Item ? itemStack.getItem() : Items.GOLD_INGOT);
-                    EntityGoldenIngotBullets goldenIngotBullets = ROMUtils.createBullets(level, itemStack, player);
-                    goldenIngotBullets = bullets(goldenIngotBullets);
-                    goldenIngotBullets.shootFromRotation(player, player.xRot, player.yRot, 0.0F, f * 3.0F, 1.0F);
-                    if (f == 1.0F) {
-                        goldenIngotBullets.setCritArrow(true);
-                    }
-
-
-                    goldenIngotBullets.setBaseDamage(goldenIngotBullets.getBaseDamage() + 1);
-
-
-                    stack.hurtAndBreak(1, player, (p_220009_1_) -> {
-                        p_220009_1_.broadcastBreakEvent(player.getUsedItemHand());
-                    });
-                    if (flag1 || player.abilities.instabuild && (itemStack.getItem() == Items.SPECTRAL_ARROW || itemStack.getItem() == Items.TIPPED_ARROW)) {
-                        goldenIngotBullets.pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
-                    }
-
-                    level.addFreshEntity(goldenIngotBullets);
+                    itemStack.getItem();
+                    Item golditem = (Item) itemStack.getItem();
+//                    EntityGoldenIngotBullets goldenIngotBullets = ROMUtils.createBullets(level, itemStack, player);
+//                    goldenIngotBullets = bullets(goldenIngotBullets);
+//                    goldenIngotBullets.shootFromRotation(player, player.xRot, player.yRot, 0.0F, f * 3.0F, 1.0F);
+//                    if (f == 1.0F) {
+//                        goldenIngotBullets.setCritArrow(true);
+//                    }
+//
+//
+//                    goldenIngotBullets.setBaseDamage(goldenIngotBullets.getBaseDamage() + 1);
+//
+//
+//                    stack.hurtAndBreak(1, player, (p_220009_1_) -> {
+//                        p_220009_1_.broadcastBreakEvent(player.getUsedItemHand());
+//                    });
+//                    if (flag1 || player.abilities.instabuild && (itemStack.getItem() == Items.SPECTRAL_ARROW || itemStack.getItem() == Items.TIPPED_ARROW)) {
+//                        goldenIngotBullets.pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
+//                    }
+//
+//                    level.addFreshEntity(goldenIngotBullets);
                 }
 
                 level.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
@@ -137,9 +136,9 @@ public class TheCrowdFunderItem extends EquipmenShootItemBase {
     }
 
 
-    public EntityGoldenIngotBullets bullets(EntityGoldenIngotBullets bullets) {
-        return bullets;
-    }
+//    public EntityGoldenIngotBullets bullets(EntityGoldenIngotBullets bullets) {
+//        return bullets;
+//    }
 
     @Override
     public Predicate<ItemStack> getAllSupportedProjectiles() {
