@@ -1,8 +1,8 @@
 package com.rumaruka.riskofmine.common.blocks;
 
 import com.rumaruka.riskofmine.api.ChestsTypes;
-import com.rumaruka.riskofmine.common.cap.ROMMoney;
-import com.rumaruka.riskofmine.common.cap.data.Money;
+import com.rumaruka.riskofmine.common.cap.money.ROMMoney;
+import com.rumaruka.riskofmine.common.cap.money.data.Money;
 import com.rumaruka.riskofmine.common.tiles.BaseChestTE;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +18,6 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
@@ -41,7 +40,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -186,6 +184,7 @@ public class GenericChestBlock extends ContainerBlock implements IWaterLoggable 
                 if (tileentity instanceof BaseChestTE &&!player.abilities.instabuild) {
                     if(money.getCurrentMoney()>0){
                         money.consumeMoney(player,10.0f);
+                        romMoney.detectAndSendChanges();
                         player.openMenu((BaseChestTE) tileentity);
                         player.awardStat(Stats.OPEN_BARREL);
                         PiglinTasks.angerNearbyPiglins(player, true);

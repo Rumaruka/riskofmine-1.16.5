@@ -24,5 +24,6 @@
   "item.riskofmine.energy_drink": "Energy Drink",
   "item.riskofmine.beads_of_fealty": "Beads Of Fealty",
   "item.riskofmine.chronobauble": "Chronobauble",
-  "playment.chest": "Please Pay for Open Chest"
+  "playment.chest": "Please Pay for Open Chest",
+  "riskofmine.currentmoney.name": "Money:"
 }
