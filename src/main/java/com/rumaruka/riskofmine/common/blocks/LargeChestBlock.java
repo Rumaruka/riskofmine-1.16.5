@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class LargeChestBlock extends GenericChestBlock {
     public LargeChestBlock() {
-        super(Items.DIAMOND, ModConfig.countSmallOpen.get(),ChestsTypes.LARGE, ROMTiles.LARGE_CHEST, Properties.of(Material.STONE).strength(-1.0F, 3600000.0F));
+        super(ChestsTypes.LARGE, ROMTiles.LARGE_CHEST, Properties.of(Material.STONE).strength(-1.0F, 3600000.0F));
     }
 
     @Nullable

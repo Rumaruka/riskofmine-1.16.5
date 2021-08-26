@@ -34,10 +34,6 @@ public class ROMCapability {
     public static void onCommonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             TimeCore.INSTANCE.getCapabilityManager().attachStaticCoffeeCapability(CapabilityOwner.ENTITY, MONEY, entity -> entity instanceof PlayerEntity, entity -> new ROMMoney((PlayerEntity) entity));
-//            TimeCore.INSTANCE.getCapabilityManager().enableKeepingPlayerCapability(player -> {
-//                JPlayer cap = JPlayer.from(player);
-//                cap.serialize(coffeeProperty -> {coffeeProperty.})
-//            });//TODO make better
             TimeCore.INSTANCE.getCapabilityManager().enableSyncingPlayerCapabilityOnJoin(entity -> {
                 ROMMoney cap = ROMMoney.from(entity);
                 if (cap != null) cap.sendAllData();

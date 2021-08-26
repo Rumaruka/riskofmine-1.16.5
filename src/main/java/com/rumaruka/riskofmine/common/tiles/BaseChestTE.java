@@ -3,6 +3,9 @@ package com.rumaruka.riskofmine.common.tiles;
 import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.api.ChestsTypes;
 import com.rumaruka.riskofmine.common.blocks.GenericChestBlock;
+import com.rumaruka.riskofmine.common.cap.ROMMoney;
+import com.rumaruka.riskofmine.common.cap.ROMMoneyStorage;
+import com.rumaruka.riskofmine.common.cap.data.Money;
 import com.rumaruka.riskofmine.common.inventory.ChestInventory;
 import com.rumaruka.riskofmine.init.ROMSounds;
 import net.minecraft.block.Block;
@@ -33,6 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 @OnlyIn(value = Dist.CLIENT, _interface = IChestLid.class)
 public class BaseChestTE extends LockableLootTileEntity implements IChestLid, ITickableTileEntity {
+
 
     private NonNullList<ItemStack> chestContents;
     protected float lidAngle;

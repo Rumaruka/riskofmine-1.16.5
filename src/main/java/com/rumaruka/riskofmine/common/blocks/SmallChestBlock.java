@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class SmallChestBlock extends GenericChestBlock {
     public SmallChestBlock() {
-        super(Items.GOLD_INGOT, ModConfig.countSmallOpen.get(), ChestsTypes.SMALL, ROMTiles.SMALL_CHEST, Properties.of(Material.STONE).strength(-1.0F, 3600000.0F));
+        super( ChestsTypes.SMALL, ROMTiles.SMALL_CHEST, Properties.of(Material.STONE).strength(-1.0F, 3600000.0F));
     }
 
     @Nullable

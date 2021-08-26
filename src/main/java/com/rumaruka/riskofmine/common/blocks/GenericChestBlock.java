@@ -1,6 +1,8 @@
 package com.rumaruka.riskofmine.common.blocks;
 
 import com.rumaruka.riskofmine.api.ChestsTypes;
+import com.rumaruka.riskofmine.common.cap.ROMMoney;
+import com.rumaruka.riskofmine.common.cap.data.Money;
 import com.rumaruka.riskofmine.common.tiles.BaseChestTE;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
@@ -50,8 +52,7 @@ public class GenericChestBlock extends ContainerBlock implements IWaterLoggable 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 12, 14);
 
-    protected int countPay;
-    protected Item itemPayment;
+
 
     private final ChestsTypes type;
     private final TileEntityType<? extends BaseChestTE> tileEntityTypeSupplier;
@@ -75,10 +76,9 @@ public class GenericChestBlock extends ContainerBlock implements IWaterLoggable 
         }
     };
 
-    public GenericChestBlock(Item paymentItem, int count, ChestsTypes typeIn, TileEntityType<? extends BaseChestTE> tileEntityTypeSupplierIn, Properties propertiesIn) {
+    public GenericChestBlock(ChestsTypes typeIn, TileEntityType<? extends BaseChestTE> tileEntityTypeSupplierIn, Properties propertiesIn) {
         super(propertiesIn);
-        this.itemPayment = paymentItem;
-        this.countPay = count;
+
         this.type = typeIn;
         this.tileEntityTypeSupplier = tileEntityTypeSupplierIn;
 
@@ -174,21 +174,23 @@ public class GenericChestBlock extends ContainerBlock implements IWaterLoggable 
 
     @Override
     public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-
-
+         ROMMoney romMoney = ROMMoney.from(player);
+        Money money = romMoney.money;
         if (worldIn.isClientSide) {
 
             return ActionResultType.SUCCESS;
 
         } else {
             TileEntity tileentity = worldIn.getBlockEntity(pos);
-            for (int i = 0; i < player.inventory.getContainerSize(); i++) {
-                ItemStack payment = player.inventory.getItem(i);
-                if (tileentity instanceof BaseChestTE &&(payment.getItem() == paymentOneChest(itemPayment,countPay).getItem())) {
-                    player.openMenu((BaseChestTE) tileentity);
-                    player.awardStat(Stats.OPEN_BARREL);
-                    PiglinTasks.angerNearbyPiglins(player, true);
-                    payment.shrink(countPay);
+
+                if (tileentity instanceof BaseChestTE &&!player.abilities.instabuild) {
+                    if(money.getCurrentMoney()>0){
+                        money.consumeMoney(player,10.0f);
+                        player.openMenu((BaseChestTE) tileentity);
+                        player.awardStat(Stats.OPEN_BARREL);
+                        PiglinTasks.angerNearbyPiglins(player, true);
+
+                    }
 
 
                 }
@@ -198,16 +200,9 @@ public class GenericChestBlock extends ContainerBlock implements IWaterLoggable 
 
         }
 
-    }
 
 
 
-    public ItemStack paymentOneChest(Item item,int count) {
-        this.countPay=count;
-
-        return new ItemStack(item, count);
-
-    }
 
 //    private ItemStack paymentChest(Item item, int count){
 //        ArrayList<Item> items = new ArrayList<>();
