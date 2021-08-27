@@ -26,7 +26,7 @@ import java.awt.*;
 @Mod.EventBusSubscriber(modid = RiskOfMine.MODID, value = Dist.CLIENT)
 public class MoneyOverlayRender {
     public static KeyBinding keyMoney;
-
+    private static final Minecraft mc = Minecraft.getInstance();
     @SubscribeEvent
     public static void renderOverlays(RenderGameOverlayEvent.Post event) {
 
@@ -58,6 +58,7 @@ public class MoneyOverlayRender {
             float finalStartY = startY;
             String toDisplay = getMoneyDisplay(money);
             Color color = Color.magenta;
+//            mc.textureManager.bind();
             //maxRectWidth = Math.max(maxRectWidth,fontRenderer.width(toDisplay)+ 5.5F * 2);
             //float finalMaxRectWidth = maxRectWidth;
             DrawHelper.drawString(stack, fontRenderer, toDisplay, 27.5f, finalStartY, color.getRGB());
