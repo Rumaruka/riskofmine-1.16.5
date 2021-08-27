@@ -22,8 +22,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 
-version = '0.15.1b'
-group = 'com.rumaruka.riskofmine' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = '0.17.1b'
+group = 'com.rumaruka.riskofmine'
 archivesBaseName = 'riskofmine'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'

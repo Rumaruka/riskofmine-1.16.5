@@ -7,11 +7,17 @@ import com.rumaruka.riskofmine.common.cap.money.data.Money;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.client.util.InputMappings;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import org.lwjgl.glfw.GLFW;
 import ru.timeconqueror.timecore.api.util.client.DrawHelper;
 
 import java.awt.*;
@@ -19,15 +25,26 @@ import java.awt.*;
 
 @Mod.EventBusSubscriber(modid = RiskOfMine.MODID, value = Dist.CLIENT)
 public class MoneyOverlayRender {
-
+    public static KeyBinding keyMoney;
 
     @SubscribeEvent
     public static void renderOverlays(RenderGameOverlayEvent.Post event) {
 
-        if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
-            renderNearbyDisplay(event.getMatrixStack());
+
+            if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
+            if(keyMoney.isDown()){
+                renderNearbyDisplay(event.getMatrixStack());
+
+            }
         }
     }
+    public static void keyPressed(FMLClientSetupEvent event){
+        keyMoney=new KeyBinding("Open Money Overlay", GLFW.GLFW_KEY_M,"Risk of Mine");
+        ClientRegistry.registerKeyBinding(keyMoney);
+
+    }
+
+
 
     private static void renderNearbyDisplay(MatrixStack stack) {
         stack.pushPose();

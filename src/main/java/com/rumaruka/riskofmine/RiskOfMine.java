@@ -3,6 +3,7 @@ package com.rumaruka.riskofmine;
 
 import com.rumaruka.riskofmine.client.ROMEntityRegister;
 import com.rumaruka.riskofmine.client.screen.BaseScreen;
+import com.rumaruka.riskofmine.client.screen.overlay.MoneyOverlayRender;
 import com.rumaruka.riskofmine.common.config.ModConfig;
 import com.rumaruka.riskofmine.common.event.ItemEvent;
 import com.rumaruka.riskofmine.common.event.MoneyEvent;
@@ -49,6 +50,7 @@ public class RiskOfMine implements TimeMod {
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
             // Client setup
             eventBus.addListener(this::clientSetup);
+            eventBus.addListener(MoneyOverlayRender::keyPressed);
         });
         ROMParticles.PARTICLES.register(eventBus);
         ROMEffects.EFFECTS.register(eventBus);
