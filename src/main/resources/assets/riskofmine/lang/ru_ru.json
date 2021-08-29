@@ -3,10 +3,10 @@
   "item.riskofmine.armor_piercing_rounds": "Armor-Piercing Rounds",
   "item.riskofmine.bustling_fungus": "Bustling Fungus",
   "item.riskofmine.monster_tooth": "Monster Tooth",
-  "item.riskofmine.soldier_syringe": "Soldier\u0027s Syringe",
+  "item.riskofmine.soldier_syringe": "Шприц Солдата",
   "item.riskofmine.infusion": "Infusion",
   "item.riskofmine.shaped_glass": "Shaped Glass",
-  "item.riskofmine.gasoline": "Gasoline",
+  "item.riskofmine.gasoline": "Бензин",
   "effect.riskofmine.stun": "Stun",
   "ror.shiftpress.info": "Press Shift for more info",
   "ror.alt.info": "Press Alt for more info about feature",
@@ -21,11 +21,9 @@
   "#MARK AUTO GEN START": "",
   "#MARK AUTO GEN END": "",
   "item.riskofmine.crowbar": "Crowbar",
-  "item.riskofmine.energy_drink": "Energy Drink",
+  "item.riskofmine.energy_drink": "Энергетик",
   "item.riskofmine.beads_of_fealty": "Beads Of Fealty",
-  "item.riskofmine.sticky_bomb": "Sticky Bomb",
   "item.riskofmine.chronobauble": "Chronobauble",
   "playment.chest": "Please Pay for Open Chest",
-  "riskofmine.currentmoney.name": "$",
-  "riskofmine.currentlunar.name": "Lunar:"
+  "riskofmine.currentmoney.name": "$"
 }

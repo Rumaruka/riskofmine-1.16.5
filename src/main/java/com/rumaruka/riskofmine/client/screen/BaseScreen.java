@@ -43,13 +43,9 @@ public class BaseScreen extends ContainerScreen<ChestInventory> implements IHasC
     @Override
     protected void renderBg(@NotNull MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-
-        assert this.minecraft != null;
         this.minecraft.getTextureManager().bind(this.chestType.guiTexture);
-
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
-
         blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, this.textureXSize, this.textureYSize);
     }
 

@@ -6,6 +6,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 
 import static com.rumaruka.riskofmine.RiskOfMine.MODID;
 
@@ -17,7 +18,7 @@ public class ModSetup {
 
 
         @Override
-        public ItemStack makeIcon() {
+        public @NotNull ItemStack makeIcon() {
             return new ItemStack(ROMItems.ARMOR_PIERCING_ROUNDS);
         }
     };

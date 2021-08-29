@@ -3,9 +3,11 @@ package com.rumaruka.riskofmine;
 
 import com.rumaruka.riskofmine.client.ROMEntityRegister;
 import com.rumaruka.riskofmine.client.screen.BaseScreen;
+import com.rumaruka.riskofmine.client.screen.overlay.LunarOverlayRender;
 import com.rumaruka.riskofmine.client.screen.overlay.MoneyOverlayRender;
 import com.rumaruka.riskofmine.common.config.ModConfig;
 import com.rumaruka.riskofmine.common.event.ItemEvent;
+import com.rumaruka.riskofmine.common.event.LunarEvent;
 import com.rumaruka.riskofmine.common.event.MoneyEvent;
 import com.rumaruka.riskofmine.events.GenerationEventHandler;
 import com.rumaruka.riskofmine.init.*;
@@ -51,6 +53,7 @@ public class RiskOfMine implements TimeMod {
             // Client setup
             eventBus.addListener(this::clientSetup);
             eventBus.addListener(MoneyOverlayRender::keyPressed);
+            eventBus.addListener(LunarOverlayRender::keyPressed);
         });
         ROMParticles.PARTICLES.register(eventBus);
         ROMEffects.EFFECTS.register(eventBus);
@@ -61,6 +64,7 @@ public class RiskOfMine implements TimeMod {
 
         MinecraftForge.EVENT_BUS.register(new ItemEvent());
         MinecraftForge.EVENT_BUS.register(new MoneyEvent());
+//        MinecraftForge.EVENT_BUS.register(new LunarEvent());
 
 
     }
@@ -84,17 +88,19 @@ public class RiskOfMine implements TimeMod {
     private void clientSetup(final FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(ROMBlocks.SMALL_CHEST, RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ROMBlocks.LARGE_CHEST, RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ROMBlocks.LUNAR_CHEST, RenderType.cutoutMipped());
         ScreenManager.register(ROMContainerTypes.SMALL_CHEST, BaseScreen::new);
         ScreenManager.register(ROMContainerTypes.LARGE_CHEST, BaseScreen::new);
+        ScreenManager.register(ROMContainerTypes.LEGENDARY_CHEST, BaseScreen::new);
+        ScreenManager.register(ROMContainerTypes.LUNAR_CHEST, BaseScreen::new);
+
         ROMEntityRegister.renderEntity();
     }
 
     private void enqueueIMC(InterModEnqueueEvent event) {
-
         for (SlotTypePreset preset : SlotTypePreset.values()) {
             InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> preset.getMessageBuilder().size(ModConfig.sizeCurio.get()).build());
         }
-
     }
 
 

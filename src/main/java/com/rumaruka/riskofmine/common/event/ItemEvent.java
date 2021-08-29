@@ -19,6 +19,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -249,7 +250,24 @@ public class ItemEvent {
                     }
 
                 }
+                if (player != null) {
+                    for (int i = 0; i < player.inventory.getContainerSize(); i++) {
+                        ItemStack itemStack = player.inventory.getItem(i);
+                        if (itemStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
+                            event.getEntity().level.explode(event.getEntity(), event.getEntity().getX(), event.getEntity().getY(0.0625D), event.getEntity().getZ(), 4.0F, Explosion.Mode.BREAK);
+                        }
+                    }
+                    if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STICKY_BOMB, player).isPresent()) {
+                        ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STUN_GRENADE, player).get().right;
+                        if (curioStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
+                            if (curioStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
+                                event.getEntity().level.explode(event.getEntity(), event.getEntity().getX(), event.getEntity().getY(0.0625D), event.getEntity().getZ(), 4.0F, Explosion.Mode.BREAK);
 
+                            }
+                        }
+                    }
+
+                }
             }
         }
 

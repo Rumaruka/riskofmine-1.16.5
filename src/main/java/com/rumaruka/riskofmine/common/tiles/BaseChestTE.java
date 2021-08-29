@@ -29,6 +29,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
 @OnlyIn(value = Dist.CLIENT, _interface = IChestLid.class)
@@ -76,10 +77,14 @@ public class BaseChestTE extends LockableLootTileEntity implements IChestLid, IT
     public void load(BlockState state, CompoundNBT compound) {
         super.load(state, compound);
 
-        this.chestContents = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        this.loadFromTag(compound);
 
-        if (!this.tryLoadLootTable(compound)) {
-            ItemStackHelper.loadAllItems(compound, this.chestContents);
+
+    }
+    public void loadFromTag(CompoundNBT p_190586_1_) {
+        this.chestContents = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        if (!this.tryLoadLootTable(p_190586_1_) && p_190586_1_.contains("Items", 9)) {
+            ItemStackHelper.loadAllItems(p_190586_1_, this.chestContents);
         }
 
     }
@@ -88,13 +93,15 @@ public class BaseChestTE extends LockableLootTileEntity implements IChestLid, IT
     public CompoundNBT save(CompoundNBT compound) {
         super.save(compound);
 
-        if (!this.trySaveLootTable(compound)) {
-            ItemStackHelper.saveAllItems(compound, this.chestContents);
+        return saveToTag(compound);
+    }
+    public CompoundNBT saveToTag(CompoundNBT p_190580_1_) {
+        if (!this.trySaveLootTable(p_190580_1_)) {
+            ItemStackHelper.saveAllItems(p_190580_1_, this.chestContents, false);
         }
 
-        return compound;
+        return p_190580_1_;
     }
-
     @Override
     public CompoundNBT getUpdateTag() {
         return save(new CompoundNBT()

@@ -2,9 +2,7 @@ package com.rumaruka.riskofmine.init;
 
 
 import com.rumaruka.riskofmine.ModSetup;
-import com.rumaruka.riskofmine.common.blocks.LargeChestBlock;
-import com.rumaruka.riskofmine.common.blocks.SmallChestBlock;
-import com.rumaruka.riskofmine.common.blocks.WarBannerBlock;
+import com.rumaruka.riskofmine.common.blocks.*;
 import net.minecraftforge.registries.ObjectHolder;
 import ru.timeconqueror.timecore.api.registry.BlockRegister;
 import ru.timeconqueror.timecore.api.registry.util.AutoRegistrable;
@@ -16,7 +14,8 @@ import static ru.timeconqueror.timecore.api.util.Hacks.promise;
 public class ROMBlocks {
     public static final SmallChestBlock SMALL_CHEST = promise();
     public static final LargeChestBlock LARGE_CHEST = promise();
-//  public static final SmallChestBlock LEGENDARY_CHEST = promise();
+    public static final LegendaryChestBlock LEGENDARY_CHEST = promise();
+  public static final LunarChestBlock LUNAR_CHEST = promise();
 
 //  public static final SmallChestBlock DAMAGE_CHEST = promise();
 //  public static final SmallChestBlock HEALING_CHEST = promise();
@@ -26,7 +25,6 @@ public class ROMBlocks {
 //  public static final SmallChestBlock EQUIPMENT_BARREL = promise();
 //  public static final SmallChestBlock EQUIPMENT_TRIPLE_BARREL = promise();
 //  public static final SmallChestBlock RUSTY_CHEST = promise();
-//  public static final SmallChestBlock LUNAR_CHEST = promise();
 
     public static final WarBannerBlock WAR_BANNER_BLOCK = promise();
 
@@ -40,6 +38,9 @@ public class ROMBlocks {
         private static void register() {
             REGISTER.register("small_chest", SmallChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
             REGISTER.register("large_chest", LargeChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
+            REGISTER.register("legendary_chest", LegendaryChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
+            REGISTER.register("lunar_chest",LunarChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
+
             REGISTER.register("war_banner", WarBannerBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
 
 

@@ -3,6 +3,7 @@ package com.rumaruka.riskofmine.init;
 
 import com.rumaruka.riskofmine.common.items.common.*;
 import com.rumaruka.riskofmine.common.items.equipment.*;
+import com.rumaruka.riskofmine.common.items.gameplay.LunarCoinItem;
 import com.rumaruka.riskofmine.common.items.legendary.AlienHeadItem;
 import com.rumaruka.riskofmine.common.items.legendary.DioBestFriendItem;
 import com.rumaruka.riskofmine.common.items.lunar.BeadsOfFealtyItem;
@@ -40,7 +41,8 @@ public class ROMItems {
     public static final StunGrenadeItem STUN_GRENADE = promise();
     public static final WarbannerItem WARBANNER = promise();
     public static final TheCrowdFunderItem THE_CROWDFUNDER = promise();
-
+    public static final StickyBombItem STICKY_BOMB = promise();
+    public static final LunarCoinItem LUNAR_COIN =promise();
 
     private static class Setup {
 
@@ -69,6 +71,8 @@ public class ROMItems {
             REGISTER.register("stun_grenade", StunGrenadeItem::new).defaultModel(tl("items/stun_grenade"));
             REGISTER.register("warbanner", WarbannerItem::new).defaultModel(tl("items/warbanner"));
             REGISTER.register("the_crowdfunder", TheCrowdFunderItem::new).defaultModel(tl("items/the_crowdfunder"));
+            REGISTER.register("sticky_bomb", StickyBombItem::new).defaultModel(tl("items/sticky_bomb"));
+            REGISTER.register("lunar_coin", LunarCoinItem::new).defaultModel(tl("items/lunar_coin"));
         }
     }
 

@@ -21,6 +21,29 @@ public class ChestInventory extends Container {
 
     private final ChestsTypes chestType;
 
+
+
+
+
+
+
+    public static @NotNull ChestInventory createLunarContainer(int windowId, PlayerInventory playerInventory) {
+        return new ChestInventory(ROMContainerTypes.LUNAR_CHEST, windowId, playerInventory, new Inventory(ChestsTypes.LUNAR.size), ChestsTypes.LUNAR);
+    }
+
+    public static ChestInventory createLunarContainer(int windowId, PlayerInventory playerInventory, IInventory inventory) {
+        return new ChestInventory(ROMContainerTypes.LUNAR_CHEST, windowId, playerInventory, inventory, ChestsTypes.LUNAR);
+    }
+
+
+    public static @NotNull ChestInventory createLegendaryContainer(int windowId, PlayerInventory playerInventory) {
+        return new ChestInventory(ROMContainerTypes.LEGENDARY_CHEST, windowId, playerInventory, new Inventory(ChestsTypes.LEGENDARY.size), ChestsTypes.LEGENDARY);
+    }
+
+    public static ChestInventory createLegendaryContainer(int windowId, PlayerInventory playerInventory, IInventory inventory) {
+        return new ChestInventory(ROMContainerTypes.LEGENDARY_CHEST, windowId, playerInventory, inventory, ChestsTypes.LEGENDARY);
+    }
+
     public static @NotNull ChestInventory createLargeContainer(int windowId, PlayerInventory playerInventory) {
         return new ChestInventory(ROMContainerTypes.LARGE_CHEST, windowId, playerInventory, new Inventory(ChestsTypes.LARGE.size), ChestsTypes.LARGE);
     }

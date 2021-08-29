@@ -1,6 +1,9 @@
 package com.rumaruka.riskofmine.common.cap.money.data;
 
+import com.rumaruka.riskofmine.common.entity.bullets.EntityGoldenIngotBullets;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import ru.timeconqueror.timecore.common.capability.property.CoffeeProperty;
 import ru.timeconqueror.timecore.common.capability.property.container.PropertyContainer;
 
@@ -72,5 +75,10 @@ public class Money extends PropertyContainer {
             return player.isCreative() || hasMoney(price);
         }
         return consumeMoney(player, price);
+    }
+
+    public EntityGoldenIngotBullets createBullets(World level, Money money,PlayerEntity player){
+        EntityGoldenIngotBullets bullets = new EntityGoldenIngotBullets(level,player);
+        return bullets;
     }
 }

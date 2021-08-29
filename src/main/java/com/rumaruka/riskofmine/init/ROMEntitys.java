@@ -2,6 +2,7 @@ package com.rumaruka.riskofmine.init;
 
 import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
 
+import com.rumaruka.riskofmine.common.entity.bullets.EntityGoldenIngotBullets;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.registries.ObjectHolder;
@@ -24,6 +25,14 @@ public class ROMEntitys {
                     .setShouldReceiveVelocityUpdates(true)
                     .sized(3.5F, 3.5F))
             .retrieve();
+
+    public static final EntityType<EntityGoldenIngotBullets> GOLD_BULLETS = REGISTER.register("gold_bullets",
+                    Builder.<EntityGoldenIngotBullets>of(EntityGoldenIngotBullets::new, EntityClassification.MISC)
+                            .setTrackingRange(80)
+                            .setShouldReceiveVelocityUpdates(true)
+                            .sized(3.5F, 3.5F))
+            .retrieve();
+
 
 
 }

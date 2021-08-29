@@ -17,10 +17,14 @@ public class ROMContainerTypes {
 
     public static final ContainerType<ChestInventory> SMALL_CHEST = promise();
     public static final ContainerType<ChestInventory> LARGE_CHEST = promise();
+    public static final ContainerType<ChestInventory> LEGENDARY_CHEST = promise();
+    public static final ContainerType<ChestInventory>LUNAR_CHEST = promise();
 
     @AutoRegistrable.InitMethod
     private static void register() {
         REGISTER.register("small_chest", () -> new ContainerType<>(ChestInventory::createCommonContainer));
         REGISTER.register("large_chest", () -> new ContainerType<>(ChestInventory::createLargeContainer));
+        REGISTER.register("legendary_chest", () -> new ContainerType<>(ChestInventory::createLegendaryContainer));
+        REGISTER.register("lunar_chest",()->new ContainerType<>(ChestInventory::createLunarContainer));
     }
 }

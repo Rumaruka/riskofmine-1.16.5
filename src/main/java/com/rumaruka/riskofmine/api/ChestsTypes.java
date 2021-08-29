@@ -14,8 +14,8 @@ import static com.rumaruka.riskofmine.RiskOfMine.rl;
 public enum ChestsTypes implements IStringSerializable {
     LUNAR(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
     RUSTY(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-    //    EQUIPMENT_TRIPLE_BARREL(3, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-//    MULTISHOP(3, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    EQUIPMENT_TRIPLE_BARREL(3, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    MULTI_SHOP(3, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
     EQUIPMENT_BARREL(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
     LEGENDARY(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
     LARGE(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
@@ -76,11 +76,10 @@ public enum ChestsTypes implements IStringSerializable {
                 return ROMBlocks.SMALL_CHEST;
             case LARGE:
                 return ROMBlocks.LARGE_CHEST;
-//            case LEGENDARY:
-//                return ROMBlocks.LEGENDARY_CHEST;
+            case LEGENDARY:
+                return ROMBlocks.LEGENDARY_CHEST;
 //            case EQUIPMENT_BARREL:
 //                return ROMBlocks.EQUIPMENT_BARREL;
-//
 //            case RUSTY:
 //                return ROMBlocks.RUSTY_CHEST;
 //            case DAMAGE:
@@ -89,8 +88,8 @@ public enum ChestsTypes implements IStringSerializable {
 //                return ROMBlocks.HEALING_CHEST;
 //            case UTILITY:
 //                return ROMBlocks.UTILITY_CHEST;
-//            case LUNAR:
-//                return ROMBlocks.LUNAR_CHEST;
+            case LUNAR:
+                return ROMBlocks.LUNAR_CHEST;
             default:
                 return Blocks.CHEST;
         }

@@ -18,6 +18,8 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootContext;
+import net.minecraft.loot.LootParameters;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
@@ -50,6 +52,7 @@ public class GenericChestBlock extends ContainerBlock implements IWaterLoggable 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 12, 14);
 
+    public static final ResourceLocation CONTENTS = new ResourceLocation("contents");
 
 
     private final ChestsTypes type;
@@ -156,61 +159,30 @@ public class GenericChestBlock extends ContainerBlock implements IWaterLoggable 
     }
 
     @Override
+    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+        TileEntity tileEntity = builder.getOptionalParameter(LootParameters.BLOCK_ENTITY);
+        if(tileEntity instanceof BaseChestTE){
+            BaseChestTE baseChestTE = (BaseChestTE) tileEntity;
+            builder = builder.withDynamicDrop(CONTENTS, (lootContext, itemStackConsumer) -> {
+                for(int i = 0; i < baseChestTE.getContainerSize(); ++i) {
+                    itemStackConsumer.accept(baseChestTE.getItem(i));
+                }
+            });
+        } return super.getDrops(state, builder);
+    }
+
+    @Override
     public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
             TileEntity tileentity = worldIn.getBlockEntity(pos);
-
             if (tileentity instanceof BaseChestTE) {
-                InventoryHelper.dropContents(worldIn, pos, (BaseChestTE) tileentity);
-                worldIn.updateNeighbourForOutputSignal(pos, this);
+                worldIn.updateNeighbourForOutputSignal(pos, state.getBlock());
             }
 
             super.onRemove(state, worldIn, pos, newState, isMoving);
         }
     }
 
-
-    @Override
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-         ROMMoney romMoney = ROMMoney.from(player);
-        Money money = romMoney.money;
-        if (worldIn.isClientSide) {
-
-            return ActionResultType.SUCCESS;
-
-        } else {
-            TileEntity tileentity = worldIn.getBlockEntity(pos);
-
-                if (tileentity instanceof BaseChestTE &&!player.abilities.instabuild) {
-                    if(money.getCurrentMoney()>0){
-                        money.consumeMoney(player,10.0f);
-                        romMoney.detectAndSendChanges();
-                        player.openMenu((BaseChestTE) tileentity);
-                        player.awardStat(Stats.OPEN_BARREL);
-                        PiglinTasks.angerNearbyPiglins(player, true);
-
-                    }
-
-
-                }
-            }
-
-            return ActionResultType.CONSUME;
-
-        }
-
-
-
-
-
-//    private ItemStack paymentChest(Item item, int count){
-//        ArrayList<Item> items = new ArrayList<>();
-//
-//        for(Item i : items){
-//            items.add(i);
-//        }
-//        return new ItemStack(item,count);
-//    }
 
     protected Stat<ResourceLocation> getOpenChestStat() {
         return Stats.CUSTOM.get(Stats.OPEN_CHEST);

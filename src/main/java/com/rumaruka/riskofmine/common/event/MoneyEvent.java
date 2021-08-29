@@ -24,14 +24,9 @@ public class MoneyEvent {
             ROMMoney romMoney = ROMMoney.from(player);
             if (!level.isClientSide) {
                 if (player != null) {
-                    assert romMoney != null;
                     Money money = romMoney.money;
-
                     money.addMoney(player, 10.0f);
-
-                    System.out.println("Money->" + money.getCurrentMoney());
                     romMoney.detectAndSendChanges();
-
                 }
 
 
@@ -49,10 +44,9 @@ public class MoneyEvent {
                     return;
                 } else {
                     if (livingEntity != null) {
-                        assert romMoney != null;
                         Money money = romMoney.money;
                         money.setMoney(0.0f);
-                        System.out.println("->"+money.getCurrentMoney());
+                        romMoney.detectAndSendChanges();
 
                     }
                 }

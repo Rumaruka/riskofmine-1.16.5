@@ -123,27 +123,6 @@ public class ROMUtils {
         return false;
     }
 
-    public static ItemStack getBullets(PlayerEntity player, ItemStack stack) {
-        if (!(stack.getItem() instanceof EquipmenShootItemBase)) {
-            return ItemStack.EMPTY;
-        } else {
-            Predicate<ItemStack> predicate = ((EquipmenShootItemBase)stack.getItem()).getSupportedHeldProjectiles();
-            ItemStack itemstack = EquipmenShootItemBase.getHeldProjectile(player, predicate);
-            if (!itemstack.isEmpty()) {
-                return itemstack;
-            } else {
-                predicate = ((EquipmenShootItemBase)stack.getItem()).getAllSupportedProjectiles();
 
-                for(int i = 0; i < player.inventory.getContainerSize(); ++i) {
-                    ItemStack itemstack1 = player.inventory.getItem(i);
-                    if (predicate.test(itemstack1)) {
-                        return itemstack1;
-                    }
-                }
-
-                return player.abilities.instabuild ? new ItemStack(Items.GOLD_INGOT) : ItemStack.EMPTY;
-            }
-        }
-    }
 
 }
