@@ -13,11 +13,8 @@ public class ChestLootTableROM extends ChestLootTables {
     @Override
     public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
         consumer.accept(ROMLootTables.SMALL_CHEST, LootTable.lootTable()
-                .withPool(LootPool.lootPool()
-                        .setRolls(ConstantRange.exactly(1))
-                        .add(ItemLootEntry.lootTableItem(ROMItems.ARMOR_PIERCING_ROUNDS)
-                                .setWeight(5)
-                                .apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F))))
+                .withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(ROMItems.ARMOR_PIERCING_ROUNDS).setWeight(5).apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F))))
                         .add(ItemLootEntry.lootTableItem(ROMItems.CROWBAR).setWeight(5).apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F))))
                         .add(ItemLootEntry.lootTableItem(ROMItems.SOLDIER_SYRINGE).setWeight(5).apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F))))
                         .add(ItemLootEntry.lootTableItem(ROMItems.BUSTLING_FUNGUS).setWeight(5).apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F))))
@@ -26,12 +23,10 @@ public class ChestLootTableROM extends ChestLootTables {
                         .add(ItemLootEntry.lootTableItem(ROMItems.GASOLINE).setWeight(5).apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F))))
                         .add(ItemLootEntry.lootTableItem(ROMItems.MONSTER_TOOTH).setWeight(5).apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F))))
                         .add(ItemLootEntry.lootTableItem(ROMItems.STUN_GRENADE).setWeight(5).apply(SetCount.setCount(RandomValueRange.between(1.0F, 2.0F))))
-                .add(ItemLootEntry.lootTableItem(ROMItems.TRI_TIP_DAGGER).setWeight(5).apply(SetCount.setCount(RandomValueRange.between(1,1))))));
+                        .add(ItemLootEntry.lootTableItem(ROMItems.TRI_TIP_DAGGER).setWeight(5).apply(SetCount.setCount(RandomValueRange.between(1,1))))));
 
         consumer.accept(ROMLootTables.LARGE_CHEST, LootTable.lootTable()
-
-                .withPool(LootPool.lootPool()
-                    .setRolls(ConstantRange.exactly(1))
+                .withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1))
                         .add(ItemLootEntry.lootTableItem(ROMItems.INFUSION).setWeight(5).apply(SetCount.setCount(RandomValueRange.between(1,1))))
                         .add(ItemLootEntry.lootTableItem(ROMItems.BUSTLING_FUNGUS).setWeight(5).apply(SetCount.setCount(RandomValueRange.between(1,1))))
 

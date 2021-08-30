@@ -30,11 +30,12 @@ public class LunarEvent {
             if (!level.isClientSide) {
                 if (player != null) {
                     Lunar lunar = romLunar.lunar;
-                    if(livingEntity.tickCount == 2 % 4){
+
+                    if(livingEntity.tickCount % 10==0){
                         ItemEntity itemEntity = new ItemEntity(level,livingEntity.getX(),livingEntity.getY(),livingEntity.getZ(),new ItemStack(ROMItems.LUNAR_COIN));
                         level.addFreshEntity(itemEntity);
                         romLunar.detectAndSendChanges();
-                        System.out.println("Lunar->"+lunar.getCurrentLunar());
+
                     }
 
 

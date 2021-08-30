@@ -3,12 +3,12 @@ package com.rumaruka.riskofmine;
 
 import com.rumaruka.riskofmine.client.ROMEntityRegister;
 import com.rumaruka.riskofmine.client.screen.BaseScreen;
-import com.rumaruka.riskofmine.client.screen.overlay.LunarOverlayRender;
-import com.rumaruka.riskofmine.client.screen.overlay.MoneyOverlayRender;
+import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
 import com.rumaruka.riskofmine.common.config.ModConfig;
 import com.rumaruka.riskofmine.common.event.ItemEvent;
 import com.rumaruka.riskofmine.common.event.LunarEvent;
 import com.rumaruka.riskofmine.common.event.MoneyEvent;
+import com.rumaruka.riskofmine.compat.jer.ROMJerPlugin;
 import com.rumaruka.riskofmine.events.GenerationEventHandler;
 import com.rumaruka.riskofmine.init.*;
 import net.minecraft.client.gui.ScreenManager;
@@ -21,6 +21,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -33,7 +34,6 @@ import ru.timeconqueror.timecore.api.client.resource.location.TextureLocation;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
 
-
 import static com.rumaruka.riskofmine.RiskOfMine.MODID;
 
 @Mod(MODID)
@@ -41,6 +41,7 @@ public class RiskOfMine implements TimeMod {
 
     public static final String MODID = "riskofmine";
     public static final Logger logger = LogManager.getLogger(MODID);
+    private static final ModList MOD_LIST = ModList.get();
 
     public RiskOfMine() {
         logger.info("Risk Of Mine add in modpack");
@@ -52,8 +53,8 @@ public class RiskOfMine implements TimeMod {
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
             // Client setup
             eventBus.addListener(this::clientSetup);
-            eventBus.addListener(MoneyOverlayRender::keyPressed);
-            eventBus.addListener(LunarOverlayRender::keyPressed);
+            eventBus.addListener(ROMOverlayRender::keyPressed);
+
         });
         ROMParticles.PARTICLES.register(eventBus);
         ROMEffects.EFFECTS.register(eventBus);
@@ -64,7 +65,7 @@ public class RiskOfMine implements TimeMod {
 
         MinecraftForge.EVENT_BUS.register(new ItemEvent());
         MinecraftForge.EVENT_BUS.register(new MoneyEvent());
-//        MinecraftForge.EVENT_BUS.register(new LunarEvent());
+        MinecraftForge.EVENT_BUS.register(new LunarEvent());
 
 
     }
@@ -72,6 +73,10 @@ public class RiskOfMine implements TimeMod {
     private void setup(final FMLCommonSetupEvent event) {
 
         MinecraftForge.EVENT_BUS.register(new GenerationEventHandler());
+        if (MOD_LIST.isLoaded("jeresources")) {
+            ROMJerPlugin.setup(event);
+        }
+
     }
 
     public static ResourceLocation rl(String path) {

@@ -1,4 +1,4 @@
-package com.rumaruka.riskofmine.compat;
+package com.rumaruka.riskofmine.compat.jei;
 
 import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.init.ROMItems;
