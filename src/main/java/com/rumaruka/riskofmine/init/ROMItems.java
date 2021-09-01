@@ -15,8 +15,7 @@ import net.minecraftforge.registries.ObjectHolder;
 import ru.timeconqueror.timecore.api.registry.ItemRegister;
 import ru.timeconqueror.timecore.api.registry.util.AutoRegistrable;
 
-import static com.rumaruka.riskofmine.RiskOfMine.MODID;
-import static com.rumaruka.riskofmine.RiskOfMine.tl;
+import static com.rumaruka.riskofmine.RiskOfMine.*;
 import static ru.timeconqueror.timecore.api.util.Hacks.promise;
 
 @ObjectHolder(MODID)
@@ -72,7 +71,7 @@ public class ROMItems {
             REGISTER.register("warbanner", WarbannerItem::new).defaultModel(tl("items/warbanner"));
             REGISTER.register("the_crowdfunder", TheCrowdFunderItem::new).defaultModel(tl("items/the_crowdfunder"));
             REGISTER.register("sticky_bomb", StickyBombItem::new).defaultModel(tl("items/sticky_bomb"));
-            REGISTER.register("lunar_coin", LunarCoinItem::new).defaultModel(tl("items/lunar_coin"));
+            REGISTER.register("lunar_coin", LunarCoinItem::new);
         }
     }
 

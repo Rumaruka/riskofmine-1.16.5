@@ -14,7 +14,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class ArmorPiercingRoundsItem extends ItemCollectiblesBase implements ICurioItem {
+public class ArmorPiercingRoundsItem extends ItemCollectiblesBase  {
     public ArmorPiercingRoundsItem() {
         super(EnumType.COMMON, CategoryEnum.DAMAGE, 64);
 

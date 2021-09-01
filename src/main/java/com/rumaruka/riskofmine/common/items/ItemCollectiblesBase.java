@@ -5,8 +5,9 @@ import com.rumaruka.riskofmine.api.CategoryEnum;
 import com.rumaruka.riskofmine.api.EnumType;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.TextFormatting;
+import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-public class ItemCollectiblesBase extends Item {
+public class ItemCollectiblesBase extends Item implements ICurioItem {
     private final EnumType type;
     private final CategoryEnum categoryEnum;
     private final int sizeStack;

@@ -15,6 +15,7 @@ public class ROMLootTables {
     public static final ResourceLocation SMALL_CHEST = register("chests/small_chest");
     public static final ResourceLocation LARGE_CHEST = register("chests/large_chest");
     public static final ResourceLocation LEGENDARY_CHEST = register("chests/legendary_chest");
+    public static final ResourceLocation LUNAR_CHEST = register("chests/lunar_chest");
 
     public static final ResourceLocation EQUIPMENT_BARREL = register("chests/equipment_barrel");
     //Category Chest

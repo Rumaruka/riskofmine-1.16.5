@@ -14,7 +14,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class GasolineItem extends ItemCollectiblesBase implements ICurioItem {
+public class GasolineItem extends ItemCollectiblesBase  {
     public GasolineItem() {
         super(EnumType.COMMON, CategoryEnum.DAMAGE, 64);
     }

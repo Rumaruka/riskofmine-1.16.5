@@ -14,7 +14,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class FocusCrystalItem extends ItemCollectiblesBase implements ICurioItem {
+public class FocusCrystalItem extends ItemCollectiblesBase {
     public FocusCrystalItem() {
         super(EnumType.COMMON, CategoryEnum.DAMAGE, 64);
     }

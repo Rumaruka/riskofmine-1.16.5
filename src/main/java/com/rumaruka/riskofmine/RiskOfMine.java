@@ -30,6 +30,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.timeconqueror.timecore.api.TimeMod;
+import ru.timeconqueror.timecore.api.client.resource.location.ItemModelLocation;
 import ru.timeconqueror.timecore.api.client.resource.location.TextureLocation;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
@@ -54,7 +55,6 @@ public class RiskOfMine implements TimeMod {
             // Client setup
             eventBus.addListener(this::clientSetup);
             eventBus.addListener(ROMOverlayRender::keyPressed);
-
         });
         ROMParticles.PARTICLES.register(eventBus);
         ROMEffects.EFFECTS.register(eventBus);
@@ -62,38 +62,24 @@ public class RiskOfMine implements TimeMod {
         ROMFeatures.registerFeatures();
 
         MinecraftForge.EVENT_BUS.register(this);
-
         MinecraftForge.EVENT_BUS.register(new ItemEvent());
         MinecraftForge.EVENT_BUS.register(new MoneyEvent());
         MinecraftForge.EVENT_BUS.register(new LunarEvent());
-
-
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-
         MinecraftForge.EVENT_BUS.register(new GenerationEventHandler());
         if (MOD_LIST.isLoaded("jeresources")) {
             ROMJerPlugin.setup(event);
         }
-
     }
-
-    public static ResourceLocation rl(String path) {
-        return new ResourceLocation(RiskOfMine.MODID, path);
-    }
-
-
-    public static TextureLocation tl(String path) {
-        return new TextureLocation(RiskOfMine.MODID, path);
-    }
-
 
     @OnlyIn(Dist.CLIENT)
     private void clientSetup(final FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(ROMBlocks.SMALL_CHEST, RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ROMBlocks.LARGE_CHEST, RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ROMBlocks.LUNAR_CHEST, RenderType.cutoutMipped());
+
         ScreenManager.register(ROMContainerTypes.SMALL_CHEST, BaseScreen::new);
         ScreenManager.register(ROMContainerTypes.LARGE_CHEST, BaseScreen::new);
         ScreenManager.register(ROMContainerTypes.LEGENDARY_CHEST, BaseScreen::new);
@@ -108,5 +94,15 @@ public class RiskOfMine implements TimeMod {
         }
     }
 
+    public static ResourceLocation rl(String path) {
+        return new ResourceLocation(RiskOfMine.MODID, path);
+    }
+
+    public static TextureLocation tl(String path) {
+        return new TextureLocation(RiskOfMine.MODID, path);
+    }
+    public static ItemModelLocation iml(String path) {
+        return new ItemModelLocation(RiskOfMine.MODID, path);
+    }
 
 }

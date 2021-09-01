@@ -18,7 +18,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class WarbannerItem extends ItemCollectiblesBase implements ICurioItem {
+public class WarbannerItem extends ItemCollectiblesBase {
     public WarbannerItem() {
         super(EnumType.COMMON, CategoryEnum.DAMAGE, 64);
     }

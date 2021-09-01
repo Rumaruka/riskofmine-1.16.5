@@ -14,7 +14,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class TriTipDaggerItem extends ItemCollectiblesBase implements ICurioItem {
+public class TriTipDaggerItem extends ItemCollectiblesBase  {
     public TriTipDaggerItem() {
         super(EnumType.COMMON, CategoryEnum.DAMAGE, 64);
     }

@@ -69,7 +69,9 @@ public class ChestInventory extends Container {
 
         inventory.startOpen(playerInventory.player);
 
-        if (chestType == ChestsTypes.SMALL || chestType == ChestsTypes.LARGE) {
+
+
+        if (chestType == ChestsTypes.SMALL || chestType == ChestsTypes.LARGE || chestType ==ChestsTypes.DAMAGE||chestType ==ChestsTypes.HEALING||chestType ==ChestsTypes.EQUIPMENT_BARREL||chestType ==ChestsTypes.LUNAR||chestType ==ChestsTypes.RUSTY||chestType ==ChestsTypes.UTILITY) {
             this.addSlot(new SingleSlot(inventory, 0, 12 + 4 * 18, 8 + 2 * 18));
         } else {
             for (int chestRow = 0; chestRow < chestType.getRowCount(); chestRow++) {
@@ -78,7 +80,17 @@ public class ChestInventory extends Container {
                 }
             }
         }
-
+        if (chestType==ChestsTypes.EQUIPMENT_TRIPLE_BARREL||chestType==ChestsTypes.MULTI_SHOP) {
+            this.addSlot(new SingleSlot(inventory, 0, 12 + 4 * 18, 8 + 2 * 18));
+            this.addSlot(new SingleSlot(inventory, 0, 12 + 4 * 10, 8 + 2 * 18));
+            this.addSlot(new SingleSlot(inventory, 0, 12 + 4 * 10, 8 + 2 * 18));
+        } else {
+            for (int chestRow = 0; chestRow < chestType.getRowCount(); chestRow++) {
+                for (int chestCol = 0; chestCol < chestType.rowLength; chestCol++) {
+                    this.addSlot(new Slot(inventory, chestCol + chestRow * chestType.rowLength, 12 + chestCol * 18, 18 + chestRow * 18));
+                }
+            }
+        }
         int leftCol = (chestType.xSize - 162) / 2 + 1;
 
         for (int playerInvRow = 0; playerInvRow < 3; playerInvRow++) {

@@ -16,12 +16,13 @@ public class ModConfig extends Config {
     public static IQuickConfigValue<Integer> cooldownEq;
     public static IQuickConfigValue<Integer> durStunConfig;
     public static IQuickConfigValue<Integer> durBleedConfig;
-    public static IQuickConfigValue<Integer> countSmallOpen;
-    public static IQuickConfigValue<Integer> countLargeOpen;
+    public static IQuickConfigValue<Float> priceSmallChest;
+    public static IQuickConfigValue<Float> priceLargeChest;
+    public static IQuickConfigValue<Float> priceLegendaryChest;
 
 
     public ModConfig() {
-        super(net.minecraftforge.fml.config.ModConfig.Type.COMMON, RiskOfMine.MODID, null);
+        super(net.minecraftforge.fml.config.ModConfig.Type.COMMON, RiskOfMine.MODID, "Risk of Mine Configs");
     }
 
     @Override
@@ -37,20 +38,23 @@ public class ModConfig extends Config {
         durStunConfig = builder
                 .optimized(builder
                         .comment("Duration Stun")
-                        .define("Duration", 6000));
+                        .define("Duration Stun", 6000));
         durBleedConfig = builder
                 .optimized(builder
                         .comment("Duration Bleed")
-                        .define("Duration", 100));
-        countSmallOpen = builder
+                        .define("Duration Bleed", 100));
+        priceSmallChest = builder
                 .optimized(builder
                         .comment("Payment for Open Small Chest")
-                        .define("Payment", 5));
-        countSmallOpen = builder
+                        .define("Payment Small Chest", 10.0f));
+        priceLargeChest = builder
                 .optimized(builder
                         .comment("Payment for Open Large Chest")
-                        .define("Payment", 10));
-
+                        .define("Payment Large Chest", 100.0f));
+        priceLegendaryChest = builder
+                .optimized(builder
+                        .comment("Payment for Open Legendary Chest")
+                        .define("Payment Legendary Chest", 1000.0f));
 
     }
 }

@@ -32,6 +32,14 @@ public class ChestLootTableROM extends ChestLootTables {
 
                 )
         );
+
+        consumer.accept(ROMLootTables.LUNAR_CHEST, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(ROMItems.SHAPED_GLASS).setWeight(2).apply(SetCount.setCount(RandomValueRange.between(1,1))))
+                        .add(ItemLootEntry.lootTableItem(ROMItems.BEADS_OF_FEALTY).setWeight(5).apply(SetCount.setCount(RandomValueRange.between(1,1))))
+
+                )
+        );
     }
 
 }

@@ -24,7 +24,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import java.util.List;
 import java.util.UUID;
 
-public class ShapedGlassItem extends ItemCollectiblesBase implements ICurioItem {
+public class ShapedGlassItem extends ItemCollectiblesBase   {
 
     public final UUID healthModifierID = UUID.fromString("208b4d4c-50ef-4b45-a097-4bed633cdbff");
 

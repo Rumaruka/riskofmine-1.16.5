@@ -14,7 +14,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class CrowbarItem extends ItemCollectiblesBase implements ICurioItem {
+public class CrowbarItem extends ItemCollectiblesBase {
     public CrowbarItem() {
         super(EnumType.COMMON, CategoryEnum.DAMAGE, 64);
     }

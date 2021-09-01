@@ -14,7 +14,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class ChronobaubleItem extends ItemCollectiblesBase implements ICurioItem {
+public class ChronobaubleItem extends ItemCollectiblesBase {
     public ChronobaubleItem() {
         super(EnumType.UNCOMMON, CategoryEnum.UTILITY, 64);
     }

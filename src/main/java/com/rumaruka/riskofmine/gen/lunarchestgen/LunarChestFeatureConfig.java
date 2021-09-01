@@ -1,4 +1,4 @@
-package com.rumaruka.riskofmine.gen.largechestgen;
+package com.rumaruka.riskofmine.gen.lunarchestgen;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LargeChestFeatureConfig implements IFeatureConfig {
-    public static final Codec<LargeChestFeatureConfig> CODEC = RecordCodecBuilder.create((instance_) -> {
+public class LunarChestFeatureConfig implements IFeatureConfig {
+    public static final Codec<LunarChestFeatureConfig> CODEC = RecordCodecBuilder.create((instance_) -> {
         return instance_.group(BlockStateProvider.CODEC.fieldOf("state_provider").forGetter((blockClusterFeatureConfig10_) -> {
             return blockClusterFeatureConfig10_.stateProvider;
         }), BlockPlacer.CODEC.fieldOf("block_placer").forGetter((blockClusterFeatureConfig9_) -> {
@@ -40,7 +40,7 @@ public class LargeChestFeatureConfig implements IFeatureConfig {
         }), Codec.BOOL.fieldOf("need_water").orElse(false).forGetter((blockClusterFeatureConfig_) -> {
             return blockClusterFeatureConfig_.needWater;
 
-        })).apply(instance_, LargeChestFeatureConfig::new);
+        })).apply(instance_, LunarChestFeatureConfig::new);
 
     });
     public final BlockStateProvider stateProvider;
@@ -56,11 +56,11 @@ public class LargeChestFeatureConfig implements IFeatureConfig {
     public final boolean project;
     public final boolean needWater;
 
-    private LargeChestFeatureConfig(BlockStateProvider blockStateProvider_, BlockPlacer blockPlacer_, List<BlockState> list_, List<BlockState> list1_, int int_, int int1_, int int2_, int int3_, boolean boolean2_, boolean boolean_, boolean boolean1_) {
+    private LunarChestFeatureConfig(BlockStateProvider blockStateProvider_, BlockPlacer blockPlacer_, List<BlockState> list_, List<BlockState> list1_, int int_, int int1_, int int2_, int int3_, boolean boolean2_, boolean boolean_, boolean boolean1_) {
         this(blockStateProvider_, blockPlacer_, list_.stream().map(AbstractBlock.AbstractBlockState::getBlock).collect(Collectors.toSet()), ImmutableSet.copyOf(list1_), int_, int1_, int2_, int3_, boolean2_, boolean_, boolean1_);
     }
 
-    private LargeChestFeatureConfig(BlockStateProvider stateProvider, BlockPlacer blockPlacer, Set<Block> whitelistIn, Set<BlockState> set_, int int_, int int1_, int int2_, int int3_, boolean boolean2_, boolean boolean_, boolean boolean1_) {
+    private LunarChestFeatureConfig(BlockStateProvider stateProvider, BlockPlacer blockPlacer, Set<Block> whitelistIn, Set<BlockState> set_, int int_, int int1_, int int2_, int int3_, boolean boolean2_, boolean boolean_, boolean boolean1_) {
         this.stateProvider = stateProvider;
         this.blockPlacer = blockPlacer;
         this.whitelist = whitelistIn;
@@ -95,54 +95,54 @@ public class LargeChestFeatureConfig implements IFeatureConfig {
             this.blockPlacer = blockPlacer_;
         }
 
-        public Builder whitelist(Set<Block> set_) {
+        public LunarChestFeatureConfig.Builder whitelist(Set<Block> set_) {
             this.whitelist = set_;
             return this;
         }
 
-        public Builder blacklist(Set<BlockState> set_) {
+        public LunarChestFeatureConfig.Builder blacklist(Set<BlockState> set_) {
             this.blacklist = set_;
             return this;
         }
 
-        public Builder tries(int int_) {
+        public LunarChestFeatureConfig.Builder tries(int int_) {
             this.tries = int_;
             return this;
         }
 
 
-        public Builder xspread(int int_) {
+        public LunarChestFeatureConfig.Builder xspread(int int_) {
             this.xspread = int_;
             return this;
         }
 
-        public Builder yspread(int int_) {
+        public LunarChestFeatureConfig.Builder yspread(int int_) {
             this.yspread = int_;
             return this;
         }
 
-        public Builder zspread(int int_) {
+        public LunarChestFeatureConfig.Builder zspread(int int_) {
             this.zspread = int_;
             return this;
         }
 
-        public Builder canReplace() {
+        public LunarChestFeatureConfig.Builder canReplace() {
             this.canReplace = true;
             return this;
         }
 
-        public Builder noProjection() {
+        public LunarChestFeatureConfig.Builder noProjection() {
             this.project = false;
             return this;
         }
 
-        public Builder needWater() {
+        public LunarChestFeatureConfig.Builder needWater() {
             this.needWater = true;
             return this;
         }
 
-        public LargeChestFeatureConfig build() {
-            return new LargeChestFeatureConfig(this.stateProvider, this.blockPlacer, this.whitelist, this.blacklist, this.tries, this.xspread, this.yspread, this.zspread, this.canReplace, this.project, this.needWater);
+        public LunarChestFeatureConfig build() {
+            return new LunarChestFeatureConfig(this.stateProvider, this.blockPlacer, this.whitelist, this.blacklist, this.tries, this.xspread, this.yspread, this.zspread, this.canReplace, this.project, this.needWater);
         }
     }
 }

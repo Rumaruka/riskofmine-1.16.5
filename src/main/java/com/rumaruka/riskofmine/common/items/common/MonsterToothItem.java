@@ -17,7 +17,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class MonsterToothItem extends ItemCollectiblesBase implements ICurioItem {
+public class MonsterToothItem extends ItemCollectiblesBase {
     public MonsterToothItem() {
         super(EnumType.COMMON, CategoryEnum.HEALING, 64);
     }

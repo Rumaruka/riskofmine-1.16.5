@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class EnergyDrinkItem extends ItemCollectiblesBase implements ICurioItem {
+public class EnergyDrinkItem extends ItemCollectiblesBase {
     private static final UUID SPEED_MODIFIER_SPRINTING_UUID = UUID.fromString("662A6B8D-DA3E-4C1C-8813-96EA6097278D");
 
     public EnergyDrinkItem() {

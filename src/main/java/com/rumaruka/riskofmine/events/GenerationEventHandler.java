@@ -2,6 +2,7 @@ package com.rumaruka.riskofmine.events;
 
 import com.rumaruka.riskofmine.gen.commonchestgen.CommonChestFeatureConfig;
 import com.rumaruka.riskofmine.gen.largechestgen.LargeChestFeatureConfig;
+import com.rumaruka.riskofmine.gen.lunarchestgen.LunarChestFeatureConfig;
 import com.rumaruka.riskofmine.init.ROMBlocks;
 import com.rumaruka.riskofmine.init.ROMFeatures;
 import net.minecraft.world.biome.Biome;
@@ -17,7 +18,8 @@ public class GenerationEventHandler {
             new SimpleBlockPlacer())).tries(25).xspread(35).yspread(128).zspread(1).build();
     public static final LargeChestFeatureConfig LARGE_CHEST = (new LargeChestFeatureConfig.Builder(new SimpleBlockStateProvider(ROMBlocks.SMALL_CHEST.defaultBlockState()),
             new SimpleBlockPlacer())).tries(1).xspread(20).yspread(10).zspread(1).build();
-
+    public static final LunarChestFeatureConfig LUNAR_CHEST = (new LunarChestFeatureConfig.Builder(new SimpleBlockStateProvider(ROMBlocks.SMALL_CHEST.defaultBlockState()),
+            new SimpleBlockPlacer())).tries(1).xspread(20).yspread(10).zspread(1).build();
     @SubscribeEvent
     public void onBiomesLoadingEvent(BiomeLoadingEvent event) {
         //spawn depend on biome type
@@ -34,5 +36,13 @@ public class GenerationEventHandler {
                     GenerationStage.Decoration.LOCAL_MODIFICATIONS,
                     ROMFeatures.LARGE_CHEST.get().configured(LARGE_CHEST));
 
-        }    }
+        }
+        if ( event.getCategory() == Biome.Category.NETHER) {
+            //spawn
+            event.getGeneration().addFeature(
+                    GenerationStage.Decoration.LOCAL_MODIFICATIONS,
+                    ROMFeatures.LUNAR_CHEST.get().configured(LUNAR_CHEST));
+
+        }
+    }
 }

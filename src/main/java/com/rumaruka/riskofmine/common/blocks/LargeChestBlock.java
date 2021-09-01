@@ -39,7 +39,7 @@ public class LargeChestBlock extends GenericChestBlock {
 
             if (tileentity instanceof BaseChestTE &&!player.abilities.instabuild) {
                 if(money.getCurrentMoney()>0){
-                    money.consumeMoney(player,100.0f);
+                    money.consumeMoney(player,ModConfig.priceLargeChest.get());
                     romMoney.detectAndSendChanges();
                     player.openMenu((BaseChestTE) tileentity);
                     player.awardStat(Stats.OPEN_CHEST);

@@ -14,7 +14,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class OldWarStealthkitItem extends ItemCollectiblesBase implements ICurioItem {
+public class OldWarStealthkitItem extends ItemCollectiblesBase {
     public OldWarStealthkitItem() {
         super(EnumType.UNCOMMON, CategoryEnum.UTILITY, 64);
     }

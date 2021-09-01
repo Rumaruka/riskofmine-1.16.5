@@ -17,11 +17,11 @@ public class LunarCoinItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World p_77659_1_, PlayerEntity p_77659_2_, Hand p_77659_3_) {
-        ItemStack itemStack = p_77659_2_.getItemInHand(p_77659_3_);
-        ROMLunar romLunar = ROMLunar.from(p_77659_2_);
+    public ActionResult<ItemStack> use(World level, PlayerEntity player, Hand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        ROMLunar romLunar = ROMLunar.from(player);
         Lunar lunar = romLunar.lunar;
-        lunar.addLunar(p_77659_2_,1);
+        lunar.addLunar(player,1);
         romLunar.detectAndSendChanges();
         itemStack.shrink(1);
         return ActionResult.success(itemStack);

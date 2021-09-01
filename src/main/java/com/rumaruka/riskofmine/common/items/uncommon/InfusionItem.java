@@ -20,7 +20,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import java.util.List;
 import java.util.UUID;
 
-public class InfusionItem extends ItemCollectiblesBase implements ICurioItem {
+public class InfusionItem extends ItemCollectiblesBase {
     private static final UUID uuid1 = UUID.randomUUID();
     public InfusionItem() {
         super(EnumType.UNCOMMON, CategoryEnum.UTILITY, 16);

@@ -20,7 +20,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class BustlingFungusItem extends ItemCollectiblesBase implements ICurioItem {
+public class BustlingFungusItem extends ItemCollectiblesBase {
     public BustlingFungusItem() {
         super(EnumType.COMMON, CategoryEnum.HEALING, 64);
     }

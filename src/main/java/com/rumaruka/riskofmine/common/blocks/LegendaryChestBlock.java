@@ -3,6 +3,7 @@ package com.rumaruka.riskofmine.common.blocks;
 import com.rumaruka.riskofmine.api.ChestsTypes;
 import com.rumaruka.riskofmine.common.cap.money.ROMMoney;
 import com.rumaruka.riskofmine.common.cap.money.data.Money;
+import com.rumaruka.riskofmine.common.config.ModConfig;
 import com.rumaruka.riskofmine.common.tiles.BaseChestTE;
 import com.rumaruka.riskofmine.common.tiles.LargeChestTE;
 import com.rumaruka.riskofmine.common.tiles.LegendaryChestTE;
@@ -38,7 +39,7 @@ public class LegendaryChestBlock extends GenericChestBlock {
 
             if (tileentity instanceof BaseChestTE &&!player.abilities.instabuild) {
                 if(money.getCurrentMoney()>0){
-                    money.consumeMoney(player,1000.0f);
+                    money.consumeMoney(player, ModConfig.priceLegendaryChest.get());
                     romMoney.detectAndSendChanges();
                     player.openMenu((BaseChestTE) tileentity);
                     player.awardStat(Stats.OPEN_CHEST);

@@ -36,7 +36,7 @@ public class SmallChestBlock extends GenericChestBlock {
             TileEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof BaseChestTE &&!player.abilities.instabuild) {
                 if(money.getCurrentMoney()>0){
-                    money.consumeMoney(player,10.0f);
+                    money.consumeMoney(player,ModConfig.priceSmallChest.get());
                     romMoney.detectAndSendChanges();
                     player.openMenu((BaseChestTE) tileentity);
                     player.awardStat(Stats.OPEN_CHEST);

@@ -14,7 +14,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class BeadsOfFealtyItem extends ItemCollectiblesBase implements ICurioItem {
+public class BeadsOfFealtyItem extends ItemCollectiblesBase  {
     public BeadsOfFealtyItem() {
         super(EnumType.LUNAR, CategoryEnum.UTILITY, 1);
     }

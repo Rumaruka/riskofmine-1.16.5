@@ -45,6 +45,7 @@ repositories {
         url 'https://www.cursemaven.com/'
     }
     maven { url = "https://dvs1.progwml6.com/files/maven" }
+    mavenCentral()
 }
 minecraft {
 
@@ -123,7 +124,7 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75")
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:3336760") // JER
-    implementation 'org.jetbrains:annotations:20.0.0'
+    implementation 'org.jetbrains:annotations:22.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation  "org.jetbrains.kotlin:kotlin-reflect"
 

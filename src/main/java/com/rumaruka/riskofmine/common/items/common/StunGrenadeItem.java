@@ -14,7 +14,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class StunGrenadeItem extends ItemCollectiblesBase implements ICurioItem {
+public class StunGrenadeItem extends ItemCollectiblesBase  {
     public StunGrenadeItem() {
         super(EnumType.COMMON, CategoryEnum.DAMAGE, 64);
     }
