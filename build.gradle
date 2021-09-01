@@ -22,7 +22,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 
-version = '0.17.1b'
+version = '0.17.7b'
 group = 'com.rumaruka.riskofmine'
 archivesBaseName = 'riskofmine'
 
@@ -113,7 +113,7 @@ sourceSets.main.resources {
 }
 dependencies {
 
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.0'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.4'
 
     implementation fg.deobf('ru.timeconqueror:TimeCore:1.16.5-3.4.0.0.build7:dev', true)
 
