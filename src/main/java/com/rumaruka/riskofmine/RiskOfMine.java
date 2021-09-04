@@ -18,6 +18,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
@@ -26,11 +27,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.timeconqueror.timecore.api.TimeMod;
-import ru.timeconqueror.timecore.api.client.resource.location.ItemModelLocation;
 import ru.timeconqueror.timecore.api.client.resource.location.TextureLocation;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
@@ -60,7 +61,6 @@ public class RiskOfMine implements TimeMod {
         ROMEffects.EFFECTS.register(eventBus);
         ROMEffects.POTIONS.register(eventBus);
         ROMFeatures.registerFeatures();
-
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ItemEvent());
         MinecraftForge.EVENT_BUS.register(new MoneyEvent());
@@ -87,22 +87,19 @@ public class RiskOfMine implements TimeMod {
 
         ROMEntityRegister.renderEntity();
     }
-
     private void enqueueIMC(InterModEnqueueEvent event) {
         for (SlotTypePreset preset : SlotTypePreset.values()) {
             InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> preset.getMessageBuilder().size(ModConfig.sizeCurio.get()).build());
         }
     }
 
+
+
     public static ResourceLocation rl(String path) {
         return new ResourceLocation(RiskOfMine.MODID, path);
     }
-
     public static TextureLocation tl(String path) {
         return new TextureLocation(RiskOfMine.MODID, path);
-    }
-    public static ItemModelLocation iml(String path) {
-        return new ItemModelLocation(RiskOfMine.MODID, path);
     }
 
 }

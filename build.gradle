@@ -22,7 +22,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 
-version = '0.17.7b'
+version = '0.17.10b'
 group = 'com.rumaruka.riskofmine'
 archivesBaseName = 'riskofmine'
 
@@ -115,7 +115,7 @@ dependencies {
 
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.4'
 
-    implementation fg.deobf('ru.timeconqueror:TimeCore:1.16.5-3.4.0.0.build7:dev', true)
+    implementation fg.deobf('ru.timeconqueror:TimeCore:1.16.5-3.4.1.0:dev', true)
 
 
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.0")

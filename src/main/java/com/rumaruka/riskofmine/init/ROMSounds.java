@@ -14,6 +14,8 @@ public class ROMSounds {
 
     public static final RegistryObject<SoundEvent> ROM_CHEST_OPEN = REGISTER.register("riskofmine.block.open_chest",
             () -> new SoundEvent(rl("riskofmine.block.open_chest")));
+    public static final RegistryObject<SoundEvent> ROM_CHEST_NOT_MONEY = REGISTER.register("riskofmine.block.not_money",
+            () -> new SoundEvent(rl("riskofmine.block.not_money")));
 
     public static final RegistryObject<SoundEvent> ROM_PLAYER_LEVEL_UP = REGISTER.register("riskofmine.player.level_up",
             () -> new SoundEvent(rl("riskofmine.player.level_up")));
