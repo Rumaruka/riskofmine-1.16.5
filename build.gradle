@@ -22,7 +22,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 
-version = '0.17.10b'
+version = '0.17.11-fix_b'
 group = 'com.rumaruka.riskofmine'
 archivesBaseName = 'riskofmine'
 

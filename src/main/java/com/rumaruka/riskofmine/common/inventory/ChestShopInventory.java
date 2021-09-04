@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-public class ChestInventory extends Container {
+public class ChestShopInventory extends Container {
 
     private final IInventory inventory;
 
@@ -25,43 +25,17 @@ public class ChestInventory extends Container {
 
 
 
-
-
-
-    public static @NotNull ChestInventory createLunarContainer(int windowId, PlayerInventory playerInventory) {
-        return new ChestInventory(ROMContainerTypes.LUNAR_CHEST, windowId, playerInventory, new Inventory(ChestsTypes.LUNAR.size), ChestsTypes.LUNAR);
+    public static @NotNull ChestShopInventory createMultiShopContainer(int windowId, PlayerInventory playerInventory) {
+        return new ChestShopInventory(ROMContainerTypes.MULTI_SHOP, windowId, playerInventory, new Inventory(ChestsTypes.MULTI_SHOP.size), ChestsTypes.MULTI_SHOP);
     }
 
-    public static ChestInventory createLunarContainer(int windowId, PlayerInventory playerInventory, IInventory inventory) {
-        return new ChestInventory(ROMContainerTypes.LUNAR_CHEST, windowId, playerInventory, inventory, ChestsTypes.LUNAR);
+    public static ChestShopInventory createMultiShopContainer(int windowId, PlayerInventory playerInventory, IInventory inventory) {
+        return new ChestShopInventory(ROMContainerTypes.MULTI_SHOP, windowId, playerInventory, inventory, ChestsTypes.MULTI_SHOP);
     }
 
 
-    public static @NotNull ChestInventory createLegendaryContainer(int windowId, PlayerInventory playerInventory) {
-        return new ChestInventory(ROMContainerTypes.LEGENDARY_CHEST, windowId, playerInventory, new Inventory(ChestsTypes.LEGENDARY.size), ChestsTypes.LEGENDARY);
-    }
 
-    public static ChestInventory createLegendaryContainer(int windowId, PlayerInventory playerInventory, IInventory inventory) {
-        return new ChestInventory(ROMContainerTypes.LEGENDARY_CHEST, windowId, playerInventory, inventory, ChestsTypes.LEGENDARY);
-    }
-
-    public static @NotNull ChestInventory createLargeContainer(int windowId, PlayerInventory playerInventory) {
-        return new ChestInventory(ROMContainerTypes.LARGE_CHEST, windowId, playerInventory, new Inventory(ChestsTypes.LARGE.size), ChestsTypes.LARGE);
-    }
-
-    public static ChestInventory createLargeContainer(int windowId, PlayerInventory playerInventory, IInventory inventory) {
-        return new ChestInventory(ROMContainerTypes.LARGE_CHEST, windowId, playerInventory, inventory, ChestsTypes.LARGE);
-    }
-
-    public static @NotNull ChestInventory createCommonContainer(int windowId, PlayerInventory playerInventory) {
-        return new ChestInventory(ROMContainerTypes.SMALL_CHEST, windowId, playerInventory, new Inventory(ChestsTypes.SMALL.size), ChestsTypes.SMALL);
-    }
-
-    public static ChestInventory createCommonContainer(int windowId, PlayerInventory playerInventory, IInventory inventory) {
-        return new ChestInventory(ROMContainerTypes.SMALL_CHEST, windowId, playerInventory, inventory, ChestsTypes.SMALL);
-    }
-
-    public ChestInventory(ContainerType<?> containerType, int windowId, PlayerInventory playerInventory, IInventory inventory, ChestsTypes chestType) {
+    public ChestShopInventory(ContainerType<?> containerType, int windowId, PlayerInventory playerInventory, IInventory inventory, ChestsTypes chestType) {
         super(containerType, windowId);
         checkContainerSize(inventory, chestType.size);
 
@@ -69,11 +43,10 @@ public class ChestInventory extends Container {
         this.chestType = chestType;
 
         inventory.startOpen(playerInventory.player);
-
-
-
-        if (chestType == ChestsTypes.SMALL || chestType == ChestsTypes.LARGE || chestType ==ChestsTypes.DAMAGE||chestType ==ChestsTypes.HEALING||chestType ==ChestsTypes.EQUIPMENT_BARREL||chestType ==ChestsTypes.LUNAR||chestType ==ChestsTypes.RUSTY||chestType ==ChestsTypes.UTILITY) {
-            this.addSlot(new SingleSlot(inventory, 0, 12 + 4 * 18, 8 + 2 * 18));
+        if (chestType == ChestsTypes.EQUIPMENT_TRIPLE_BARREL || chestType == ChestsTypes.MULTI_SHOP ) {
+            this.addSlot(new TripleSlot(inventory, 0, 12 + 4 * 18, 8 + 2 * 18));
+            this.addSlot(new TripleSlot(inventory, 1, 12 + 3 * 18, 8 + 3 * 18));
+            this.addSlot(new TripleSlot(inventory, 2, 12 + 2 * 18, 8 + 4 * 18));
         } else {
             for (int chestRow = 0; chestRow < chestType.getRowCount(); chestRow++) {
                 for (int chestCol = 0; chestCol < chestType.rowLength; chestCol++) {

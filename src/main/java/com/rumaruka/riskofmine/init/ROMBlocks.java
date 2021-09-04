@@ -16,13 +16,13 @@ public class ROMBlocks {
     public static final LargeChestBlock LARGE_CHEST = promise();
     public static final LegendaryChestBlock LEGENDARY_CHEST = promise();
   public static final LunarChestBlock LUNAR_CHEST = promise();
+//  public static final SmallChestBlock EQUIPMENT_BARREL = promise();
 
 //  public static final SmallChestBlock DAMAGE_CHEST = promise();
 //  public static final SmallChestBlock HEALING_CHEST = promise();
 //  public static final SmallChestBlock UTILITY_CHEST = promise();
 
-//  public static final SmallChestBlock MULTISHOP = promise();
-//  public static final SmallChestBlock EQUIPMENT_BARREL = promise();
+  public static final MultiShopBlock MULTI_SHOP = promise();
 //  public static final SmallChestBlock EQUIPMENT_TRIPLE_BARREL = promise();
 //  public static final SmallChestBlock RUSTY_CHEST = promise();
 
@@ -40,6 +40,7 @@ public class ROMBlocks {
             REGISTER.register("large_chest", LargeChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
             REGISTER.register("legendary_chest", LegendaryChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
             REGISTER.register("lunar_chest",LunarChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
+            REGISTER.register("multi_shop",MultiShopBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
 
             REGISTER.register("war_banner", WarBannerBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
 

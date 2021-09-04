@@ -3,6 +3,7 @@ package com.rumaruka.riskofmine;
 
 import com.rumaruka.riskofmine.client.ROMEntityRegister;
 import com.rumaruka.riskofmine.client.screen.BaseScreen;
+import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
 import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
 import com.rumaruka.riskofmine.common.config.ModConfig;
 import com.rumaruka.riskofmine.common.event.ItemEvent;
@@ -84,6 +85,8 @@ public class RiskOfMine implements TimeMod {
         ScreenManager.register(ROMContainerTypes.LARGE_CHEST, BaseScreen::new);
         ScreenManager.register(ROMContainerTypes.LEGENDARY_CHEST, BaseScreen::new);
         ScreenManager.register(ROMContainerTypes.LUNAR_CHEST, BaseScreen::new);
+
+        ScreenManager.register(ROMContainerTypes.MULTI_SHOP, BaseShopScreen::new);
 
         ROMEntityRegister.renderEntity();
     }

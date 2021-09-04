@@ -1,6 +1,7 @@
 package com.rumaruka.riskofmine.init;
 
 import com.rumaruka.riskofmine.common.inventory.ChestInventory;
+import com.rumaruka.riskofmine.common.inventory.ChestShopInventory;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
@@ -19,6 +20,7 @@ public class ROMContainerTypes {
     public static final ContainerType<ChestInventory> LARGE_CHEST = promise();
     public static final ContainerType<ChestInventory> LEGENDARY_CHEST = promise();
     public static final ContainerType<ChestInventory>LUNAR_CHEST = promise();
+    public static final ContainerType<ChestShopInventory>MULTI_SHOP = promise();
 
     @AutoRegistrable.InitMethod
     private static void register() {
@@ -26,5 +28,6 @@ public class ROMContainerTypes {
         REGISTER.register("large_chest", () -> new ContainerType<>(ChestInventory::createLargeContainer));
         REGISTER.register("legendary_chest", () -> new ContainerType<>(ChestInventory::createLegendaryContainer));
         REGISTER.register("lunar_chest",()->new ContainerType<>(ChestInventory::createLunarContainer));
+        REGISTER.register("multi_shop",()->new ContainerType<>(ChestShopInventory::createMultiShopContainer));
     }
 }
