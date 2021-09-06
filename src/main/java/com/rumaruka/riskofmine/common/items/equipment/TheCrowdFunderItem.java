@@ -5,29 +5,22 @@ import com.rumaruka.riskofmine.api.CategoryEnum;
 import com.rumaruka.riskofmine.common.cap.money.ROMMoney;
 import com.rumaruka.riskofmine.common.cap.money.data.Money;
 import com.rumaruka.riskofmine.common.entity.bullets.EntityGoldenIngotBullets;
-import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.*;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.event.ForgeEventFactory;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-public class TheCrowdFunderItem extends EquipmenShootItemBase {
+public class TheCrowdFunderItem extends EquipmentShootItemBase {
     public TheCrowdFunderItem() {
         super(CategoryEnum.DAMAGE);
     }

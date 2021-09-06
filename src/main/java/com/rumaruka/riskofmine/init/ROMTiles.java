@@ -19,6 +19,7 @@ public class ROMTiles {
     public static final TileEntityType<LegendaryChestTE> LEGENDARY_CHEST = promise();
     public static final TileEntityType<LunarChestTE>LUNAR_CHEST = promise();
     public static final TileEntityType<MultiShopTE>MULTI_SHOP = promise();
+    public static final TileEntityType<EquipmentTripleBarrelTE>EQUIPMENT_TRIPLE_BARREL = promise();
 
     private static class Setup {
 
@@ -33,6 +34,7 @@ public class ROMTiles {
             REGISTER.registerSingleBound("legendary_chest", LegendaryChestTE::new, () -> ROMBlocks.LARGE_CHEST);
             REGISTER.registerSingleBound("lunar_chest", LunarChestTE::new,()-> ROMBlocks.LUNAR_CHEST);
             REGISTER.registerSingleBound("multi_shop", MultiShopTE::new,()-> ROMBlocks.MULTI_SHOP);
+            REGISTER.registerSingleBound("equipment_triple_barrel", EquipmentTripleBarrelTE::new,()-> ROMBlocks.EQUIPMENT_TRIPLE_BARREL);
 
 
         }

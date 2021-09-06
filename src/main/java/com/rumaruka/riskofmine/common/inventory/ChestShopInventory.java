@@ -24,6 +24,14 @@ public class ChestShopInventory extends Container {
 
 
 
+    public static @NotNull ChestShopInventory createEquipmentTripleBarrelContainer(int windowId, PlayerInventory playerInventory) {
+        return new ChestShopInventory(ROMContainerTypes.EQUIPMENT_TRIPLE_BARREL, windowId, playerInventory, new Inventory(ChestsTypes.EQUIPMENT_TRIPLE_BARREL.size), ChestsTypes.EQUIPMENT_TRIPLE_BARREL);
+    }
+
+    public static ChestShopInventory createEquipmentTripleBarrelContainer(int windowId, PlayerInventory playerInventory, IInventory inventory) {
+        return new ChestShopInventory(ROMContainerTypes.EQUIPMENT_TRIPLE_BARREL, windowId, playerInventory, inventory, ChestsTypes.EQUIPMENT_TRIPLE_BARREL);
+    }
+
 
     public static @NotNull ChestShopInventory createMultiShopContainer(int windowId, PlayerInventory playerInventory) {
         return new ChestShopInventory(ROMContainerTypes.MULTI_SHOP, windowId, playerInventory, new Inventory(ChestsTypes.MULTI_SHOP.size), ChestsTypes.MULTI_SHOP);

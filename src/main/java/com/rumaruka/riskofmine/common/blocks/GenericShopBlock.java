@@ -49,7 +49,7 @@ public class GenericShopBlock extends ContainerBlock implements IWaterLoggable {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 12, 14);
-
+    public static final BooleanProperty CLOSED = BooleanProperty.create("closed");
     public static final ResourceLocation CONTENTS = new ResourceLocation("contents");
 
 
@@ -82,7 +82,6 @@ public class GenericShopBlock extends ContainerBlock implements IWaterLoggable {
         this.tileEntityTypeSupplier = tileEntityTypeSupplierIn;
 
 
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.FALSE));
     }
 
     @NotNull
@@ -253,7 +252,7 @@ public class GenericShopBlock extends ContainerBlock implements IWaterLoggable {
 
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED);
+        builder.add(FACING, WATERLOGGED,CLOSED);
     }
 
     @Override

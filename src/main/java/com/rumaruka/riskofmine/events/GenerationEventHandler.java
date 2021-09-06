@@ -16,14 +16,14 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class GenerationEventHandler {
     public static final CommonChestFeatureConfig SMALL_CHEST = (new CommonChestFeatureConfig.Builder(new SimpleBlockStateProvider(ROMBlocks.SMALL_CHEST.defaultBlockState()),
             new SimpleBlockPlacer())).tries(25).xspread(35).yspread(128).zspread(1).build();
-    public static final LargeChestFeatureConfig LARGE_CHEST = (new LargeChestFeatureConfig.Builder(new SimpleBlockStateProvider(ROMBlocks.SMALL_CHEST.defaultBlockState()),
+    public static final LargeChestFeatureConfig LARGE_CHEST = (new LargeChestFeatureConfig.Builder(new SimpleBlockStateProvider(ROMBlocks.LARGE_CHEST.defaultBlockState()),
             new SimpleBlockPlacer())).tries(1).xspread(20).yspread(10).zspread(1).build();
-    public static final LunarChestFeatureConfig LUNAR_CHEST = (new LunarChestFeatureConfig.Builder(new SimpleBlockStateProvider(ROMBlocks.SMALL_CHEST.defaultBlockState()),
+    public static final LunarChestFeatureConfig LUNAR_CHEST = (new LunarChestFeatureConfig.Builder(new SimpleBlockStateProvider(ROMBlocks.LUNAR_CHEST.defaultBlockState()),
             new SimpleBlockPlacer())).tries(1).xspread(20).yspread(10).zspread(1).build();
     @SubscribeEvent
     public void onBiomesLoadingEvent(BiomeLoadingEvent event) {
         //spawn depend on biome type
-        if (event.getCategory()== Biome.Category.PLAINS|| event.getCategory() == Biome.Category.TAIGA   || event.getCategory() == Biome.Category.EXTREME_HILLS) {
+        if (event.getCategory()== Biome.Category.PLAINS || event.getCategory() == Biome.Category.TAIGA   || event.getCategory() == Biome.Category.EXTREME_HILLS) {
             //spawn
             event.getGeneration().addFeature(
                     GenerationStage.Decoration.LOCAL_MODIFICATIONS,

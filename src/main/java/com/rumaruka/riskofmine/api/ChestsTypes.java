@@ -90,6 +90,10 @@ public enum ChestsTypes implements IStringSerializable {
 //                return ROMBlocks.UTILITY_CHEST;
             case LUNAR:
                 return ROMBlocks.LUNAR_CHEST;
+            case MULTI_SHOP:
+                return ROMBlocks.MULTI_SHOP;
+            case EQUIPMENT_TRIPLE_BARREL:
+                return ROMBlocks.EQUIPMENT_TRIPLE_BARREL;
             default:
                 return Blocks.CHEST;
         }

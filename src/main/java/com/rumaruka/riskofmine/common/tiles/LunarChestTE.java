@@ -4,10 +4,8 @@ import com.rumaruka.riskofmine.api.ChestsTypes;
 import com.rumaruka.riskofmine.common.inventory.ChestInventory;
 import com.rumaruka.riskofmine.init.ROMBlocks;
 import com.rumaruka.riskofmine.init.ROMTiles;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.tileentity.TileEntityType;
 
 public class LunarChestTE extends BaseChestTE{
     public LunarChestTE() {

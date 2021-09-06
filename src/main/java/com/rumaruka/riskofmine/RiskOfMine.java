@@ -80,13 +80,16 @@ public class RiskOfMine implements TimeMod {
         RenderTypeLookup.setRenderLayer(ROMBlocks.SMALL_CHEST, RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ROMBlocks.LARGE_CHEST, RenderType.cutoutMipped());
         RenderTypeLookup.setRenderLayer(ROMBlocks.LUNAR_CHEST, RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ROMBlocks.LEGENDARY_CHEST, RenderType.cutoutMipped());
 
         ScreenManager.register(ROMContainerTypes.SMALL_CHEST, BaseScreen::new);
         ScreenManager.register(ROMContainerTypes.LARGE_CHEST, BaseScreen::new);
         ScreenManager.register(ROMContainerTypes.LEGENDARY_CHEST, BaseScreen::new);
         ScreenManager.register(ROMContainerTypes.LUNAR_CHEST, BaseScreen::new);
 
+
         ScreenManager.register(ROMContainerTypes.MULTI_SHOP, BaseShopScreen::new);
+        ScreenManager.register(ROMContainerTypes.EQUIPMENT_TRIPLE_BARREL, BaseShopScreen::new);
 
         ROMEntityRegister.renderEntity();
     }

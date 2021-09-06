@@ -3,10 +3,8 @@ package com.rumaruka.riskofmine.common.blocks;
 import com.rumaruka.riskofmine.api.ChestsTypes;
 import com.rumaruka.riskofmine.common.cap.money.ROMMoney;
 import com.rumaruka.riskofmine.common.cap.money.data.Money;
-import com.rumaruka.riskofmine.common.config.ModConfig;
-import com.rumaruka.riskofmine.common.tiles.BaseChestTE;
 import com.rumaruka.riskofmine.common.tiles.BaseShopTE;
-import com.rumaruka.riskofmine.common.tiles.CommonChestTE;
+import com.rumaruka.riskofmine.common.tiles.EquipmentTripleBarrelTE;
 import com.rumaruka.riskofmine.common.tiles.MultiShopTE;
 import com.rumaruka.riskofmine.init.ROMSounds;
 import com.rumaruka.riskofmine.init.ROMTiles;
@@ -28,9 +26,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class MultiShopBlock extends GenericShopBlock {
-    public MultiShopBlock() {
-        super(ChestsTypes.MULTI_SHOP, ROMTiles.MULTI_SHOP, Properties.of(Material.STONE).strength(5.0F, 5.0F));
+public class EquipmentTripleBarrelBlock extends GenericShopBlock {
+    public EquipmentTripleBarrelBlock() {
+        super(ChestsTypes.EQUIPMENT_TRIPLE_BARREL, ROMTiles.MULTI_SHOP, Properties.of(Material.STONE).strength(5.0F, 5.0F));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.FALSE).setValue(CLOSED,Boolean.FALSE));
 
     }
@@ -74,7 +72,7 @@ public class MultiShopBlock extends GenericShopBlock {
     @Nullable
     @Override
     public TileEntity newBlockEntity(IBlockReader worldIn) {
-        return new MultiShopTE();
+        return new EquipmentTripleBarrelTE();
     }
 
 }

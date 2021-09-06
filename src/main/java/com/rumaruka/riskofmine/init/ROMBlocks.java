@@ -23,6 +23,7 @@ public class ROMBlocks {
 //  public static final SmallChestBlock UTILITY_CHEST = promise();
 
   public static final MultiShopBlock MULTI_SHOP = promise();
+  public static final EquipmentTripleBarrelBlock EQUIPMENT_TRIPLE_BARREL = promise();
 //  public static final SmallChestBlock EQUIPMENT_TRIPLE_BARREL = promise();
 //  public static final SmallChestBlock RUSTY_CHEST = promise();
 
@@ -41,6 +42,7 @@ public class ROMBlocks {
             REGISTER.register("legendary_chest", LegendaryChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
             REGISTER.register("lunar_chest",LunarChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
             REGISTER.register("multi_shop",MultiShopBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
+            REGISTER.register("equipment_triple_barrel",EquipmentTripleBarrelBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
 
             REGISTER.register("war_banner", WarBannerBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
 

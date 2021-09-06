@@ -10,12 +10,12 @@ import net.minecraft.util.Hand;
 
 import java.util.function.Predicate;
 
-public abstract class EquipmenShootItemBase extends ItemCollectiblesBase {
+public abstract class EquipmentShootItemBase extends ItemCollectiblesBase {
     private final CategoryEnum categoryEnum;
     public static final Predicate<ItemStack> GOLDEN_INGOT = (predicate)->{
         return predicate.getItem()== Items.GOLD_INGOT;
     };
-    public EquipmenShootItemBase(CategoryEnum categoryEnum) {
+    public EquipmentShootItemBase(CategoryEnum categoryEnum) {
         super(EnumType.EQUIPMENT, categoryEnum, 1);
         this.categoryEnum = categoryEnum;
 

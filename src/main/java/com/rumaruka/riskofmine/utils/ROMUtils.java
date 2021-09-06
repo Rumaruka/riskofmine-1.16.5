@@ -1,44 +1,19 @@
 package com.rumaruka.riskofmine.utils;
 
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.rumaruka.riskofmine.api.CategoryEnum;
 
-import com.rumaruka.riskofmine.common.items.equipment.EquipmenShootItemBase;
-import com.rumaruka.riskofmine.common.tiles.CommonChestTE;
-import com.rumaruka.riskofmine.init.ROMBlocks;
 import com.rumaruka.riskofmine.init.ROMItems;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.ShootableItem;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import org.spongepowered.asm.mixin.MixinEnvironment;
 import top.theillusivec4.curios.api.CuriosApi;
 
-import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
-import java.util.function.Predicate;
-
-import static net.minecraft.world.gen.feature.structure.StructurePiece.reorient;
 
 
 public class ROMUtils {

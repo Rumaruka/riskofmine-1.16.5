@@ -7,12 +7,12 @@ import com.rumaruka.riskofmine.init.ROMTiles;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 
-public class MultiShopTE extends BaseShopTE{
-    public MultiShopTE() {
-        super(ROMTiles.MULTI_SHOP, ChestsTypes.MULTI_SHOP, ROMBlocks.MULTI_SHOP);
+public class EquipmentTripleBarrelTE extends BaseShopTE{
+    public EquipmentTripleBarrelTE() {
+        super(ROMTiles.EQUIPMENT_TRIPLE_BARREL, ChestsTypes.EQUIPMENT_TRIPLE_BARREL, ROMBlocks.EQUIPMENT_TRIPLE_BARREL);
     }
     @Override
     protected Container createMenu(int windowId, PlayerInventory playerInventory) {
-        return ChestShopInventory.createMultiShopContainer(windowId, playerInventory, this);
+        return ChestShopInventory.createEquipmentTripleBarrelContainer(windowId, playerInventory, this);
     }
 }
