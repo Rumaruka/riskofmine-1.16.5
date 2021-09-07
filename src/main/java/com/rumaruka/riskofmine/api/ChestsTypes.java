@@ -14,8 +14,8 @@ import static com.rumaruka.riskofmine.RiskOfMine.rl;
 public enum ChestsTypes implements IStringSerializable {
     LUNAR(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
     RUSTY(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-    EQUIPMENT_TRIPLE_BARREL(3, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-    MULTI_SHOP(3, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    EQUIPMENT_TRIPLE_BARREL(3, 1, 184, 184, rl("textures/gui/dirt_triple_container.png"), 256, 256),
+    MULTI_SHOP(3, 1, 184, 184, rl("textures/gui/dirt_triple_container.png"), 256, 256),
     EQUIPMENT_BARREL(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
     LEGENDARY(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
     LARGE(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),

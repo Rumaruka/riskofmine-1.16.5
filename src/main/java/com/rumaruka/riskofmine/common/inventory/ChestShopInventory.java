@@ -52,9 +52,9 @@ public class ChestShopInventory extends Container {
 
         inventory.startOpen(playerInventory.player);
         if (chestType == ChestsTypes.EQUIPMENT_TRIPLE_BARREL || chestType == ChestsTypes.MULTI_SHOP ) {
-            this.addSlot(new TripleSlot(inventory, 0, 12 + 4 * 18, 8 + 2 * 18));
-            this.addSlot(new TripleSlot(inventory, 1, 12 + 3 * 18, 8 + 3 * 18));
-            this.addSlot(new TripleSlot(inventory, 2, 12 + 2 * 18, 8 + 4 * 18));
+            this.addSlot(new TripleSlot(inventory, 0, 18, 8 + 2 * 18));
+            this.addSlot(new TripleSlot(inventory, 1, 12 + 4 * 18, 8 + 2 * 18));
+            this.addSlot(new TripleSlot(inventory, 2, 147, 8 + 2 * 18));
         } else {
             for (int chestRow = 0; chestRow < chestType.getRowCount(); chestRow++) {
                 for (int chestCol = 0; chestCol < chestType.rowLength; chestCol++) {

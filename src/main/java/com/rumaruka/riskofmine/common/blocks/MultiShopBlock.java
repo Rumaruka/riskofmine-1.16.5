@@ -43,12 +43,12 @@ public class MultiShopBlock extends GenericShopBlock {
         } else {
             TileEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof BaseShopTE &&!player.abilities.instabuild) {
-                if(money.getCurrentMoney()==0){
+                if(money.getCurrentMoney()<20){
                     worldIn.playSound(null, pos, ROMSounds.ROM_CHEST_NOT_MONEY.get(), SoundCategory.BLOCKS, 2.0F, 1.0F);
                     player.displayClientMessage(new TranslationTextComponent("riskofmine.not_money"), true);
                 }
-                if(money.getCurrentMoney()>0 && state.getValue(CLOSED)==Boolean.FALSE){
-                    money.consumeMoney(player,25);
+                if(money.getCurrentMoney()>=20 && state.getValue(CLOSED)==Boolean.FALSE){
+                    money.consumeMoney(player,20);
                     romMoney.detectAndSendChanges();
                     player.openMenu((BaseShopTE) tileentity);
                     player.awardStat(Stats.OPEN_CHEST);

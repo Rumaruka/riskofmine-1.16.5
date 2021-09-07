@@ -30,5 +30,6 @@ public class ROMContainerTypes {
         REGISTER.register("legendary_chest", () -> new ContainerType<>(ChestInventory::createLegendaryContainer));
         REGISTER.register("lunar_chest",()->new ContainerType<>(ChestInventory::createLunarContainer));
         REGISTER.register("equipment_triple_barrel",()->new ContainerType<>(ChestShopInventory::createEquipmentTripleBarrelContainer));
+        REGISTER.register("multi_shop",()->new ContainerType<>(ChestShopInventory::createMultiShopContainer));
     }
 }

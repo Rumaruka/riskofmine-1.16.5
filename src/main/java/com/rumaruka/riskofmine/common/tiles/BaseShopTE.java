@@ -2,7 +2,8 @@ package com.rumaruka.riskofmine.common.tiles;
 
 import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.api.ChestsTypes;
-import com.rumaruka.riskofmine.common.blocks.GenericChestBlock;
+
+import com.rumaruka.riskofmine.common.blocks.GenericShopBlock;
 import com.rumaruka.riskofmine.common.inventory.ChestShopInventory;
 import com.rumaruka.riskofmine.init.ROMSounds;
 import net.minecraft.block.Block;
@@ -219,7 +220,7 @@ public class BaseShopTE extends LockableLootTileEntity implements IChestLid, ITi
     protected void onOpenOrClose() {
         Block block = this.getBlockState().getBlock();
 
-        if (block instanceof GenericChestBlock) {
+        if (block instanceof GenericShopBlock) {
             assert this.level != null;
             this.level.blockEvent(this.worldPosition, block, 1, this.numPlayersUsing);
             this.level.updateNeighborsAt(this.worldPosition, block);
@@ -275,7 +276,7 @@ public class BaseShopTE extends LockableLootTileEntity implements IChestLid, ITi
         ChestsTypes type = ChestsTypes.SMALL;
 
         if (this.hasLevel()) {
-            ChestsTypes typeFromBlock = GenericChestBlock.getTypeFromBlock(this.getBlockState().getBlock());
+            ChestsTypes typeFromBlock = GenericShopBlock.getTypeFromBlock(this.getBlockState().getBlock());
 
             if (typeFromBlock != null) {
                 type = typeFromBlock;

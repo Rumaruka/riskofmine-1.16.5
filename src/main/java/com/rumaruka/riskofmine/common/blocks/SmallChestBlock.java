@@ -38,13 +38,13 @@ public class SmallChestBlock extends GenericChestBlock {
         } else {
             TileEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof BaseChestTE &&!player.abilities.instabuild) {
-                if(money.getCurrentMoney()==0){
+                if(money.getCurrentMoney()<ModConfig.priceSmallChest.get()){
                     worldIn.playSound(null, pos, ROMSounds.ROM_CHEST_NOT_MONEY.get(), SoundCategory.BLOCKS, 2.0F, 1.0F);
                     player.displayClientMessage(new TranslationTextComponent("riskofmine.not_money"), true);
                 }
             }
 
-                if(money.getCurrentMoney()>0){
+                if(money.getCurrentMoney()>=ModConfig.priceSmallChest.get()){
                     money.consumeMoney(player,ModConfig.priceSmallChest.get());
                     romMoney.detectAndSendChanges();
                     player.openMenu((BaseChestTE) tileentity);
