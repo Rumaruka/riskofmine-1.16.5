@@ -3,6 +3,7 @@ package com.rumaruka.riskofmine.init;
 
 import com.rumaruka.riskofmine.ModSetup;
 import com.rumaruka.riskofmine.common.blocks.*;
+import com.rumaruka.riskofmine.common.blocks.chests.*;
 import net.minecraftforge.registries.ObjectHolder;
 import ru.timeconqueror.timecore.api.registry.BlockRegister;
 import ru.timeconqueror.timecore.api.registry.util.AutoRegistrable;

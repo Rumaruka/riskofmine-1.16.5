@@ -1,24 +1,15 @@
 package com.rumaruka.riskofmine.client.tesr;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.rumaruka.riskofmine.common.blocks.SmallChestBlock;
 import com.rumaruka.riskofmine.common.tiles.CommonChestTE;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3f;
 import ru.timeconqueror.timecore.api.client.render.model.TimeModelLoader;
-import ru.timeconqueror.timecore.api.util.client.DrawHelper;
 import ru.timeconqueror.timecore.client.render.model.TimeModel;
-
-import java.awt.*;
 
 import static com.rumaruka.riskofmine.RiskOfMine.rl;
 

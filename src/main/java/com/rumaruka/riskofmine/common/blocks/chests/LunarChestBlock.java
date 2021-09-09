@@ -1,11 +1,10 @@
-package com.rumaruka.riskofmine.common.blocks;
+package com.rumaruka.riskofmine.common.blocks.chests;
 
 import com.rumaruka.riskofmine.api.ChestsTypes;
 import com.rumaruka.riskofmine.common.cap.lunar.ROMLunar;
 import com.rumaruka.riskofmine.common.cap.lunar.data.Lunar;
 
 import com.rumaruka.riskofmine.common.tiles.BaseChestTE;
-import com.rumaruka.riskofmine.common.tiles.CommonChestTE;
 import com.rumaruka.riskofmine.common.tiles.LunarChestTE;
 import com.rumaruka.riskofmine.init.ROMTiles;
 import net.minecraft.block.BlockState;
@@ -14,7 +13,6 @@ import net.minecraft.entity.monster.piglin.PiglinTasks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;

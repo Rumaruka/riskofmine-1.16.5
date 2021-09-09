@@ -3,7 +3,7 @@ package com.rumaruka.riskofmine.common.tiles;
 import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.api.ChestsTypes;
 
-import com.rumaruka.riskofmine.common.blocks.GenericShopBlock;
+import com.rumaruka.riskofmine.common.blocks.chests.GenericShopBlock;
 import com.rumaruka.riskofmine.common.inventory.ChestShopInventory;
 import com.rumaruka.riskofmine.init.ROMSounds;
 import net.minecraft.block.Block;

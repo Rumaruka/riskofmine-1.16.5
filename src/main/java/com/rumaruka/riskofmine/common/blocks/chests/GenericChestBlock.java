@@ -1,8 +1,7 @@
-package com.rumaruka.riskofmine.common.blocks;
+package com.rumaruka.riskofmine.common.blocks.chests;
 
 import com.rumaruka.riskofmine.api.ChestsTypes;
-
-import com.rumaruka.riskofmine.common.tiles.BaseShopTE;
+import com.rumaruka.riskofmine.common.tiles.BaseChestTE;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.CatEntity;
@@ -26,10 +25,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMerger;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -43,29 +39,29 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class GenericShopBlock extends ContainerBlock implements IWaterLoggable {
+public class GenericChestBlock extends ContainerBlock implements IWaterLoggable {
 
     public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 12, 14);
-    public static final BooleanProperty CLOSED = BooleanProperty.create("closed");
+
     public static final ResourceLocation CONTENTS = new ResourceLocation("contents");
 
 
     private final ChestsTypes type;
-    private final TileEntityType<? extends BaseShopTE> tileEntityTypeSupplier;
-    private static final TileEntityMerger.ICallback<BaseShopTE, Optional<IInventory>> CHEST_TE_OPTIONAL_I_CALLBACK = new TileEntityMerger.ICallback<BaseShopTE, Optional<IInventory>>() {
+    private final TileEntityType<? extends BaseChestTE> tileEntityTypeSupplier;
+    private static final TileEntityMerger.ICallback<BaseChestTE, Optional<IInventory>> CHEST_TE_OPTIONAL_I_CALLBACK = new TileEntityMerger.ICallback<BaseChestTE, Optional<IInventory>>() {
 
         @NotNull
         @Override
-        public Optional<IInventory> acceptDouble(BaseShopTE chestTileEntity_, BaseShopTE chestTileEntity1_) {
+        public Optional<IInventory> acceptDouble(BaseChestTE chestTileEntity_, BaseChestTE chestTileEntity1_) {
             return Optional.empty();
         }
 
         @NotNull
         @Override
-        public Optional<IInventory> acceptSingle(BaseShopTE chestTileEntity_) {
+        public Optional<IInventory> acceptSingle(BaseChestTE chestTileEntity_) {
             return Optional.of(chestTileEntity_);
         }
 
@@ -75,13 +71,14 @@ public class GenericShopBlock extends ContainerBlock implements IWaterLoggable {
         }
     };
 
-    public GenericShopBlock(ChestsTypes typeIn, TileEntityType<? extends BaseShopTE> tileEntityTypeSupplierIn, Properties propertiesIn) {
+    public GenericChestBlock(ChestsTypes typeIn, TileEntityType<? extends BaseChestTE> tileEntityTypeSupplierIn, Properties propertiesIn) {
         super(propertiesIn);
 
         this.type = typeIn;
         this.tileEntityTypeSupplier = tileEntityTypeSupplierIn;
 
 
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.FALSE));
     }
 
     @NotNull
@@ -148,9 +145,9 @@ public class GenericShopBlock extends ContainerBlock implements IWaterLoggable {
     public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         TileEntity tileentity = worldIn.getBlockEntity(pos);
 
-        if (tileentity instanceof BaseShopTE) {
+        if (tileentity instanceof BaseChestTE) {
             if (stack.hasCustomHoverName()) {
-                ((BaseShopTE) tileentity).setCustomName(stack.getDisplayName());
+                ((BaseChestTE) tileentity).setCustomName(stack.getDisplayName());
             }
         }
     }
@@ -158,11 +155,11 @@ public class GenericShopBlock extends ContainerBlock implements IWaterLoggable {
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         TileEntity tileEntity = builder.getOptionalParameter(LootParameters.BLOCK_ENTITY);
-        if(tileEntity instanceof BaseShopTE){
-            BaseShopTE BaseShopTE = (BaseShopTE) tileEntity;
+        if(tileEntity instanceof BaseChestTE){
+            BaseChestTE baseChestTE = (BaseChestTE) tileEntity;
             builder = builder.withDynamicDrop(CONTENTS, (lootContext, itemStackConsumer) -> {
-                for(int i = 0; i < BaseShopTE.getContainerSize(); ++i) {
-                    itemStackConsumer.accept(BaseShopTE.getItem(i));
+                for(int i = 0; i < baseChestTE.getContainerSize(); ++i) {
+                    itemStackConsumer.accept(baseChestTE.getItem(i));
                 }
             });
         } return super.getDrops(state, builder);
@@ -172,7 +169,7 @@ public class GenericShopBlock extends ContainerBlock implements IWaterLoggable {
     public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
             TileEntity tileentity = worldIn.getBlockEntity(pos);
-            if (tileentity instanceof BaseShopTE) {
+            if (tileentity instanceof BaseChestTE) {
                 worldIn.updateNeighbourForOutputSignal(pos, state.getBlock());
             }
 
@@ -252,7 +249,7 @@ public class GenericShopBlock extends ContainerBlock implements IWaterLoggable {
 
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED,CLOSED);
+        builder.add(FACING, WATERLOGGED);
     }
 
     @Override
@@ -265,7 +262,7 @@ public class GenericShopBlock extends ContainerBlock implements IWaterLoggable {
     }
 
     public static ChestsTypes getTypeFromBlock(Block blockIn) {
-        return blockIn instanceof GenericShopBlock ? ((GenericShopBlock) blockIn).getType() : null;
+        return blockIn instanceof GenericChestBlock ? ((GenericChestBlock) blockIn).getType() : null;
     }
 
     public ChestsTypes getType() {

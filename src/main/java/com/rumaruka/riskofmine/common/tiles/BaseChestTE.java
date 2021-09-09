@@ -2,7 +2,7 @@ package com.rumaruka.riskofmine.common.tiles;
 
 import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.api.ChestsTypes;
-import com.rumaruka.riskofmine.common.blocks.GenericChestBlock;
+import com.rumaruka.riskofmine.common.blocks.chests.GenericChestBlock;
 import com.rumaruka.riskofmine.common.inventory.ChestInventory;
 import com.rumaruka.riskofmine.init.ROMSounds;
 import net.minecraft.block.Block;
@@ -29,7 +29,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
 @OnlyIn(value = Dist.CLIENT, _interface = IChestLid.class)
