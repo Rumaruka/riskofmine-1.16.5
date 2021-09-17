@@ -41,6 +41,7 @@ public class ROMItems {
     public static final WarbannerItem WARBANNER = promise();
     public static final TheCrowdFunderItem THE_CROWDFUNDER = promise();
     public static final StickyBombItem STICKY_BOMB = promise();
+
     public static final LunarCoinItem LUNAR_COIN =promise();
 
     private static class Setup {

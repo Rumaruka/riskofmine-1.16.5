@@ -11,10 +11,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = RiskOfMine.MODID)
-public class ROMEventListener {
+public class ROMDimensionEvent {
+
     private static final String TAG_ROOST_START = "distant_roost";
     @SubscribeEvent
-    public  void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
+    public  void onPlayerJoinFirstWorld(PlayerEvent.PlayerLoggedInEvent event) {
         PlayerEntity player =event.getPlayer();
         CompoundNBT nbt = player.getPersistentData();
         CompoundNBT tag = nbt.getCompound(PlayerEntity.PERSISTED_NBT_TAG);
@@ -25,8 +26,8 @@ public class ROMEventListener {
             ServerWorld world = (ServerWorld) player.level;
 
 
-            serverPlayerEntity.setRespawnPosition(ROMDimensions.DISTANT_ROOST_WORLD, serverPlayerEntity.getRespawnPosition(),serverPlayerEntity.getYHeadRot(),true,false);
-            world.setDefaultSpawnPos(serverPlayerEntity.blockPosition(),16);
+//            serverPlayerEntity.setRespawnPosition(ROMDimensions.DISTANT_ROOST_WORLD, serverPlayerEntity.getRespawnPosition(),serverPlayerEntity.getYHeadRot(),true,false);
+//            world.setDefaultSpawnPos(serverPlayerEntity.blockPosition(),16);
         }
 
 

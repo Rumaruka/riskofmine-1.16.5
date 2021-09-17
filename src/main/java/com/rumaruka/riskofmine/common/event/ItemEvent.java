@@ -1,11 +1,11 @@
 package com.rumaruka.riskofmine.common.event;
 
-import com.rumaruka.riskofmine.common.config.ModConfig;
+import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
-import com.rumaruka.riskofmine.init.*;
+import com.rumaruka.riskofmine.init.ROMEffects;
+import com.rumaruka.riskofmine.init.ROMItems;
+import com.rumaruka.riskofmine.init.ROMParticles;
 import com.rumaruka.riskofmine.utils.ROMUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.LivingEntity;
@@ -17,15 +17,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -216,14 +213,14 @@ public class ItemEvent {
                     for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                         ItemStack itemStack = player.inventory.getItem(i);
                         if (itemStack.getItem() == ROMItems.TRI_TIP_DAGGER && event.getEntity() instanceof CreatureEntity) {
-                            ((CreatureEntity) event.getEntity()).addEffect(new EffectInstance(ROMEffects.BLEED.get(), ModConfig.durBleedConfig.get() * itemStack.getCount(), 2, true, false));
+                            ((CreatureEntity) event.getEntity()).addEffect(new EffectInstance(ROMEffects.BLEED.get(), ROMConfig.General.durBleedConfig.get() * itemStack.getCount(), 2, true, false));
                         }
                     }
                     if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.TRI_TIP_DAGGER, player).isPresent()) {
                         ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.TRI_TIP_DAGGER, player).get().right;
                         if (curioStack.getItem() == ROMItems.TRI_TIP_DAGGER && event.getEntity() instanceof CreatureEntity) {
                             if (curioStack.getItem() == ROMItems.TRI_TIP_DAGGER && event.getEntity() instanceof CreatureEntity) {
-                                ((CreatureEntity) event.getEntity()).addEffect(new EffectInstance(ROMEffects.BLEED.get(), ModConfig.durBleedConfig.get() * curioStack.getCount(), 2, true, false));
+                                ((CreatureEntity) event.getEntity()).addEffect(new EffectInstance(ROMEffects.BLEED.get(), ROMConfig.General.durBleedConfig.get() * curioStack.getCount(), 2, true, false));
                             }
                         }
                     }
@@ -237,41 +234,51 @@ public class ItemEvent {
                     for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                         ItemStack itemStack = player.inventory.getItem(i);
                         if (itemStack.getItem() == ROMItems.STUN_GRENADE && event.getEntity() instanceof CreatureEntity) {
-                            ((CreatureEntity) event.getEntity()).addEffect(new EffectInstance(ROMEffects.STUN.get(), ROMUtils.setDurOld(ModConfig.durStunConfig.get() * itemStack.getCount()), 2, true, false));
+                            ((CreatureEntity) event.getEntity()).addEffect(new EffectInstance(ROMEffects.STUN.get(), ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get() * itemStack.getCount()), 2, true, false));
                         }
                     }
                     if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STUN_GRENADE, player).isPresent()) {
                         ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STUN_GRENADE, player).get().right;
                         if (curioStack.getItem() == ROMItems.STUN_GRENADE && event.getEntity() instanceof CreatureEntity) {
                             if (curioStack.getItem() == ROMItems.STUN_GRENADE && event.getEntity() instanceof CreatureEntity) {
-                                ((CreatureEntity) event.getEntity()).addEffect(new EffectInstance(ROMEffects.STUN.get(), ROMUtils.setDurOld(ModConfig.durStunConfig.get() * curioStack.getCount()), 2, true, false));
+                                ((CreatureEntity) event.getEntity()).addEffect(new EffectInstance(ROMEffects.STUN.get(), ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get() * curioStack.getCount()), 2, true, false));
                             }
                         }
                     }
 
                 }
                 if (player != null) {
+
                     for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                         ItemStack itemStack = player.inventory.getItem(i);
                         if (itemStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
-                            event.getEntity().level.explode(event.getEntity(), event.getEntity().getX(), event.getEntity().getY(0.0625D), event.getEntity().getZ(), 4.0F, Explosion.Mode.BREAK);
+                            //TODO: Make mini bomb entity how magnite in entity
+//                            event.getEntity().level.explode(event.getEntity(), event.getEntity().getX(), event.getEntity().getY(0.0625D), event.getEntity().getZ(), 4.0F, Explosion.Mode.BREAK);
+//                            player.setHealth(5);
+
+
+
                         }
                     }
-                    if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STICKY_BOMB, player).isPresent()) {
-                        ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STUN_GRENADE, player).get().right;
-                        if (curioStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
-                            if (curioStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
-                                event.getEntity().level.explode(event.getEntity(), event.getEntity().getX(), event.getEntity().getY(0.0625D), event.getEntity().getZ(), 4.0F, Explosion.Mode.BREAK);
-
-                            }
-                        }
-                    }
-
                 }
+                if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STICKY_BOMB, player).isPresent()) {
+                    ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STUN_GRENADE, player).get().right;
+                    if (curioStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
+                        if (curioStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
+
+//                            event.getEntity().level.explode(event.getEntity(), event.getEntity().getX(), event.getEntity().getY(0.0625D), event.getEntity().getZ(), 4.0F, Explosion.Mode.BREAK);
+
+//                                        player.setHealth(1.5f);
+
+
+                        }
+                    }
+                }
+
             }
         }
-
     }
+
 
     /**
      * onEntityUpdate worked code !!
@@ -364,33 +371,33 @@ public class ItemEvent {
         }
     }
 
-/*
-    @SubscribeEvent
-    public void onXpLevelUp(PlayerXpEvent.LevelChange event) {
+    /*
+        @SubscribeEvent
+        public void onXpLevelUp(PlayerXpEvent.LevelChange event) {
 
-        PlayerEntity player = event.getPlayer();
-        int levels = event.getLevels();
-        player.experienceLevel += levels;
-        World level = player.level;
-        BlockPos pos = player.blockPosition();
-        if (levels > 0 && player.experienceLevel % 2 == 0) {
+            PlayerEntity player = event.getPlayer();
+            int levels = event.getLevels();
+            player.experienceLevel += levels;
+            World level = player.level;
+            BlockPos pos = player.blockPosition();
+            if (levels > 0 && player.experienceLevel % 2 == 0) {
 
 
-            player.level.playSound(null, player.getX(), player.getY(), player.getZ(), ROMSounds.ROM_PLAYER_LEVEL_UP.get(), SoundCategory.MASTER, 1F, 1.0F);
-            for (int i = 0; i < player.inventory.getContainerSize(); i++) {
-                ItemStack itemStack = player.inventory.getItem(i);
-                if (itemStack.getItem() == ROMItems.WARBANNER) {
-                    BlockState state = level.getBlockState(pos);
-                    Block block = state.getBlock();
-                    if (block == ROMBlocks.WAR_BANNER_BLOCK) {
-                        level.setBlock(pos, state, 4);
+                player.level.playSound(null, player.getX(), player.getY(), player.getZ(), ROMSounds.ROM_PLAYER_LEVEL_UP.get(), SoundCategory.MASTER, 1F, 1.0F);
+                for (int i = 0; i < player.inventory.getContainerSize(); i++) {
+                    ItemStack itemStack = player.inventory.getItem(i);
+                    if (itemStack.getItem() == ROMItems.WARBANNER) {
+                        BlockState state = level.getBlockState(pos);
+                        Block block = state.getBlock();
+                        if (block == ROMBlocks.WAR_BANNER_BLOCK) {
+                            level.setBlock(pos, state, 4);
+                        }
                     }
                 }
             }
-        }
 
-    }
-*/
+        }
+    */
 //TODO: EntityMissiles and Fireworks
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void attacksDronesFireworksMissiles(LivingAttackEvent event) {

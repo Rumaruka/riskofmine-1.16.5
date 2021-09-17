@@ -2,33 +2,36 @@ package com.rumaruka.riskofmine;
 
 
 import com.rumaruka.riskofmine.client.ROMEntityRegister;
+import com.rumaruka.riskofmine.client.render.layer.LayerMonsterTooth;
 import com.rumaruka.riskofmine.client.screen.BaseScreen;
 import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
 import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
-import com.rumaruka.riskofmine.common.config.ModConfig;
+import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.common.event.ItemEvent;
 import com.rumaruka.riskofmine.common.event.LunarEvent;
 import com.rumaruka.riskofmine.common.event.MoneyEvent;
 import com.rumaruka.riskofmine.compat.jer.ROMJerPlugin;
 import com.rumaruka.riskofmine.events.GenerationEventHandler;
 import com.rumaruka.riskofmine.init.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,6 +53,8 @@ public class RiskOfMine implements TimeMod {
         logger.info("Risk Of Mine add in modpack");
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
+        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ROMConfig.commonConfig);
+        eventBus.register(ROMConfig.class);
         eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
         ROMSounds.REGISTER.register(eventBus);
@@ -70,6 +75,7 @@ public class RiskOfMine implements TimeMod {
 
     private void setup(final FMLCommonSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new GenerationEventHandler());
+
         if (MOD_LIST.isLoaded("jeresources")) {
             ROMJerPlugin.setup(event);
         }
@@ -92,11 +98,21 @@ public class RiskOfMine implements TimeMod {
         ScreenManager.register(ROMContainerTypes.EQUIPMENT_TRIPLE_BARREL, BaseShopScreen::new);
 
         ROMEntityRegister.renderEntity();
+
+
     }
     private void enqueueIMC(InterModEnqueueEvent event) {
         for (SlotTypePreset preset : SlotTypePreset.values()) {
-            InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> preset.getMessageBuilder().size(ModConfig.sizeCurio.get()).build());
+            InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> preset.getMessageBuilder().size(ROMConfig.General.sizeCurio.get()).build());
         }
+        for (PlayerRenderer render : Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().values()) {
+            render.addLayer(new LayerMonsterTooth(render));
+        }
+
+
+
+
+
     }
 
 

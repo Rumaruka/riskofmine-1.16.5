@@ -1,7 +1,7 @@
 package com.rumaruka.riskofmine.common.effect;
 
 import com.google.common.collect.Maps;
-import com.rumaruka.riskofmine.common.config.ModConfig;
+import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.init.ROMEffects;
 import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.entity.CreatureEntity;
@@ -34,12 +34,12 @@ public class StunEffect extends Effect {
 
         if (this == ROMEffects.STUN.get()) {
             if (entityLivingBaseIn instanceof CreatureEntity || entityLivingBaseIn instanceof ServerPlayerEntity) {
-                entityLivingBaseIn.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, ROMUtils.setDurOld(ModConfig.durStunConfig.get()), 9, true, false));
-                entityLivingBaseIn.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, ROMUtils.setDurOld(ModConfig.durStunConfig.get()), 4, true, false));
-                entityLivingBaseIn.addEffect(new EffectInstance(Effects.BLINDNESS, ROMUtils.setDurOld(ModConfig.durStunConfig.get()), 4, true, false));
-                entityLivingBaseIn.addEffect(new EffectInstance(Effects.WEAKNESS, ROMUtils.setDurOld(ModConfig.durStunConfig.get()), 5, true, false));
-                entityLivingBaseIn.addEffect(new EffectInstance(Effects.CONFUSION, ROMUtils.setDurOld(ModConfig.durStunConfig.get()), 5, true, false));
-                entityLivingBaseIn.addEffect(new EffectInstance(Effects.GLOWING, ROMUtils.setDurOld(ModConfig.durStunConfig.get()), 5, true, false));
+                entityLivingBaseIn.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get()), 9, true, false));
+                entityLivingBaseIn.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get()), 4, true, false));
+                entityLivingBaseIn.addEffect(new EffectInstance(Effects.BLINDNESS, ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get()), 4, true, false));
+                entityLivingBaseIn.addEffect(new EffectInstance(Effects.WEAKNESS, ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get()), 5, true, false));
+                entityLivingBaseIn.addEffect(new EffectInstance(Effects.CONFUSION, ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get()), 5, true, false));
+                entityLivingBaseIn.addEffect(new EffectInstance(Effects.GLOWING, ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get()), 5, true, false));
 
             }
 
@@ -97,12 +97,12 @@ public class StunEffect extends Effect {
 
         if (this == ROMEffects.STUN.get()) {
             if (entityLivingBaseIn instanceof CreatureEntity || entityLivingBaseIn instanceof ServerPlayerEntity) {
-                entityLivingBaseIn.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, ROMUtils.setDurOld(ModConfig.durStunConfig.get()), 9, true, false));
-                entityLivingBaseIn.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, ROMUtils.setDurOld(ModConfig.durStunConfig.get()), 4, true, false));
-                entityLivingBaseIn.addEffect(new EffectInstance(Effects.BLINDNESS, ROMUtils.setDurOld(ModConfig.durStunConfig.get()), 4, true, false));
-                entityLivingBaseIn.addEffect(new EffectInstance(Effects.WEAKNESS, ROMUtils.setDurOld(ModConfig.durStunConfig.get()), 5, true, false));
-                entityLivingBaseIn.addEffect(new EffectInstance(Effects.CONFUSION, ROMUtils.setDurOld(ModConfig.durStunConfig.get()), 5, true, false));
-                entityLivingBaseIn.addEffect(new EffectInstance(Effects.GLOWING, ROMUtils.setDurOld(ModConfig.durStunConfig.get()), 5, true, false));
+                entityLivingBaseIn.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get()), 9, true, false));
+                entityLivingBaseIn.addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get()), 4, true, false));
+                entityLivingBaseIn.addEffect(new EffectInstance(Effects.BLINDNESS, ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get()), 4, true, false));
+                entityLivingBaseIn.addEffect(new EffectInstance(Effects.WEAKNESS, ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get()), 5, true, false));
+                entityLivingBaseIn.addEffect(new EffectInstance(Effects.CONFUSION, ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get()), 5, true, false));
+                entityLivingBaseIn.addEffect(new EffectInstance(Effects.GLOWING, ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get()), 5, true, false));
 
 
             }

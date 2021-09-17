@@ -12,6 +12,7 @@ import java.util.function.Predicate;
 public  class EquipmentItemBase extends ItemCollectiblesBase {
     private final CategoryEnum categoryEnum;
 
+    public int cooldownMinus;
 
     public EquipmentItemBase(CategoryEnum categoryEnum) {
         super(EnumType.EQUIPMENT, categoryEnum, 1);

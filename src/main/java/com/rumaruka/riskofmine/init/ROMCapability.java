@@ -33,6 +33,7 @@ public class ROMCapability {
     public static final Capability<ROMLunar> LUNAR = promise();
     @AutoRegistrable.InitMethod
     private static void register() {
+
         REGISTER.regCapability(IMoney.class, new ROMMoneyStorage());
         REGISTER.regCapability(ILunar.class,new ROMLunarStorage());
     }

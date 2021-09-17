@@ -31,6 +31,8 @@ public class MultiShopBlock extends GenericShopBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.FALSE).setValue(CLOSED,Boolean.FALSE));
 
     }
+
+
     @Override
     public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         ROMMoney romMoney = ROMMoney.from(player);

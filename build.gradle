@@ -22,7 +22,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 
-version = '0.17.20b'
+version = '0.17.25b'
 group = 'com.rumaruka.riskofmine'
 archivesBaseName = 'riskofmine'
 
@@ -124,6 +124,11 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75")
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:3336760") // JER
+    compile fg.deobf('curse.maven:catalogue-459701:3399554')
+    compile fg.deobf('curse.maven:configured-457570:3434071')
+
+
+
     implementation 'org.jetbrains:annotations:22.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation  "org.jetbrains.kotlin:kotlin-reflect"

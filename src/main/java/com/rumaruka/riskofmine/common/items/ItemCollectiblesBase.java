@@ -4,6 +4,7 @@ import com.rumaruka.riskofmine.ModSetup;
 import com.rumaruka.riskofmine.api.CategoryEnum;
 import com.rumaruka.riskofmine.api.EnumType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
@@ -20,6 +21,11 @@ public class ItemCollectiblesBase extends Item implements ICurioItem {
         this.sizeStack = size;
     }
 
+    @Override
+    public int getItemStackLimit(ItemStack stack) {
+        return sizeStack;
+    }
+    
     public int getSizeStack() {
         return sizeStack;
     }

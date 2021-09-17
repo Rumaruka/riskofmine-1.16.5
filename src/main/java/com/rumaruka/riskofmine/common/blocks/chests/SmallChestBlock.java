@@ -3,7 +3,7 @@ package com.rumaruka.riskofmine.common.blocks.chests;
 import com.rumaruka.riskofmine.api.ChestsTypes;
 import com.rumaruka.riskofmine.common.cap.money.ROMMoney;
 import com.rumaruka.riskofmine.common.cap.money.data.Money;
-import com.rumaruka.riskofmine.common.config.ModConfig;
+import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.common.tiles.BaseChestTE;
 import com.rumaruka.riskofmine.common.tiles.CommonChestTE;
 import com.rumaruka.riskofmine.init.ROMSounds;
@@ -35,14 +35,14 @@ public class SmallChestBlock extends GenericChestBlock {
         } else {
             TileEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof BaseChestTE &&!player.abilities.instabuild) {
-                if(money.getCurrentMoney()<ModConfig.priceSmallChest.get()){
+                if(money.getCurrentMoney()< ROMConfig.General.priceSmallChest.get()){
                     worldIn.playSound(null, pos, ROMSounds.ROM_CHEST_NOT_MONEY.get(), SoundCategory.BLOCKS, 2.0F, 1.0F);
                     player.displayClientMessage(new TranslationTextComponent("riskofmine.not_money"), true);
                 }
             }
 
-                if(money.getCurrentMoney()>=ModConfig.priceSmallChest.get()){
-                    money.consumeMoney(player,ModConfig.priceSmallChest.get());
+                if(money.getCurrentMoney()>= ROMConfig.General.priceSmallChest.get()){
+                    money.consumeMoney(player, ROMConfig.General.priceSmallChest.get());
                     romMoney.detectAndSendChanges();
                     player.openMenu((BaseChestTE) tileentity);
                     player.awardStat(Stats.OPEN_CHEST);
