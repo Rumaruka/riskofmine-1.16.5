@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = 'https://repo.spongepowered.org/maven' }
         jcenter()
         mavenCentral()
         maven {
@@ -11,6 +12,8 @@ buildscript {
 
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.7-patched'
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+
     }
 }
 plugins {
@@ -20,7 +23,7 @@ apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-
+apply plugin: 'org.spongepowered.mixin'
 
 version = '0.17.25b'
 group = 'com.rumaruka.riskofmine'
@@ -63,7 +66,7 @@ minecraft {
             setJvmArgs(jvmArgs)
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-
+            args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'riskofmine.mixin.json'
             mods {
                 riskofmine {
                     source sourceSets.main
@@ -79,7 +82,7 @@ minecraft {
             setJvmArgs(jvmArgs)
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-
+            args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'riskofmine.mixin.json'
             mods {
                 riskofmine {
                     source sourceSets.main
@@ -95,6 +98,7 @@ minecraft {
             ideaModule "${project.name}.main"
             workingDirectory project.file('run')
             forceExit false
+            args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'riskofmine.mixin.json'
             mods {
                 riskofmine {
                     source sourceSets.main
@@ -113,7 +117,7 @@ sourceSets.main.resources {
 }
 dependencies {
 
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.4'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.22'
 
     implementation fg.deobf('ru.timeconqueror:TimeCore:1.16.5-3.4.1.0:dev', true)
 
@@ -129,9 +133,13 @@ dependencies {
 
 
 
+    //System Dependencies
+
     implementation 'org.jetbrains:annotations:22.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation  "org.jetbrains.kotlin:kotlin-reflect"
+    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
+    testAnnotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
 
 }
 
@@ -145,6 +153,7 @@ jar {
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"examplemodsareus",
+                "FMLCorePluginContainsFMLMod": "true",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -167,4 +176,7 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
+}
+mixin {
+    add sourceSets.main, "riskofmine.mixin-refmap.json"
 }

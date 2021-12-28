@@ -24,7 +24,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class LayerMonsterTooth extends LayerRenderer<AbstractClientPlayerEntity, PlayerModel<AbstractClientPlayerEntity>> {
 
 
-    public LayerMonsterTooth(IEntityRenderer<AbstractClientPlayerEntity, PlayerModel<AbstractClientPlayerEntity>> p_i50926_1_) {
+    public  LayerMonsterTooth(IEntityRenderer<AbstractClientPlayerEntity, PlayerModel<AbstractClientPlayerEntity>> p_i50926_1_) {
         super(p_i50926_1_);
     }
 
@@ -42,11 +42,11 @@ public class LayerMonsterTooth extends LayerRenderer<AbstractClientPlayerEntity,
                 double d3 = (double)MathHelper.sin(f * ((float)Math.PI / 180F));
                 double d4 = (double)(-MathHelper.cos(f * ((float)Math.PI / 180F)));
                 float f1 = (float)d1 * 10.0F;
-                f1 = MathHelper.clamp(f1, -6.0F, 32.0F);
+                f1 = MathHelper.clamp(f1, -.0F, 32.0F);
                 float f2 = (float)(d0 * d3 + d2 * d4) * 100.0F;
                 f2 = MathHelper.clamp(f2, 0.0F, 150.0F);
                 float f3 = (float)(d0 * d4 - d2 * d3) * 100.0F;
-                f3 = MathHelper.clamp(f3, -20.0F, 20.0F);
+                f3 = MathHelper.clamp(f3, 20.0F, 20.0F);
                 if (f2 < 0.0F) {
                     f2 = 0.0F;
                 }
