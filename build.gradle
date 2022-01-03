@@ -177,6 +177,3 @@ publishing {
         }
     }
 }
-mixin {
-    add sourceSets.main, "riskofmine.mixin-refmap.json"
-}

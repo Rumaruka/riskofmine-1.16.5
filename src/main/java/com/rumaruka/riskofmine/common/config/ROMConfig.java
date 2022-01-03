@@ -3,8 +3,12 @@ package com.rumaruka.riskofmine.common.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class ROMConfig {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+public class ROMConfig {
 
     public static final ForgeConfigSpec commonConfig;
     public static final General COMMON;
@@ -24,6 +28,7 @@ public class ROMConfig {
         public static ForgeConfigSpec.IntValue priceSmallChest;
         public static ForgeConfigSpec.IntValue priceLargeChest;
         public static ForgeConfigSpec.IntValue priceLegendaryChest;
+        public static ForgeConfigSpec.BooleanValue isBossBar;
 
         General(ForgeConfigSpec.Builder builder){
             builder.push("Risk of Mine General");
@@ -41,11 +46,11 @@ public class ROMConfig {
             priceLargeChest = builder.defineInRange("Payment Large Chest:",100,10,Integer.MAX_VALUE);
             builder.comment("Payment for Open Legendary Chest");
             priceLegendaryChest = builder.defineInRange("Payment Legendary Chest:",1000,10,Integer.MAX_VALUE);
+            builder.comment("Boss bar enable?");
+            isBossBar = builder.define("Enable:",false);
             builder.pop();
         }
 
     }
-
-
 
 }

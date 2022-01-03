@@ -2,13 +2,18 @@ package com.rumaruka.riskofmine.init;
 
 
 import com.rumaruka.riskofmine.ModSetup;
+import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.common.blocks.WarBannerBlock;
 import com.rumaruka.riskofmine.common.blocks.chests.*;
+import com.rumaruka.riskofmine.common.blocks.level.firststage.BlockDistantRoostGrass;
 import net.minecraftforge.registries.ObjectHolder;
+import ru.timeconqueror.timecore.api.client.resource.BlockModels;
+import ru.timeconqueror.timecore.api.client.resource.location.BlockModelLocation;
+import ru.timeconqueror.timecore.api.client.resource.location.TextureLocation;
 import ru.timeconqueror.timecore.api.registry.BlockRegister;
 import ru.timeconqueror.timecore.api.registry.util.AutoRegistrable;
 
-import static com.rumaruka.riskofmine.RiskOfMine.MODID;
+import static com.rumaruka.riskofmine.RiskOfMine.*;
 import static ru.timeconqueror.timecore.api.util.Hacks.promise;
 
 @ObjectHolder(MODID)
@@ -37,6 +42,9 @@ public class ROMBlocks {
     public static final WarBannerBlock WAR_BANNER_BLOCK = promise();
 
 
+    //Block levels
+    public static final BlockDistantRoostGrass DISTANT_ROOST_GRASS = promise();
+
     private static class Setup {
 
         @AutoRegistrable
@@ -58,6 +66,7 @@ public class ROMBlocks {
             REGISTER.register("war_banner", WarBannerBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ModSetup.ITEM_GROUP);
 
 
+            REGISTER.register("distant_roost_grass", BlockDistantRoostGrass::new).defaultBlockItem(ModSetup.ITEM_GROUP);
         }
     }
 

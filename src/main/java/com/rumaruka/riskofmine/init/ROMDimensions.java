@@ -14,8 +14,8 @@ import static com.rumaruka.riskofmine.RiskOfMine.rl;
 
 public class ROMDimensions {
 
-//   public static final RegistryKey<DimensionType>DISTANT_ROOST = RegistryKey.create(Registry.DIMENSION_TYPE_REGISTRY,rl("distant_roost"));
-//   public static final RegistryKey<World>DISTANT_ROOST_WORLD = RegistryKey.create(Registry.DIMENSION_REGISTRY,rl("distant_roost"));
+   public static final RegistryKey<DimensionType>DISTANT_ROOST = RegistryKey.create(Registry.DIMENSION_TYPE_REGISTRY,rl("distant_roost"));
+   public static final RegistryKey<World>DISTANT_ROOST_WORLD = RegistryKey.create(Registry.DIMENSION_REGISTRY,rl("distant_roost"));
 //   public static final RegistryKey<DimensionType>TITANIC_PLAINS= RegistryKey.create(Registry.DIMENSION_TYPE_REGISTRY,rl("titanic_plains"));
 //   public static final RegistryKey<World>TITANIC_PLAINS_WORLD= RegistryKey.create(Registry.DIMENSION_REGISTRY,rl("titanic_plains"));
 //   public static final RegistryKey<DimensionType>ABANDONED_AQUEDUCT= RegistryKey.create(Registry.DIMENSION_TYPE_REGISTRY,rl("abandoned_aqueduct"));
