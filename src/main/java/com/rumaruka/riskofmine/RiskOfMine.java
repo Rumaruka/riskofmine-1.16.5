@@ -7,7 +7,6 @@ import com.rumaruka.riskofmine.client.screen.BaseScreen;
 import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
 import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
 import com.rumaruka.riskofmine.common.config.ROMConfig;
-import com.rumaruka.riskofmine.common.dimensions.Dimensions;
 import com.rumaruka.riskofmine.common.event.ItemEvent;
 import com.rumaruka.riskofmine.common.event.LunarEvent;
 import com.rumaruka.riskofmine.common.event.MoneyEvent;
@@ -36,7 +35,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.timeconqueror.timecore.api.TimeMod;
-import ru.timeconqueror.timecore.api.client.resource.location.BlockModelLocation;
 import ru.timeconqueror.timecore.api.client.resource.location.TextureLocation;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
@@ -76,14 +74,12 @@ public class RiskOfMine implements TimeMod {
         MinecraftForge.EVENT_BUS.register(new ItemEvent());
         MinecraftForge.EVENT_BUS.register(new MoneyEvent());
         MinecraftForge.EVENT_BUS.register(new LunarEvent());
-        Dimensions.register(eventBus);
 
     }
 
 
     private void setup(final FMLCommonSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new GenerationEventHandler());
-
         if (MOD_LIST.isLoaded("jeresources")) {
             ROMJerPlugin.setup(event);
         }
@@ -133,8 +129,5 @@ public class RiskOfMine implements TimeMod {
         return new TextureLocation(RiskOfMine.MODID, path);
     }
 
-    public static BlockModelLocation bml(String path){
-        return new BlockModelLocation(MODID,path);
-    }
 
 }

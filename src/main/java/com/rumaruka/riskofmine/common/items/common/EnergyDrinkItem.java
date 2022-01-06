@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.rumaruka.riskofmine.api.CategoryEnum;
 import com.rumaruka.riskofmine.api.EnumType;
 import com.rumaruka.riskofmine.common.items.ItemCollectiblesBase;
+import com.rumaruka.riskofmine.utils.ROMMathFormula;
 import com.rumaruka.riskofmine.utils.ROMMathUtils;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
@@ -60,7 +61,7 @@ public class EnergyDrinkItem extends ItemCollectiblesBase {
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         if (slot == EquipmentSlotType.OFFHAND) {
-            builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_MODIFIER_SPRINTING_UUID, "Speed",Math.abs(Math.tan(Math.PI*stack.getCount() / 180)) , AttributeModifier.Operation.ADDITION));
+            builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_MODIFIER_SPRINTING_UUID, "Speed", ROMMathFormula.speedIncreasing(stack.getCount()), AttributeModifier.Operation.ADDITION));
         }
 
         defaultModifiers = builder.build();
@@ -81,7 +82,7 @@ public class EnergyDrinkItem extends ItemCollectiblesBase {
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 
-        builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_MODIFIER_SPRINTING_UUID, "Speed", Math.abs(Math.tan(Math.PI*stack.getCount() / 180)), AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_MODIFIER_SPRINTING_UUID, "Speed", ROMMathFormula.speedIncreasing(stack.getCount()), AttributeModifier.Operation.ADDITION));
         defaultModifiers = builder.build();
         return defaultModifiers;
     }
