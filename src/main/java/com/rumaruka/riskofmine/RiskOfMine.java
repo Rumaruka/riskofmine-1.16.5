@@ -11,6 +11,7 @@ import com.rumaruka.riskofmine.common.event.ItemEvent;
 import com.rumaruka.riskofmine.common.event.LunarEvent;
 import com.rumaruka.riskofmine.common.event.MoneyEvent;
 import com.rumaruka.riskofmine.compat.jer.ROMJerPlugin;
+import com.rumaruka.riskofmine.events.CommonEvent;
 import com.rumaruka.riskofmine.events.GenerationEventHandler;
 import com.rumaruka.riskofmine.init.*;
 import net.minecraft.client.Minecraft;
@@ -30,8 +31,10 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.timeconqueror.timecore.api.TimeMod;
@@ -46,7 +49,7 @@ public class RiskOfMine implements TimeMod {
     private static RiskOfMine instance;
     public static final String MODID = "riskofmine";
     public static final Logger logger = LogManager.getLogger(MODID);
-
+    public static CommonEvent eventCommon;
     private static final ModList MOD_LIST = ModList.get();
 
 
@@ -65,6 +68,7 @@ public class RiskOfMine implements TimeMod {
             eventBus.addListener(this::clientSetup);
             eventBus.addListener(ROMOverlayRender::keyPressed);
         });
+        MinecraftForge.EVENT_BUS.register(eventCommon = new CommonEvent());
 
         ROMParticles.PARTICLES.register(eventBus);
         ROMEffects.EFFECTS.register(eventBus);
@@ -74,7 +78,7 @@ public class RiskOfMine implements TimeMod {
         MinecraftForge.EVENT_BUS.register(new ItemEvent());
         MinecraftForge.EVENT_BUS.register(new MoneyEvent());
         MinecraftForge.EVENT_BUS.register(new LunarEvent());
-
+        eventBus.addListener(this::finish);
     }
 
 
@@ -103,17 +107,23 @@ public class RiskOfMine implements TimeMod {
 
         ROMEntityRegister.renderEntity();
 
-
+        for (PlayerRenderer render : Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().values()) {
+            render.addLayer(new LayerMonsterTooth(render));
+        }
     }
 
     private void enqueueIMC(InterModEnqueueEvent event) {
         for (SlotTypePreset preset : SlotTypePreset.values()) {
             InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> preset.getMessageBuilder().size(ROMConfig.General.sizeCurio.get()).build());
         }
-        for (PlayerRenderer render : Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().values()) {
-            render.addLayer(new LayerMonsterTooth(render));
-        }
 
+    }
+    private void finish(FMLLoadCompleteEvent event){
+        if(FMLEnvironment.dist.isClient())
+        {
+            eventCommon.addLayer();
+
+        }
     }
 
     public static RiskOfMine instance() {

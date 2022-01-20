@@ -1,5 +1,6 @@
 package com.rumaruka.riskofmine.common.event;
 
+import com.rumaruka.riskofmine.client.render.layer.LayerMonsterTooth;
 import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
 import com.rumaruka.riskofmine.init.ROMEffects;
@@ -8,21 +9,21 @@ import com.rumaruka.riskofmine.init.ROMParticles;
 import com.rumaruka.riskofmine.utils.ROMMathFormula;
 import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.PlayerRenderer;
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.passive.AmbientEntity;
-import net.minecraft.entity.passive.BatEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -256,33 +257,31 @@ public class ItemEvent {
 
                     for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                         ItemStack itemStack = player.inventory.getItem(i);
-                        if (itemStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
-                            //TODO: Make mini bomb entity how magnite in entity
-//                            event.getEntity().level.explode(event.getEntity(), event.getEntity().getX(), event.getEntity().getY(0.0625D), event.getEntity().getZ(), 4.0F, Explosion.Mode.BREAK);
-//                            player.setHealth(5);
+                        if (itemStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof LivingEntity) {
+                            Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(itemStack, (int) event.getEntity().position().x,  OverlayTexture.NO_OVERLAY);                        }
 
 
-
-                        }
                     }
                 }
-                if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STICKY_BOMB, player).isPresent()) {
-                    ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STUN_GRENADE, player).get().right;
+            }
+            if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STICKY_BOMB, player).isPresent()) {
+                ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STUN_GRENADE, player).get().right;
+                if (curioStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
                     if (curioStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
-                        if (curioStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
 
 //                            event.getEntity().level.explode(event.getEntity(), event.getEntity().getX(), event.getEntity().getY(0.0625D), event.getEntity().getZ(), 4.0F, Explosion.Mode.BREAK);
 
 //                                        player.setHealth(1.5f);
 
 
-                        }
                     }
                 }
-
             }
+
         }
     }
+
+
 
 
     /**
@@ -293,45 +292,45 @@ public class ItemEvent {
     public void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
         PlayerEntity player = Minecraft.getInstance().player;
 
-            LivingEntity livingEntity = event.getEntityLiving();
+        LivingEntity livingEntity = event.getEntityLiving();
 
-            World world = livingEntity.level;
-            if (!world.isClientSide) {
-                if (player != null ) {
-                    for (int i = 0; i < player.inventory.getContainerSize(); i++) {
-                        ItemStack itemStack = player.inventory.getItem(i);
-                        if (itemStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
-                            if(livingEntity instanceof MobEntity){
-                                float distance = player.distanceTo(livingEntity);
+        World world = livingEntity.level;
+        if (!world.isClientSide) {
+            if (player != null) {
+                for (int i = 0; i < player.inventory.getContainerSize(); i++) {
+                    ItemStack itemStack = player.inventory.getItem(i);
+                    if (itemStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
+                        if (livingEntity instanceof MobEntity) {
+                            float distance = player.distanceTo(livingEntity);
 
-                                if (distance <= 3.5) {
-                                    livingEntity.hurt(DamageSource.ANVIL, ROMMathFormula.powerIncreasing(itemStack.getCount(),5.0f));
-                                    Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
-                                }
-
-
+                            if (distance <= 3.5) {
+                                livingEntity.hurt(DamageSource.ANVIL, ROMMathFormula.powerIncreasing(itemStack.getCount(), 5.0f));
+                                Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
                             }
+
+
                         }
-
-                        if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).isPresent()) {
-                            ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).get().right;
-                            if (curioStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
-
-                                float distance = player.distanceTo(livingEntity);
-                                if (distance <= 3.5) {
-                                    livingEntity.hurt(DamageSource.ANVIL, curioStack.getCount());
-                                    Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
-                                }
-                            }
-                        }
-
                     }
 
+                    if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).isPresent()) {
+                        ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).get().right;
+                        if (curioStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
+
+                            float distance = player.distanceTo(livingEntity);
+                            if (distance <= 3.5) {
+                                livingEntity.hurt(DamageSource.ANVIL, curioStack.getCount());
+                                Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
+                            }
+                        }
+                    }
 
                 }
 
 
             }
+
+
+        }
 
     }
 
