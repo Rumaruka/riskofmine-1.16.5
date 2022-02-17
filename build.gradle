@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
-        maven { url = 'https://repo.spongepowered.org/maven' }
+        maven {  url = 'https://repo.spongepowered.org/repository/maven-public'}
         jcenter()
         mavenCentral()
         maven {
@@ -12,8 +12,7 @@ buildscript {
 
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.7-patched'
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-patched'
     }
 }
 plugins {
@@ -117,9 +116,9 @@ sourceSets.main.resources {
 }
 dependencies {
 
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.22'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.23'
 
-    implementation fg.deobf('ru.timeconqueror:TimeCore:1.16.5-3.4.1.0:dev', true)
+    implementation fg.deobf('ru.timeconqueror:TimeCore:1.16.5-3.4.1.0.build17:dev', true)
 
 
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.0")
@@ -127,12 +126,28 @@ dependencies {
 
     compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75")
+
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:3336760") // JER
+
     compile fg.deobf('curse.maven:catalogue-459701:3399554')
     compile fg.deobf('curse.maven:configured-457570:3434071')
 
 
 
+    if (file("libs").exists()) {
+        file("libs").eachFile { file ->
+            def splitPos = file.name.lastIndexOf("-")
+            def modartifact = file.name.substring(0, splitPos)
+            def modversion = file.name.substring(splitPos + 1, file.name.length() - 4)
+            def modreference = "lib:$modartifact:$modversion"
+
+            dependencies {
+                implementation fg.deobf(project.dependencies.create(modreference) {
+                    transitive = false
+                })
+            }
+        }
+    }
     //System Dependencies
 
     implementation 'org.jetbrains:annotations:22.0.0'

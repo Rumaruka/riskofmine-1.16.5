@@ -1,6 +1,6 @@
 package com.rumaruka.riskofmine.events;
 
-import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
+import com.rumaruka.riskofmine.common.entity.misc.HealthOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.Cancelable;

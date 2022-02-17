@@ -1,5 +1,9 @@
 package com.rumaruka.riskofmine.utils;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3f;
+
 public class ROMMathUtils {
 
 
@@ -22,4 +26,8 @@ public class ROMMathUtils {
    public static float percent(float x){
         return x / 100;
    }
+
+
+
+
 }

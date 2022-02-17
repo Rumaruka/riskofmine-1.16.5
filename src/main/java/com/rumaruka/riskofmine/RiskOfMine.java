@@ -11,7 +11,6 @@ import com.rumaruka.riskofmine.common.event.ItemEvent;
 import com.rumaruka.riskofmine.common.event.LunarEvent;
 import com.rumaruka.riskofmine.common.event.MoneyEvent;
 import com.rumaruka.riskofmine.compat.jer.ROMJerPlugin;
-import com.rumaruka.riskofmine.events.CommonEvent;
 import com.rumaruka.riskofmine.events.GenerationEventHandler;
 import com.rumaruka.riskofmine.init.*;
 import net.minecraft.client.Minecraft;
@@ -49,7 +48,6 @@ public class RiskOfMine implements TimeMod {
     private static RiskOfMine instance;
     public static final String MODID = "riskofmine";
     public static final Logger logger = LogManager.getLogger(MODID);
-    public static CommonEvent eventCommon;
     private static final ModList MOD_LIST = ModList.get();
 
 
@@ -68,7 +66,6 @@ public class RiskOfMine implements TimeMod {
             eventBus.addListener(this::clientSetup);
             eventBus.addListener(ROMOverlayRender::keyPressed);
         });
-        MinecraftForge.EVENT_BUS.register(eventCommon = new CommonEvent());
 
         ROMParticles.PARTICLES.register(eventBus);
         ROMEffects.EFFECTS.register(eventBus);
@@ -78,7 +75,6 @@ public class RiskOfMine implements TimeMod {
         MinecraftForge.EVENT_BUS.register(new ItemEvent());
         MinecraftForge.EVENT_BUS.register(new MoneyEvent());
         MinecraftForge.EVENT_BUS.register(new LunarEvent());
-        eventBus.addListener(this::finish);
     }
 
 
@@ -118,13 +114,7 @@ public class RiskOfMine implements TimeMod {
         }
 
     }
-    private void finish(FMLLoadCompleteEvent event){
-        if(FMLEnvironment.dist.isClient())
-        {
-            eventCommon.addLayer();
 
-        }
-    }
 
     public static RiskOfMine instance() {
         return instance;

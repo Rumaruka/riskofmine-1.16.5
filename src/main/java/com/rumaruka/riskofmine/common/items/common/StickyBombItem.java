@@ -2,10 +2,19 @@ package com.rumaruka.riskofmine.common.items.common;
 
 import com.rumaruka.riskofmine.api.CategoryEnum;
 import com.rumaruka.riskofmine.api.EnumType;
+import com.rumaruka.riskofmine.common.entity.weapon.EntityStickyBomb;
 import com.rumaruka.riskofmine.common.items.ItemCollectiblesBase;
+import com.rumaruka.riskofmine.events.MovingHandler;
+import com.rumaruka.riskofmine.utils.ROMUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -36,4 +45,9 @@ public class StickyBombItem extends ItemCollectiblesBase {
             tooltip.add(new TranslationTextComponent("[Stacks:" + stack.getCount() + "]"));
         }
     }
-}
+
+
+
+    }
+
+

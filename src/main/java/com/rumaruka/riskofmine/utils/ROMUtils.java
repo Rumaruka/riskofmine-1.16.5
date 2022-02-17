@@ -18,6 +18,7 @@ import java.util.UUID;
 
 public class ROMUtils {
     public static Minecraft minecraft = Minecraft.getInstance();
+    public static PlayerEntity player = Minecraft.getInstance().player;
 
     private final List<CategoryEnum> categoryEnum = Lists.newArrayList();
 
@@ -79,24 +80,6 @@ public class ROMUtils {
 
     }
 
-    public boolean checkItemInInventory(ServerPlayerEntity player, Item item) {
-        for (int i = 0; i < player.inventory.getContainerSize(); i++) {
-            ItemStack itemStack = player.inventory.getItem(0);
-            if (itemStack.getItem() == item) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public boolean checkItemInCurios(ServerPlayerEntity player, Item item) {
-        if (CuriosApi.getCuriosHelper().findEquippedCurio(item, player).isPresent()) {
-            ItemStack curiosStack = CuriosApi.getCuriosHelper().findEquippedCurio(item, player).get().right;
-            return curiosStack.getItem() == item;
-        }
-        return false;
-    }
 
 
 

@@ -1,23 +1,19 @@
 package com.rumaruka.riskofmine.common.event;
 
-import com.rumaruka.riskofmine.client.render.layer.LayerMonsterTooth;
 import com.rumaruka.riskofmine.common.config.ROMConfig;
-import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
+import com.rumaruka.riskofmine.common.entity.misc.HealthOrbEntity;
+import com.rumaruka.riskofmine.common.entity.weapon.EntityStickyBomb;
 import com.rumaruka.riskofmine.init.ROMEffects;
 import com.rumaruka.riskofmine.init.ROMItems;
 import com.rumaruka.riskofmine.init.ROMParticles;
 import com.rumaruka.riskofmine.utils.ROMMathFormula;
 import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.PlayerRenderer;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -62,6 +58,7 @@ public class ItemEvent {
                         world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, curiosStack.getCount() / 2));
 
                     }
+
                     for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                         ItemStack itemStack = player.inventory.getItem(i);
                         if (itemStack.getItem() == ROMItems.MONSTER_TOOTH) {
@@ -140,6 +137,7 @@ public class ItemEvent {
      * priority = EventPriority.LOW
      * If item use hurt and damage add only this method
      */
+
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onEntityHurt(LivingHurtEvent event) {
         if (event.getSource().getEntity() instanceof ServerPlayerEntity) {
@@ -247,7 +245,14 @@ public class ItemEvent {
                         ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STUN_GRENADE, player).get().right;
                         if (curioStack.getItem() == ROMItems.STUN_GRENADE && event.getEntity() instanceof CreatureEntity) {
                             if (curioStack.getItem() == ROMItems.STUN_GRENADE && event.getEntity() instanceof CreatureEntity) {
+
                                 ((CreatureEntity) event.getEntity()).addEffect(new EffectInstance(ROMEffects.STUN.get(), ROMUtils.setDurOld(ROMConfig.General.durStunConfig.get() * curioStack.getCount()), 2, true, false));
+                                if (((CreatureEntity) event.getEntity()).hasEffect(ROMEffects.STUN.get())) {
+
+
+                                }
+
+
                             }
                         }
                     }
@@ -258,30 +263,33 @@ public class ItemEvent {
                     for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                         ItemStack itemStack = player.inventory.getItem(i);
                         if (itemStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof LivingEntity) {
-                            Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(itemStack, (int) event.getEntity().position().x,  OverlayTexture.NO_OVERLAY);                        }
 
 
-                    }
-                }
-            }
-            if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STICKY_BOMB, player).isPresent()) {
-                ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STUN_GRENADE, player).get().right;
-                if (curioStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
-                    if (curioStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof CreatureEntity) {
+                            EntityStickyBomb entityStickyBomb = new EntityStickyBomb(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, player, (MobEntity) event.getEntity());
+                            world.addFreshEntity(entityStickyBomb);
 
-//                            event.getEntity().level.explode(event.getEntity(), event.getEntity().getX(), event.getEntity().getY(0.0625D), event.getEntity().getZ(), 4.0F, Explosion.Mode.BREAK);
 
-//                                        player.setHealth(1.5f);
-
+                        }
 
                     }
+                    if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STICKY_BOMB, player).isPresent()) {
+                        ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STICKY_BOMB, player).get().right;
+                        if (curioStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof LivingEntity) {
+
+
+                            EntityStickyBomb entityStickyBomb = new EntityStickyBomb(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, player, (MobEntity) event.getEntity());
+                            world.addFreshEntity(entityStickyBomb);
+
+
+                        }
+                    }
+
+
                 }
             }
-
         }
+
     }
-
-
 
 
     /**
@@ -333,6 +341,7 @@ public class ItemEvent {
         }
 
     }
+
 
     /**
      * onPlayerHurt  - for hurt player event

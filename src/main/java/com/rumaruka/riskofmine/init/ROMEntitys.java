@@ -1,8 +1,9 @@
 package com.rumaruka.riskofmine.init;
 
-import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
+import com.rumaruka.riskofmine.common.entity.misc.HealthOrbEntity;
 
 import com.rumaruka.riskofmine.common.entity.bullets.EntityGoldenIngotBullets;
+import com.rumaruka.riskofmine.common.entity.weapon.EntityStickyBomb;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.registries.ObjectHolder;
@@ -33,6 +34,11 @@ public class ROMEntitys {
                             .sized(3.5F, 3.5F))
             .retrieve();
 
-
+    public static final EntityType<EntityStickyBomb> STICKY_BOMB = REGISTER.register("sticky_bomb",
+                    Builder.<EntityStickyBomb>of(EntityStickyBomb::new, EntityClassification.MISC)
+                            .setTrackingRange(80)
+                            .setShouldReceiveVelocityUpdates(true)
+                            .sized(3.5F, 3.5F))
+            .retrieve();
 
 }

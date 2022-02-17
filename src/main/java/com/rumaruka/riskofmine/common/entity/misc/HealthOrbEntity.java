@@ -1,4 +1,4 @@
-package com.rumaruka.riskofmine.common.entity;
+package com.rumaruka.riskofmine.common.entity.misc;
 
 import com.rumaruka.riskofmine.events.PlayerHealthEvent;
 import com.rumaruka.riskofmine.init.ROMEntitys;
