@@ -21,6 +21,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -319,25 +320,45 @@ public class ItemEvent {
 
                         }
                     }
+                }
+                if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).isPresent()) {
+                    ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).get().right;
+                    if (curioStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
 
-                    if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).isPresent()) {
-                        ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).get().right;
-                        if (curioStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
-
-                            float distance = player.distanceTo(livingEntity);
-                            if (distance <= 3.5) {
-                                livingEntity.hurt(DamageSource.ANVIL, curioStack.getCount());
-                                Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
-                            }
+                        float distance = player.distanceTo(livingEntity);
+                        if (distance <= 3.5) {
+                            livingEntity.hurt(DamageSource.ANVIL, curioStack.getCount());
+                            Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
                         }
                     }
-
                 }
 
 
             }
+        }
+    }
 
 
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        PlayerEntity player = event.player;
+
+        for (int i = 0; i < player.inventory.getContainerSize(); i++) {
+            for (int j = 0; j < player.inventory.getContainerSize(); j++) {
+                ItemStack uncorruted = player.inventory.getItem(j);
+                ItemStack corrupted = player.inventory.getItem(i);
+
+
+                if (corrupted.getItem() == ROMItems.TENTABAUBLE) {
+                    if (uncorruted.getItem() == ROMItems.CHRONOBAUBLE) {
+                        int count = uncorruted.getCount();
+                        uncorruted.shrink(count);
+                        corrupted.shrink(-count);
+    //                    player.inventory.setItem(i, corrupted);
+                    }
+
+                }
+            }
         }
 
     }
@@ -386,41 +407,20 @@ public class ItemEvent {
         }
     }
 
-    /*
-        @SubscribeEvent
-        public void onXpLevelUp(PlayerXpEvent.LevelChange event) {
-
-            PlayerEntity player = event.getPlayer();
-            int levels = event.getLevels();
-            player.experienceLevel += levels;
-            World level = player.level;
-            BlockPos pos = player.blockPosition();
-            if (levels > 0 && player.experienceLevel % 2 == 0) {
-
-
-                player.level.playSound(null, player.getX(), player.getY(), player.getZ(), ROMSounds.ROM_PLAYER_LEVEL_UP.get(), SoundCategory.MASTER, 1F, 1.0F);
-                for (int i = 0; i < player.inventory.getContainerSize(); i++) {
-                    ItemStack itemStack = player.inventory.getItem(i);
-                    if (itemStack.getItem() == ROMItems.WARBANNER) {
-                        BlockState state = level.getBlockState(pos);
-                        Block block = state.getBlock();
-                        if (block == ROMBlocks.WAR_BANNER_BLOCK) {
-                            level.setBlock(pos, state, 4);
-                        }
-                    }
-                }
-            }
-
-        }
-    */
-//TODO: EntityMissiles and Fireworks
+    //TODO: EntityMissiles and Fireworks
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void attacksDronesFireworksMissiles(LivingAttackEvent event) {
 
     }
-
-
 }
+
+
+
+
+
+
+
+
 
 
 

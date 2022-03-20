@@ -11,6 +11,7 @@ import com.rumaruka.riskofmine.common.items.lunar.ShapedGlassItem;
 import com.rumaruka.riskofmine.common.items.uncommon.ChronobaubleItem;
 import com.rumaruka.riskofmine.common.items.uncommon.InfusionItem;
 import com.rumaruka.riskofmine.common.items.uncommon.OldWarStealthkitItem;
+import com.rumaruka.riskofmine.common.items.voiditems.TentabaubleItem;
 import net.minecraftforge.registries.ObjectHolder;
 import ru.timeconqueror.timecore.api.registry.ItemRegister;
 import ru.timeconqueror.timecore.api.registry.util.AutoRegistrable;
@@ -42,6 +43,8 @@ public class ROMItems {
     public static final TheCrowdFunderItem THE_CROWDFUNDER = promise();
     public static final StickyBombItem STICKY_BOMB = promise();
 
+    public static final TentabaubleItem TENTABAUBLE = promise();
+
     public static final LunarCoinItem LUNAR_COIN =promise();
 
     private static class Setup {
@@ -72,6 +75,7 @@ public class ROMItems {
             REGISTER.register("warbanner", WarbannerItem::new).defaultModel(tl("items/warbanner"));
             REGISTER.register("the_crowdfunder", TheCrowdFunderItem::new).defaultModel(tl("items/the_crowdfunder"));
             REGISTER.register("sticky_bomb", StickyBombItem::new).defaultModel(tl("items/sticky_bomb"));
+            REGISTER.register("tentabauble", TentabaubleItem::new).defaultModel(tl("items/tentabauble"));
             REGISTER.register("lunar_coin", LunarCoinItem::new);
         }
     }

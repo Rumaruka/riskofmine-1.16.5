@@ -20,6 +20,7 @@ public enum ChestsTypes implements IStringSerializable {
     LEGENDARY(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
     LARGE(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
     SMALL(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    VOID(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
     DAMAGE(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
     HEALING(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
     UTILITY(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),

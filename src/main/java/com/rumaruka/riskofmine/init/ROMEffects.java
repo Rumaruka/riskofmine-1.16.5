@@ -1,6 +1,7 @@
 package com.rumaruka.riskofmine.init;
 
 import com.rumaruka.riskofmine.common.effect.BleedEffect;
+import com.rumaruka.riskofmine.common.effect.NullifiedEffect;
 import com.rumaruka.riskofmine.common.effect.StunEffect;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
@@ -21,5 +22,6 @@ public class ROMEffects {
 
     public static final RegistryObject<Effect> STUN = EFFECTS.register("stun", () -> new StunEffect(EffectType.HARMFUL, 0x2A2D2E));
     public static final RegistryObject<Effect> BLEED = EFFECTS.register("bleed", () -> new BleedEffect(EffectType.BENEFICIAL, 5646433));
+    public static final RegistryObject<Effect> NULLIFIED = EFFECTS.register("nullified", () -> new NullifiedEffect(EffectType.BENEFICIAL, 5646433));
 
 }

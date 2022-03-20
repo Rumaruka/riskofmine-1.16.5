@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = 'https://maven.parchmentmc.org' }
         maven {  url = 'https://repo.spongepowered.org/repository/maven-public'}
         jcenter()
         mavenCentral()
@@ -11,18 +12,23 @@ buildscript {
     }
 
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.7-patched'
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-patched'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath 'org.parchmentmc:librarian:1.+'
     }
 }
+
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.4.31"
 }
+
 apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+
 apply plugin: 'org.spongepowered.mixin'
+
 
 version = '0.17.25b'
 group = 'com.rumaruka.riskofmine'
@@ -51,8 +57,8 @@ repositories {
 }
 minecraft {
 
-    // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'official', version: '1.16.5'
+    mappings channel: 'parchment', version: '2022.03.06-1.16.5'
+
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     def jvmArgs = Arrays.asList('-Dmixin.env.disableRefMap=true'.split(' '))
@@ -118,7 +124,7 @@ dependencies {
 
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.23'
 
-    implementation fg.deobf('ru.timeconqueror:TimeCore:1.16.5-3.4.1.0.build17:dev', true)
+    implementation fg.deobf('ru.timeconqueror:TimeCore:1.16.5-3.4.1.0.build17:dev')
 
 
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.0")
@@ -134,23 +140,10 @@ dependencies {
 
 
 
-    if (file("libs").exists()) {
-        file("libs").eachFile { file ->
-            def splitPos = file.name.lastIndexOf("-")
-            def modartifact = file.name.substring(0, splitPos)
-            def modversion = file.name.substring(splitPos + 1, file.name.length() - 4)
-            def modreference = "lib:$modartifact:$modversion"
 
-            dependencies {
-                implementation fg.deobf(project.dependencies.create(modreference) {
-                    transitive = false
-                })
-            }
-        }
-    }
     //System Dependencies
 
-    implementation 'org.jetbrains:annotations:22.0.0'
+    implementation 'org.jetbrains:annotations:23.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation  "org.jetbrains.kotlin:kotlin-reflect"
     annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'

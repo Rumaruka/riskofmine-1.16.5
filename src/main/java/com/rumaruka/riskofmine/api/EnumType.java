@@ -6,12 +6,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public enum EnumType implements IStringSerializable {
-    COMMON(0, 5, "Common", "common", 16383998, TextFormatting.WHITE),
-    UNCOMMON(1, 4, "Uncommon", "uncommon", 6192150, TextFormatting.DARK_GREEN),
-    LEGENDARY(2, 3, "Legendary", "legendary", 11546150, TextFormatting.RED),
-    BOSS(3, 2, "Boss", "boss", 16351261, TextFormatting.YELLOW),
-    LUNAR(4, 1, "Lunar", "lunar", 3949738, TextFormatting.BLUE),
-    EQUIPMENT(5, 0, "Equipment", "equipment", 439738, TextFormatting.GOLD);
+    COMMON(0, 6, "Common", "common", 16383998, TextFormatting.WHITE),
+    UNCOMMON(1, 5, "Uncommon", "uncommon", 6192150, TextFormatting.DARK_GREEN),
+    LEGENDARY(2, 4, "Legendary", "legendary", 11546150, TextFormatting.RED),
+    BOSS(3, 3, "Boss", "boss", 16351261, TextFormatting.YELLOW),
+    LUNAR(4, 2, "Lunar", "lunar", 3949738, TextFormatting.BLUE),
+    EQUIPMENT(5, 1, "Equipment", "equipment", 439738, TextFormatting.GOLD),
+    VOID(6,1,"Void","void",8991416, TextFormatting.DARK_PURPLE);
 
 
     private static final EnumType[] META_LOOKUP = new EnumType[values().length];
