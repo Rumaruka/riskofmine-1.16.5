@@ -7,6 +7,9 @@ import com.rumaruka.riskofmine.common.cap.lunar.ROMLunarStorage;
 import com.rumaruka.riskofmine.common.cap.money.IMoney;
 import com.rumaruka.riskofmine.common.cap.money.ROMMoney;
 import com.rumaruka.riskofmine.common.cap.money.ROMMoneyStorage;
+import com.rumaruka.riskofmine.common.cap.shields.IShields;
+import com.rumaruka.riskofmine.common.cap.shields.ROMShields;
+import com.rumaruka.riskofmine.common.cap.shields.ROMShieldsStorage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -31,11 +34,14 @@ public class ROMCapability {
     public static final Capability<ROMMoney> MONEY = promise();
     @CapabilityInject(ILunar.class)
     public static final Capability<ROMLunar> LUNAR = promise();
+    @CapabilityInject(IShields.class)
+    public static final Capability<ROMShields> SHIELDS = promise();
     @AutoRegistrable.InitMethod
     private static void register() {
 
         REGISTER.regCapability(IMoney.class, new ROMMoneyStorage());
         REGISTER.regCapability(ILunar.class,new ROMLunarStorage());
+        REGISTER.regCapability(IShields.class,new ROMShieldsStorage());
     }
 
     @SubscribeEvent
@@ -52,6 +58,15 @@ public class ROMCapability {
            TimeCore.INSTANCE.getCapabilityManager().attachStaticCoffeeCapability(CapabilityOwner.ENTITY,LUNAR,entity -> entity instanceof PlayerEntity, entity -> new ROMLunar((PlayerEntity) entity));
             TimeCore.INSTANCE.getCapabilityManager().enableSyncingPlayerCapabilityOnJoin(entity -> {
                 ROMLunar cap = ROMLunar.from(entity);
+                if (cap != null) cap.sendAllData();
+            });
+        });
+
+
+        event.enqueueWork(()->{
+            TimeCore.INSTANCE.getCapabilityManager().attachStaticCoffeeCapability(CapabilityOwner.ENTITY,SHIELDS,entity -> entity instanceof PlayerEntity, entity -> new ROMShields((PlayerEntity) entity));
+            TimeCore.INSTANCE.getCapabilityManager().enableSyncingPlayerCapabilityOnJoin(entity -> {
+                ROMShields cap = ROMShields.from(entity);
                 if (cap != null) cap.sendAllData();
             });
         });

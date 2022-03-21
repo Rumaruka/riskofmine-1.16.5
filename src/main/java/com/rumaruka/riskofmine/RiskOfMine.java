@@ -10,6 +10,7 @@ import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.common.event.ItemEvent;
 import com.rumaruka.riskofmine.common.event.LunarEvent;
 import com.rumaruka.riskofmine.common.event.MoneyEvent;
+import com.rumaruka.riskofmine.common.event.ShieldsEvent;
 import com.rumaruka.riskofmine.compat.jer.ROMJerPlugin;
 import com.rumaruka.riskofmine.events.GenerationEventHandler;
 import com.rumaruka.riskofmine.init.*;
@@ -75,6 +76,7 @@ public class RiskOfMine implements TimeMod {
         MinecraftForge.EVENT_BUS.register(new ItemEvent());
         MinecraftForge.EVENT_BUS.register(new MoneyEvent());
         MinecraftForge.EVENT_BUS.register(new LunarEvent());
+        MinecraftForge.EVENT_BUS.register(new ShieldsEvent());
     }
 
 

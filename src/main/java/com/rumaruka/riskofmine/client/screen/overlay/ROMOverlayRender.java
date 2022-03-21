@@ -6,6 +6,8 @@ import com.rumaruka.riskofmine.common.cap.lunar.ROMLunar;
 import com.rumaruka.riskofmine.common.cap.lunar.data.Lunar;
 import com.rumaruka.riskofmine.common.cap.money.ROMMoney;
 import com.rumaruka.riskofmine.common.cap.money.data.Money;
+import com.rumaruka.riskofmine.common.cap.shields.ROMShields;
+import com.rumaruka.riskofmine.common.cap.shields.data.Shields;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
@@ -32,9 +34,11 @@ public class ROMOverlayRender {
 
 
         if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
+            renderNearbyShieldsDisplay(event.getMatrixStack());
             if(keyShowOverlay.isDown()){
                 renderNearbyMoneyDisplay(event.getMatrixStack());
                 renderNearbyLunarDisplay(event.getMatrixStack());
+
 
             }
         }
@@ -81,7 +85,28 @@ public class ROMOverlayRender {
         }
         stack.popPose();
     }
+    private static void renderNearbyShieldsDisplay(MatrixStack stack) {
+        stack.pushPose();
+        PlayerEntity player = Minecraft.getInstance().player;
+        FontRenderer fontRenderer = Minecraft.getInstance().font;
+        if (!player.isDeadOrDying()) {
+            ROMShields romShields = ROMShields.from(player);
+            Shields shields = romShields.shields;
+            String toDisplay = getShieldsDisplay(shields);
+            Color color = Color.RED;
+//            mc.textureManager.bind();
 
+            DrawHelper.drawString(stack, fontRenderer, toDisplay, 27.5f, 20, color.getRGB());
+
+
+        }
+        stack.popPose();
+    }
+
+    private static String getShieldsDisplay(Shields shields) {
+        float currentLunar = shields.getCurrentShields();
+        return I18n.get("riskofmine.currentshields.name") + currentLunar;
+    }
 
     private static String getLunarDisplay(Lunar lunar) {
         float currentLunar = lunar.getCurrentLunar();
