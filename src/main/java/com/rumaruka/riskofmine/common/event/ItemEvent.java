@@ -21,6 +21,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -320,6 +321,9 @@ public class ItemEvent {
 
                         }
                     }
+
+
+
                 }
                 if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).isPresent()) {
                     ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).get().right;
@@ -330,6 +334,14 @@ public class ItemEvent {
                             livingEntity.hurt(DamageSource.ANVIL, curioStack.getCount());
                             Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
                         }
+                    }
+
+                    if(curioStack.getItem()==ROMItems.TOPAZ_BROOCH){
+                        System.out.println("Register");
+                        MinecraftForge.EVENT_BUS.register(new ShieldsEvent());
+                    }else {
+                        System.out.println("Unregister");
+                        MinecraftForge.EVENT_BUS.unregister(new ShieldsEvent());
                     }
                 }
 

@@ -1,6 +1,7 @@
 package com.rumaruka.riskofmine.compat.jei;
 
 import com.rumaruka.riskofmine.RiskOfMine;
+import com.rumaruka.riskofmine.common.items.ItemCollectiblesBase;
 import com.rumaruka.riskofmine.init.ROMItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -16,10 +17,12 @@ import static com.rumaruka.riskofmine.RiskOfMine.rl;
 public class ROMJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
+
         registerIngredientInfo(registration, ROMItems.ENERGY_DRINK);
         registerIngredientInfo(registration, ROMItems.GASOLINE);
         registerIngredientInfo(registration, ROMItems.SHAPED_GLASS);
         registerIngredientInfo(registration, ROMItems.CHRONOBAUBLE);
+        registerIngredientInfo(registration,ROMItems.COMMON_ITEM_SCRAP);
 
 
     }

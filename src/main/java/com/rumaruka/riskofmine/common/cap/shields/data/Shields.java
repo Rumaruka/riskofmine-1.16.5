@@ -5,7 +5,7 @@ import ru.timeconqueror.timecore.common.capability.property.CoffeeProperty;
 import ru.timeconqueror.timecore.common.capability.property.container.PropertyContainer;
 
 public class Shields extends PropertyContainer {
-    public final CoffeeProperty<Float> currentShields = prop("current_money", 0F).synced();
+    public final CoffeeProperty<Float> currentShields = prop("current_barrier", 0F).synced();
     public final CoffeeProperty<Float> burnoutTime = prop("burnout", 0F).synced();
     public final CoffeeProperty<Integer> timeout = prop("timeout", 0);
 
@@ -49,10 +49,19 @@ public class Shields extends PropertyContainer {
     public void addShields(PlayerEntity player, float add) {
         setShields(Math.min(getCurrentShields() + add, getMaxShields(player)));
     }
+    public void decreaseShields(PlayerEntity player){
+        for(float i = 0; i<this.getCurrentShields(); i-- ){
+            addShields(player,i);
+            if(i<=getMaxShields(player)){
+                setShields(0);
+            }
+
+        }
+    }
 
     public boolean consumeShields(PlayerEntity player, float price) {
         if (!player.isCreative()) {
-            if (hasShields(price)) {
+            if (hasShields()) {
                 setShields(getCurrentShields() - price);
                 setTimeout(20);
                 return true;
@@ -63,13 +72,13 @@ public class Shields extends PropertyContainer {
         return true;
     }
 
-    public boolean hasShields(float price) {
-        return getCurrentShields() >= price;
+    public boolean hasShields() {
+        return getCurrentShields()!=0;
     }
 
     public boolean checkShieldsEitherSide(boolean client, PlayerEntity player, float price) {
         if (client) {
-            return player.isCreative() || hasShields(price);
+            return player.isCreative() || hasShields();
         }
         return consumeShields(player, price);
     }

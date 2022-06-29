@@ -54,11 +54,8 @@ public class EntityStickyBomb extends Entity {
 
     public void setTarget( ) {
 
-            try {
+
                 this.moveTo(target.getX(),target.getY(),target.getZ());
-            }catch (NullPointerException e){
-                e.printStackTrace();
-            }
 
 
 

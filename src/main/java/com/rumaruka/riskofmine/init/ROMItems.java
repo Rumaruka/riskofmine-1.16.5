@@ -8,9 +8,11 @@ import com.rumaruka.riskofmine.common.items.legendary.AlienHeadItem;
 import com.rumaruka.riskofmine.common.items.legendary.DioBestFriendItem;
 import com.rumaruka.riskofmine.common.items.lunar.BeadsOfFealtyItem;
 import com.rumaruka.riskofmine.common.items.lunar.ShapedGlassItem;
+import com.rumaruka.riskofmine.common.items.scrap.CommonItemScrapItem;
 import com.rumaruka.riskofmine.common.items.uncommon.ChronobaubleItem;
 import com.rumaruka.riskofmine.common.items.uncommon.InfusionItem;
 import com.rumaruka.riskofmine.common.items.uncommon.OldWarStealthkitItem;
+import com.rumaruka.riskofmine.common.items.scrap.UnCommonItemScrapItem;
 import com.rumaruka.riskofmine.common.items.voiditems.TentabaubleItem;
 import net.minecraftforge.registries.ObjectHolder;
 import ru.timeconqueror.timecore.api.registry.ItemRegister;
@@ -42,8 +44,11 @@ public class ROMItems {
     public static final WarbannerItem WARBANNER = promise();
     public static final TheCrowdFunderItem THE_CROWDFUNDER = promise();
     public static final StickyBombItem STICKY_BOMB = promise();
-
+    public static final TopazBroochItem TOPAZ_BROOCH = promise();
     public static final TentabaubleItem TENTABAUBLE = promise();
+    public static final BisonSteakItem BISON_STEAK = promise();
+    public static final CommonItemScrapItem COMMON_ITEM_SCRAP = promise();
+    public static final UnCommonItemScrapItem UNCOMMON_ITEM_SCRAP = promise();
 
     public static final LunarCoinItem LUNAR_COIN =promise();
 
@@ -76,6 +81,11 @@ public class ROMItems {
             REGISTER.register("the_crowdfunder", TheCrowdFunderItem::new).defaultModel(tl("items/the_crowdfunder"));
             REGISTER.register("sticky_bomb", StickyBombItem::new).defaultModel(tl("items/sticky_bomb"));
             REGISTER.register("tentabauble", TentabaubleItem::new).defaultModel(tl("items/tentabauble"));
+            REGISTER.register("topaz_broosh", TopazBroochItem::new).defaultModel(tl("items/topaz_broosh"));
+            REGISTER.register("bison_steak", BisonSteakItem::new).defaultModel(tl("items/bison_steak"));
+            REGISTER.register("common_item_scrap", CommonItemScrapItem::new).defaultModel(tl("items/common_item_scrap"));
+            REGISTER.register("uncommon_item_scrap", UnCommonItemScrapItem::new).defaultModel(tl("items/uncommon_item_scrap"));
+
             REGISTER.register("lunar_coin", LunarCoinItem::new);
         }
     }

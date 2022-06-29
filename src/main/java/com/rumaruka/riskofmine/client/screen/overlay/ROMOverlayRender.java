@@ -2,6 +2,8 @@ package com.rumaruka.riskofmine.client.screen.overlay;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.rumaruka.riskofmine.RiskOfMine;
+import com.rumaruka.riskofmine.common.cap.barrier.ROMBarrier;
+import com.rumaruka.riskofmine.common.cap.barrier.data.Barrier;
 import com.rumaruka.riskofmine.common.cap.lunar.ROMLunar;
 import com.rumaruka.riskofmine.common.cap.lunar.data.Lunar;
 import com.rumaruka.riskofmine.common.cap.money.ROMMoney;
@@ -34,12 +36,15 @@ public class ROMOverlayRender {
 
 
         if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
-            renderNearbyShieldsDisplay(event.getMatrixStack());
+
             if(keyShowOverlay.isDown()){
                 renderNearbyMoneyDisplay(event.getMatrixStack());
                 renderNearbyLunarDisplay(event.getMatrixStack());
 
 
+            }else {
+                renderNearbyShieldsDisplay(event.getMatrixStack());
+                renderNearbyBarrierDisplay(event.getMatrixStack());
             }
         }
     }
@@ -103,9 +108,31 @@ public class ROMOverlayRender {
         stack.popPose();
     }
 
+    private static void renderNearbyBarrierDisplay(MatrixStack stack) {
+        stack.pushPose();
+        PlayerEntity player = Minecraft.getInstance().player;
+        FontRenderer fontRenderer = Minecraft.getInstance().font;
+        if (!player.isDeadOrDying()) {
+            ROMBarrier romBarrier = ROMBarrier.from(player);
+            Barrier barrier = romBarrier.barrier;
+            String toDisplay = getBarrierDisplay(barrier);
+            Color color = Color.BLUE;
+//            mc.textureManager.bind();
+
+            DrawHelper.drawString(stack, fontRenderer, toDisplay, 27.5f, 30, color.getRGB());
+
+
+        }
+        stack.popPose();
+    }
+
     private static String getShieldsDisplay(Shields shields) {
-        float currentLunar = shields.getCurrentShields();
-        return I18n.get("riskofmine.currentshields.name") + currentLunar;
+        float currentShields = shields.getCurrentShields();
+        return I18n.get("riskofmine.currentshields.name") + currentShields;
+    }
+    private static String getBarrierDisplay(Barrier barrier) {
+        float currentBarrier = barrier.getCurrentBarrier();
+        return I18n.get("riskofmine.currentbarrier.name") + currentBarrier;
     }
 
     private static String getLunarDisplay(Lunar lunar) {

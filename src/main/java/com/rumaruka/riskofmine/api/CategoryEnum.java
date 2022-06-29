@@ -5,6 +5,7 @@ import net.minecraft.util.text.TextFormatting;
 
 public enum CategoryEnum implements IStringSerializable {
     DAMAGE("Damage", "damage", TextFormatting.DARK_RED),
+    SCRAP("Scrap", "scrap", TextFormatting.GRAY),
     UTILITY("Utility", "utility", TextFormatting.GOLD),
     HEALING("Healing", "healing", TextFormatting.GREEN),
 

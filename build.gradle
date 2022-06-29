@@ -35,7 +35,6 @@ group = 'com.rumaruka.riskofmine'
 archivesBaseName = 'riskofmine'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 repositories {
     mavenLocal()
     maven {
@@ -122,9 +121,9 @@ sourceSets.main.resources {
 }
 dependencies {
 
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.23'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.35'
 
-    implementation fg.deobf('ru.timeconqueror:TimeCore:1.16.5-3.4.1.0.build17:dev')
+    implementation fg.deobf('ru.timeconqueror:TimeCore:1.16.5-3.5.0.0:dev')
 
 
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.0")
@@ -157,7 +156,7 @@ jar {
         attributes([
                 "Specification-Title": "riskofmine",
                 "Specification-Vendor": "Rumaruka",
-                "Specification-Version": "1", // We are version 1 of ourselves
+                "Specification-Version": "1",
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"examplemodsareus",

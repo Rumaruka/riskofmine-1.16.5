@@ -1,6 +1,9 @@
 package com.rumaruka.riskofmine.init;
 
 import com.rumaruka.riskofmine.RiskOfMine;
+import com.rumaruka.riskofmine.common.cap.barrier.IBarrier;
+import com.rumaruka.riskofmine.common.cap.barrier.ROMBarrier;
+import com.rumaruka.riskofmine.common.cap.barrier.ROMBarrierStorage;
 import com.rumaruka.riskofmine.common.cap.lunar.ILunar;
 import com.rumaruka.riskofmine.common.cap.lunar.ROMLunar;
 import com.rumaruka.riskofmine.common.cap.lunar.ROMLunarStorage;
@@ -36,12 +39,15 @@ public class ROMCapability {
     public static final Capability<ROMLunar> LUNAR = promise();
     @CapabilityInject(IShields.class)
     public static final Capability<ROMShields> SHIELDS = promise();
+    @CapabilityInject(IBarrier.class)
+    public static final Capability<ROMBarrier> BARRIER = promise();
     @AutoRegistrable.InitMethod
     private static void register() {
 
         REGISTER.regCapability(IMoney.class, new ROMMoneyStorage());
         REGISTER.regCapability(ILunar.class,new ROMLunarStorage());
         REGISTER.regCapability(IShields.class,new ROMShieldsStorage());
+        REGISTER.regCapability(IBarrier.class,new ROMBarrierStorage());
     }
 
     @SubscribeEvent
@@ -67,6 +73,14 @@ public class ROMCapability {
             TimeCore.INSTANCE.getCapabilityManager().attachStaticCoffeeCapability(CapabilityOwner.ENTITY,SHIELDS,entity -> entity instanceof PlayerEntity, entity -> new ROMShields((PlayerEntity) entity));
             TimeCore.INSTANCE.getCapabilityManager().enableSyncingPlayerCapabilityOnJoin(entity -> {
                 ROMShields cap = ROMShields.from(entity);
+                if (cap != null) cap.sendAllData();
+            });
+        });
+
+        event.enqueueWork(()->{
+            TimeCore.INSTANCE.getCapabilityManager().attachStaticCoffeeCapability(CapabilityOwner.ENTITY,BARRIER,entity -> entity instanceof PlayerEntity, entity -> new ROMBarrier((PlayerEntity) entity));
+            TimeCore.INSTANCE.getCapabilityManager().enableSyncingPlayerCapabilityOnJoin(entity -> {
+                ROMBarrier cap = ROMBarrier.from(entity);
                 if (cap != null) cap.sendAllData();
             });
         });

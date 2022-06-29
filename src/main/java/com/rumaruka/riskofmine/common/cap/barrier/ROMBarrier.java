@@ -1,8 +1,6 @@
-package com.rumaruka.riskofmine.common.cap.shields;
+package com.rumaruka.riskofmine.common.cap.barrier;
 
-import com.rumaruka.riskofmine.common.cap.money.ROMMoney;
-import com.rumaruka.riskofmine.common.cap.money.data.Money;
-import com.rumaruka.riskofmine.common.cap.shields.data.Shields;
+import com.rumaruka.riskofmine.common.cap.barrier.data.Barrier;
 import com.rumaruka.riskofmine.init.ROMCapability;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,19 +16,19 @@ import ru.timeconqueror.timecore.common.capability.owner.serializer.CapabilityOw
 
 import javax.annotation.Nullable;
 
-public class ROMShields extends CoffeeCapability<Entity> implements IShields {
-    public final Shields shields = container("barrier", new Shields());
+public class ROMBarrier extends CoffeeCapability<Entity> implements IBarrier {
+    public final Barrier barrier = container("barrier", new Barrier());
 
     private final PlayerEntity player;
 
-    public ROMShields(PlayerEntity player) {
+    public ROMBarrier(PlayerEntity player) {
         this.player = player;
     }
 
     @NotNull
     @Override
     public Capability<? extends CoffeeCapability<Entity>> getCapability() {
-        return ROMCapability.SHIELDS;
+        return ROMCapability.BARRIER;
     }
 
     @NotNull
@@ -53,9 +51,9 @@ public class ROMShields extends CoffeeCapability<Entity> implements IShields {
     }
 
     @Nullable
-    public static ROMShields from(@Nullable PlayerEntity player) {
+    public static ROMBarrier from(@Nullable PlayerEntity player) {
         if (player != null) {
-            LazyOptional<ROMShields> cap = player.getCapability(ROMCapability.SHIELDS);
+            LazyOptional<ROMBarrier> cap = player.getCapability(ROMCapability.BARRIER);
 
             if (cap.isPresent()) {
                 return cap.orElseThrow(IllegalStateException::new);
