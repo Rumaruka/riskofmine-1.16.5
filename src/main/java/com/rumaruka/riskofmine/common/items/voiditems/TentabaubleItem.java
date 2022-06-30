@@ -1,10 +1,12 @@
 package com.rumaruka.riskofmine.common.items.voiditems;
 
 import com.rumaruka.riskofmine.api.CategoryEnum;
+import com.rumaruka.riskofmine.common.items.uncommon.ChronobaubleItem;
 import com.rumaruka.riskofmine.init.ROMItems;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -13,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TentabaubleItem extends ItemVoidBase{
+public class TentabaubleItem extends ItemVoidBase {
     public TentabaubleItem() {
         super(CategoryEnum.UTILITY, 16);
     }
@@ -34,4 +36,14 @@ public class TentabaubleItem extends ItemVoidBase{
             tooltip.add(new TranslationTextComponent("[Stacks:" + stack.getCount() + "]"));
         }
     }
+
+    @Override
+    public void inventoryTick(ItemStack p_77663_1_, World p_77663_2_, Entity p_77663_3_, int p_77663_4_, boolean p_77663_5_) {
+        PlayerEntity player = (PlayerEntity) p_77663_3_;
+        ItemStack itemStack = player.getMainHandItem();
+        if (itemStack.getItem() instanceof ChronobaubleItem) {
+            replaceItem(itemStack, p_77663_1_);
+        }
+    }
+
 }

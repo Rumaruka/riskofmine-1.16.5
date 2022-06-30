@@ -351,29 +351,7 @@ public class ItemEvent {
     }
 
 
-    @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        PlayerEntity player = event.player;
 
-        for (int i = 0; i < player.inventory.getContainerSize(); i++) {
-            for (int j = 0; j < player.inventory.getContainerSize(); j++) {
-                ItemStack uncorruted = player.inventory.getItem(j);
-                ItemStack corrupted = player.inventory.getItem(i);
-
-
-                if (corrupted.getItem() == ROMItems.TENTABAUBLE) {
-                    if (uncorruted.getItem() == ROMItems.CHRONOBAUBLE) {
-                        int count = uncorruted.getCount();
-                        uncorruted.shrink(count);
-                        corrupted.shrink(-count);
-    //                    player.inventory.setItem(i, corrupted);
-                    }
-
-                }
-            }
-        }
-
-    }
 
 
     /**
