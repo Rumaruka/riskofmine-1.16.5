@@ -6,6 +6,7 @@ import com.rumaruka.riskofmine.common.entity.weapon.EntityStickyBomb;
 import com.rumaruka.riskofmine.init.ROMEffects;
 import com.rumaruka.riskofmine.init.ROMItems;
 import com.rumaruka.riskofmine.init.ROMParticles;
+import com.rumaruka.riskofmine.init.ROMSounds;
 import com.rumaruka.riskofmine.utils.ROMMathFormula;
 import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.client.Minecraft;
@@ -20,6 +21,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -57,14 +60,16 @@ public class ItemEvent {
 
                     if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.MONSTER_TOOTH, player).isPresent()) {
                         ItemStack curiosStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.MONSTER_TOOTH, player).get().right;
-                        world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, curiosStack.getCount() / 2));
-
+                        world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, curiosStack.getCount()));
+                        world.playSound(null, new BlockPos(player.getX(), player.getY(), player.getZ()), ROMSounds.PROC_MT_SPAWN.get(), SoundCategory.MASTER, 2, 2);
                     }
 
                     for (int i = 0; i < player.inventory.getContainerSize(); i++) {
                         ItemStack itemStack = player.inventory.getItem(i);
                         if (itemStack.getItem() == ROMItems.MONSTER_TOOTH) {
-                            world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, itemStack.getCount() / 2));
+                            world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, itemStack.getCount()));
+                            world.playSound(null, new BlockPos(player.getX(), player.getY(), player.getZ()), ROMSounds.PROC_MT_SPAWN.get(), SoundCategory.MASTER, 2, 2);
+
                         }
                     }
                 }
@@ -325,23 +330,18 @@ public class ItemEvent {
 
 
                 }
-                if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).isPresent()) {
-                    ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).get().right;
-                    if (curioStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
+                if (livingEntity instanceof MobEntity) {
+                    float distance = player.distanceTo(livingEntity);
+                    if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).isPresent()) {
+                        ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).get().right;
+                        if (curioStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
 
-                        float distance = player.distanceTo(livingEntity);
-                        if (distance <= 3.5) {
-                            livingEntity.hurt(DamageSource.ANVIL, curioStack.getCount());
-                            Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
+                            if (distance <= 3.5) {
+                                livingEntity.hurt(DamageSource.ANVIL, curioStack.getCount());
+                                Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
+                            }
                         }
-                    }
 
-                    if(curioStack.getItem()==ROMItems.TOPAZ_BROOCH){
-                        System.out.println("Register");
-                        MinecraftForge.EVENT_BUS.register(new ShieldsEvent());
-                    }else {
-                        System.out.println("Unregister");
-                        MinecraftForge.EVENT_BUS.unregister(new ShieldsEvent());
                     }
                 }
 
@@ -349,9 +349,6 @@ public class ItemEvent {
             }
         }
     }
-
-
-
 
 
     /**
@@ -403,19 +400,3 @@ public class ItemEvent {
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

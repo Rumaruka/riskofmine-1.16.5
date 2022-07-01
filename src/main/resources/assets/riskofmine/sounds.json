@@ -9,6 +9,22 @@
       "riskofmine:riskofmine.block.not_money"
     ]
   },
+
+  "riskofmine.ui.void_replace": {
+    "sounds": [
+      "riskofmine:riskofmine.ui.void_replace"
+    ]
+  },
+  "riskofmine.proc.mt_spawn": {
+    "sounds": [
+      "riskofmine:riskofmine.proc.mt_spawn"
+    ]
+  },
+  "riskofmine.proc.mt_impact": {
+    "sounds": [
+      "riskofmine:riskofmine.proc.mt_impact"
+    ]
+  },
   "riskofmine.player.level_up": {
     "sounds": [
       "riskofmine:riskofmine.player.level_up"

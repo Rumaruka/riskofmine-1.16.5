@@ -2,6 +2,7 @@ package com.rumaruka.riskofmine.common.entity.misc;
 
 import com.rumaruka.riskofmine.events.PlayerHealthEvent;
 import com.rumaruka.riskofmine.init.ROMEntitys;
+import com.rumaruka.riskofmine.init.ROMSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
@@ -10,6 +11,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
@@ -161,8 +163,11 @@ public class HealthOrbEntity extends Entity {
     public void playerTouch(@NotNull PlayerEntity player) {
         if (!this.level.isClientSide) {
             if (MinecraftForge.EVENT_BUS.post(new PlayerHealthEvent.PickupHealth(player, this))) return;
+            player.level.playSound(null, new BlockPos(player.getX(),player.getY(),player.getZ()), ROMSounds.PROC_MT_IMPACT.get(), SoundCategory.MASTER,2,2);
+
             player.take(this, 1);
             player.heal(this.value);
+
             this.remove();
         }
     }
