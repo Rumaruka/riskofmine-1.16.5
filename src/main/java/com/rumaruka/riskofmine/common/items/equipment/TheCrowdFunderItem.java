@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class TheCrowdFunderItem extends EquipmentShootItemBase {
+public class TheCrowdFunderItem extends EquipmentItemBase {
     public TheCrowdFunderItem() {
         super(CategoryEnum.DAMAGE);
     }
@@ -52,9 +52,7 @@ public class TheCrowdFunderItem extends EquipmentShootItemBase {
             ROMMoney romMoney = ROMMoney.from(playerentity);
             Money money = romMoney.money;
             if (!level.isClientSide) {
-                EntityGoldenIngotBullets bullets = money.createBullets(level, money, playerentity);
-                bullets = bullets(bullets);
-                bullets.shootFromRotation(playerentity, playerentity.xRot, playerentity.yRot, 0.0F, f * 3.0F, 1.0F);
+
                 if(!playerentity.abilities.instabuild&&money.getCurrentMoney()>0){
                     money.consumeMoney(playerentity,0.5f);
                 }
@@ -77,17 +75,9 @@ public class TheCrowdFunderItem extends EquipmentShootItemBase {
     @Override
     public ActionResult<ItemStack> use(World level, PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        boolean flag = !player.getProjectile(itemstack).isEmpty();
 
-        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, level, player, hand, flag);
-        if (ret != null) return ret;
-
-        if (!player.abilities.instabuild && !flag) {
-            return ActionResult.fail(itemstack);
-        } else {
-            player.startUsingItem(hand);
             return ActionResult.consume(itemstack);
-        }
+
     }
 
     @Override
@@ -99,13 +89,5 @@ public class TheCrowdFunderItem extends EquipmentShootItemBase {
         return bullets;
     }
 
-    @Override
-    public Predicate<ItemStack> getAllSupportedProjectiles() {
-        return GOLDEN_INGOT;
-    }
 
-    @Override
-    public int getDefaultProjectileRange() {
-        return 20;
-    }
 }

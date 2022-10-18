@@ -51,6 +51,7 @@ public class LayerMonsterTooth extends LayerRenderer<AbstractClientPlayerEntity,
                     f2 = 0.0F;
                 }
 
+
                 float f4 = MathHelper.lerp(pTicks, playerEntity.oBob, playerEntity.bob);
                 f1 = f1 + MathHelper.sin(MathHelper.lerp(pTicks, playerEntity.walkDistO, playerEntity.walkDist) * 6.0F) * 32.0F * f4;
                 if (playerEntity.isCrouching()) {

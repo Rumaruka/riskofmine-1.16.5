@@ -17,9 +17,9 @@ public class ROMJerPlugin {
 
     private static void initDungeonLoot() {
         IDungeonRegistry dungeonRegistry = jerAPI.getDungeonRegistry();
-        dungeonRegistry.registerChest("RiskOfMine:Small Chest", ROMLootTables.SMALL_CHEST);
-        dungeonRegistry.registerChest("RiskOfMine:Large Chest", ROMLootTables.LARGE_CHEST);
-        dungeonRegistry.registerChest("RiskOfMine:Lunar Chest", ROMLootTables.LUNAR_CHEST);
+        dungeonRegistry.registerChest("RiskOfMine: Small Chest", ROMLootTables.SMALL_CHEST);
+        dungeonRegistry.registerChest("RiskOfMine: Large Chest", ROMLootTables.LARGE_CHEST);
+        dungeonRegistry.registerChest("RiskOfMine: Lunar Chest", ROMLootTables.LUNAR_CHEST);
     }
 
 

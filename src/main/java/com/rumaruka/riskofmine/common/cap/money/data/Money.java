@@ -77,8 +77,5 @@ public class Money extends PropertyContainer {
         return consumeMoney(player, price);
     }
 
-    public EntityGoldenIngotBullets createBullets(World level, Money money,PlayerEntity player){
-        EntityGoldenIngotBullets bullets = new EntityGoldenIngotBullets(level,player);
-        return bullets;
-    }
+
 }

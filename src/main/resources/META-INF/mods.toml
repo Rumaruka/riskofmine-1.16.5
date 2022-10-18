@@ -4,7 +4,7 @@ loaderVersion="[36,)" #mandatory This is typically bumped every Minecraft versio
 license="MIT"
 [[mods]] #mandatory
 modId="riskofmine" #mandatory
-version="0.17.25b" #mandatory
+version="0.25.0" #mandatory
 displayName="Risk of Mine" #mandatory
 displayURL="https://www.curseforge.com/minecraft/mc-mods/risk-of-mine" #optional
 
@@ -33,10 +33,18 @@ Minecraft, but Risk of Rain
 [[dependencies.riskofmine]]
     modId="minecraft"
     mandatory=true
-# This version range declares a minimum of the current minecraft version up to but not including the next major version
     versionRange="[1.16.5,1.17)"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.riskofmine]]
+modId="timecore"
+mandatory=true
+versionRange="[1.16.5-3.5.0.0,)"
+ordering="NONE"
+side="BOTH"
+
+
 [modproperties.riskofmine]
-catalogueImageIcon="logo.png" #Optional support for Cataloque mod.
+catalogueImageIcon="minecraft:textures/block/netherite_block.png" #Optional support for Cataloque mod.
 configuredBackground="minecraft:textures/block/netherite_block.png" #Optional support for Configured mod.

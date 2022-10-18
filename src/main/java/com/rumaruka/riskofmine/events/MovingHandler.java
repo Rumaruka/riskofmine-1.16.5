@@ -53,7 +53,7 @@ public class MovingHandler {
 
     }
 
-    public static boolean isMoving(ServerPlayerEntity mp) {
+    public static boolean isMoving(PlayerEntity mp) {
         MoveInfo moveInfo = moveMap.get(mp.getUUID());
         if (moveInfo != null) {
             return moveInfo.isPosChanged();

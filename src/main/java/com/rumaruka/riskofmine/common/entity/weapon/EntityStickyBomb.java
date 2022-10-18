@@ -1,35 +1,30 @@
 package com.rumaruka.riskofmine.common.entity.weapon;
 
-import com.rumaruka.riskofmine.common.entity.bullets.EntityGoldenIngotBullets;
 import com.rumaruka.riskofmine.init.ROMEntitys;
 import com.rumaruka.riskofmine.init.ROMItems;
 import com.rumaruka.riskofmine.utils.ROMMathFormula;
 import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.entity.*;
-import net.minecraft.entity.item.TNTEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.network.play.server.SSpawnObjectPacket;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class EntityStickyBomb extends Entity {
 
     private static final DataParameter<Integer> DATA_FUSE_ID;
-    @Nullable
+
     private LivingEntity owner;
     private int life;
+
 
     private LivingEntity target;
 
@@ -39,7 +34,7 @@ public class EntityStickyBomb extends Entity {
         this.blocksBuilding = true;
     }
 
-    public EntityStickyBomb(World p_i1730_1_, double p_i1730_2_, double p_i1730_4_, double p_i1730_6_, @Nullable LivingEntity p_i1730_8_,LivingEntity target) {
+    public EntityStickyBomb(World p_i1730_1_, double p_i1730_2_, double p_i1730_4_, double p_i1730_6_, LivingEntity p_i1730_8_, LivingEntity target) {
         this(ROMEntitys.STICKY_BOMB, p_i1730_1_);
         this.setPos(p_i1730_2_, p_i1730_4_, p_i1730_6_);
         double d0 = p_i1730_1_.random.nextDouble() * 6.2831854820251465D;
@@ -49,14 +44,13 @@ public class EntityStickyBomb extends Entity {
         this.yo = p_i1730_4_;
         this.zo = p_i1730_6_;
         this.owner = p_i1730_8_;
-        this.target=target;
+        this.target = target;
     }
 
-    public void setTarget( ) {
-
-
-                this.moveTo(target.getX(),target.getY(),target.getZ());
-
+    public void setTarget() {
+        if (target != null) {
+            this.moveTo(target.getX(), target.getY(), target.getZ());
+        }
 
 
     }
@@ -95,23 +89,15 @@ public class EntityStickyBomb extends Entity {
     }
 
     protected void explode() {
-        float f = 0.02F;
-        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), f, Explosion.Mode.NONE);
+        float f = 2f;
+        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), f, Explosion.Mode.DESTROY);
     }
 
-    public  float explodeInc( ){
-        for (int i = 0; i < ROMUtils.player.inventory.getContainerSize(); i++) {
-            ItemStack stack = ROMUtils.player.inventory.getItem(i);
-            if (stack.getItem() == ROMItems.STICKY_BOMB) {
-                this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), ROMMathFormula.explodeIncreasing(stack.getCount()), Explosion.Mode.NONE);
-            }
-        }
-        return 0;
-    }
+
 
 
     protected void addAdditionalSaveData(CompoundNBT p_213281_1_) {
-        p_213281_1_.putShort("Fuse", (short)this.getLife());
+        p_213281_1_.putShort("Fuse", (short) this.getLife());
     }
 
     protected void readAdditionalSaveData(CompoundNBT p_70037_1_) {
@@ -140,7 +126,7 @@ public class EntityStickyBomb extends Entity {
     }
 
     public int getFuse() {
-        return (Integer)this.entityData.get(DATA_FUSE_ID);
+        return (Integer) this.entityData.get(DATA_FUSE_ID);
     }
 
     public int getLife() {

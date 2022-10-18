@@ -3,8 +3,6 @@ package com.rumaruka.riskofmine.common.event;
 import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.common.cap.lunar.ROMLunar;
 import com.rumaruka.riskofmine.common.cap.lunar.data.Lunar;
-import com.rumaruka.riskofmine.common.cap.money.ROMMoney;
-import com.rumaruka.riskofmine.common.cap.money.data.Money;
 import com.rumaruka.riskofmine.init.ROMItems;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.LivingEntity;
@@ -31,8 +29,8 @@ public class LunarEvent {
                 if (player != null) {
                     Lunar lunar = romLunar.lunar;
 
-                    if(livingEntity.tickCount % 10==0){
-                        ItemEntity itemEntity = new ItemEntity(level,livingEntity.getX(),livingEntity.getY(),livingEntity.getZ(),new ItemStack(ROMItems.LUNAR_COIN));
+                    if (livingEntity.tickCount % 10 == 0) {
+                        ItemEntity itemEntity = new ItemEntity(level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), new ItemStack(ROMItems.LUNAR_COIN));
                         level.addFreshEntity(itemEntity);
                         romLunar.detectAndSendChanges();
 

@@ -24,8 +24,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -42,106 +40,8 @@ public class ItemEvent {
     private static final UUID SPEED_MODIFIER_SPRINTING_UUID = UUID.fromString("662A6B8D-DA3E-4C1C-8813-96EA6097278D");
 
     /**
-     * onEntityDeath worked code !!
-     */
-    @SubscribeEvent
-    public void onEntityDeath(LivingDeathEvent event) {
-        /**
-         Player kill Entity
-         */
-        if (event.getSource().getEntity() instanceof ServerPlayerEntity) {
-            ServerPlayerEntity player = (ServerPlayerEntity) event.getSource().getEntity();
-            LivingEntity livingEntity = event.getEntityLiving();
-            World world = livingEntity.level;
-
-            if (!world.isClientSide) {
-
-                if (player != null) {
-
-                    if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.MONSTER_TOOTH, player).isPresent()) {
-                        ItemStack curiosStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.MONSTER_TOOTH, player).get().right;
-                        world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, curiosStack.getCount()));
-                        world.playSound(null, new BlockPos(player.getX(), player.getY(), player.getZ()), ROMSounds.PROC_MT_SPAWN.get(), SoundCategory.MASTER, 2, 2);
-                    }
-
-                    for (int i = 0; i < player.inventory.getContainerSize(); i++) {
-                        ItemStack itemStack = player.inventory.getItem(i);
-                        if (itemStack.getItem() == ROMItems.MONSTER_TOOTH) {
-                            world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, itemStack.getCount()));
-                            world.playSound(null, new BlockPos(player.getX(), player.getY(), player.getZ()), ROMSounds.PROC_MT_SPAWN.get(), SoundCategory.MASTER, 2, 2);
-
-                        }
-                    }
-                }
-
-            }
-        }
-        /**
-         Entity kill Player
-         */
-        if (event.getSource().getEntity() instanceof CreatureEntity && event.getEntityLiving() instanceof ServerPlayerEntity) {
-            CreatureEntity livingEntity = (CreatureEntity) event.getSource().getEntity();
-            ServerPlayerEntity player = (ServerPlayerEntity) event.getEntityLiving();
-            World world = player.level;
-            if (!world.isClientSide) {
-                if (event.getSource().isBypassInvul()) {
-                    return;
-                } else {
-                    if (livingEntity != null) {
-                        for (int i = 0; i < player.inventory.getContainerSize(); i++) {
-                            ItemStack itemStack = player.inventory.getItem(i);
-                            if (itemStack.getItem() == ROMItems.DIO_BEST_FRIEND) {
-                                if (player.isDeadOrDying() || player.getHealth() < 2.5f) {
-                                    Minecraft.getInstance().gameRenderer.displayItemActivation(ROMUtils.whereMyBestFriend(player));
-                                    player.setHealth(player.getMaxHealth());
-                                    player.removeAllEffects();
-                                    player.addEffect(new EffectInstance(Effects.REGENERATION, 1800, 2));
-                                    player.addEffect(new EffectInstance(Effects.ABSORPTION, 200, 2));
-                                    player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 1600, 1));
-                                    player.addEffect(new EffectInstance(Effects.JUMP, 600, 1));
-                                    player.level.broadcastEntityEvent(player, (byte) 35);
-
-
-                                    itemStack.shrink(1);
-
-
-                                }
-                            }
-
-
-                        }
-                        if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.DIO_BEST_FRIEND, player).isPresent()) {
-                            ItemStack curiosStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.DIO_BEST_FRIEND, player).get().right;
-                            if (curiosStack.getItem() == ROMItems.DIO_BEST_FRIEND) {
-                                if (player.isDeadOrDying() || player.getHealth() < 2.5f) {
-
-                                    player.setHealth(player.getMaxHealth());
-                                    player.removeAllEffects();
-                                    player.addEffect(new EffectInstance(Effects.REGENERATION, 1800, 2));
-                                    player.addEffect(new EffectInstance(Effects.ABSORPTION, 200, 2));
-                                    player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 1600, 1));
-                                    player.addEffect(new EffectInstance(Effects.JUMP, 600, 1));
-                                    player.level.broadcastEntityEvent(player, (byte) 35);
-
-                                    Minecraft.getInstance().gameRenderer.displayItemActivation(ROMUtils.whereMyBestFriendInCurio(player));
-                                    curiosStack.shrink(1);
-                                }
-
-                            }
-                        }
-
-
-                    }
-                }
-
-
-            }
-        }
-    }
-
-    /**
      * onEntityHurt worked code !!
-     * priority = EventPriority.LOW
+     * priority = EventPriority. LOW
      * If item use hurt and damage add only this method
      */
 
@@ -161,7 +61,7 @@ public class ItemEvent {
                     }
 
 
-                    if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.GASOLINE, player).isPresent()) {
+                    if (CuriosApi.getCuriosHelper().findFirstCurio( player,ROMItems.GASOLINE).isPresent()) {
                         ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.GASOLINE, player).get().right;
                         if (event.getEntity() instanceof CreatureEntity) {
                             event.getEntity().setRemainingFireTicks(curioStack.getCount() * 20);
@@ -267,17 +167,21 @@ public class ItemEvent {
                 }
                 if (player != null) {
 
-                    for (int i = 0; i < player.inventory.getContainerSize(); i++) {
-                        ItemStack itemStack = player.inventory.getItem(i);
-                        if (itemStack.getItem() == ROMItems.STICKY_BOMB && event.getEntity() instanceof LivingEntity) {
-
-
-                            EntityStickyBomb entityStickyBomb = new EntityStickyBomb(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, player, (MobEntity) event.getEntity());
-                            world.addFreshEntity(entityStickyBomb);
-
-
-                        }
-
+//                    for (int i = 0; i < player.inventory.getContainerSize(); i++) {
+//                        ItemStack itemStack = player.inventory.getItem(i);
+//                        if (itemStack.getItem() == ROMItems.STICKY_BOMB ) {
+//
+//
+//                            EntityStickyBomb entityStickyBomb = new EntityStickyBomb(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, player, (MobEntity) event.getEntity());
+//                            world.addFreshEntity(entityStickyBomb);
+//
+//
+//                        }
+//
+//                    }
+                    if(ROMUtils.checkInventory(player,ROMItems.STICKY_BOMB) && event.getEntity() instanceof LivingEntity){
+                        EntityStickyBomb entityStickyBomb = new EntityStickyBomb(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, player, (MobEntity) event.getEntity());
+                           world.addFreshEntity(entityStickyBomb);
                     }
                     if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STICKY_BOMB, player).isPresent()) {
                         ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.STICKY_BOMB, player).get().right;
@@ -297,59 +201,6 @@ public class ItemEvent {
         }
 
     }
-
-
-    /**
-     * onEntityUpdate worked code !!
-     * If item use updating entity
-     */
-    @SubscribeEvent
-    public void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
-        PlayerEntity player = Minecraft.getInstance().player;
-
-        LivingEntity livingEntity = event.getEntityLiving();
-
-        World world = livingEntity.level;
-        if (!world.isClientSide) {
-            if (player != null) {
-                for (int i = 0; i < player.inventory.getContainerSize(); i++) {
-                    ItemStack itemStack = player.inventory.getItem(i);
-                    if (itemStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
-                        if (livingEntity instanceof MobEntity) {
-                            float distance = player.distanceTo(livingEntity);
-
-                            if (distance <= 3.5) {
-                                livingEntity.hurt(DamageSource.ANVIL, ROMMathFormula.powerIncreasing(itemStack.getCount(), 5.0f));
-                                Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
-                            }
-
-
-                        }
-                    }
-
-
-
-                }
-                if (livingEntity instanceof MobEntity) {
-                    float distance = player.distanceTo(livingEntity);
-                    if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).isPresent()) {
-                        ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).get().right;
-                        if (curioStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
-
-                            if (distance <= 3.5) {
-                                livingEntity.hurt(DamageSource.ANVIL, curioStack.getCount());
-                                Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
-                            }
-                        }
-
-                    }
-                }
-
-
-            }
-        }
-    }
-
 
     /**
      * onPlayerHurt  - for hurt player event
@@ -397,6 +248,160 @@ public class ItemEvent {
     //TODO: EntityMissiles and Fireworks
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void attacksDronesFireworksMissiles(LivingAttackEvent event) {
+
+    }
+
+    /**
+     * onEntityDeath worked code !!
+     */
+    @SubscribeEvent
+    public void onEntityDeath(LivingDeathEvent event) {
+        /**
+         Player kill Entity
+         */
+        if (event.getSource().getEntity() instanceof ServerPlayerEntity) {
+            ServerPlayerEntity player = (ServerPlayerEntity) event.getSource().getEntity();
+            LivingEntity livingEntity = event.getEntityLiving();
+            World world = livingEntity.level;
+
+            if (!world.isClientSide) {
+
+                if (player != null) {
+
+                    if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.MONSTER_TOOTH, player).isPresent()) {
+                        ItemStack curiosStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.MONSTER_TOOTH, player).get().right;
+                        world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, curiosStack.getCount()));
+                        world.playSound(null, new BlockPos(player.getX(), player.getY(), player.getZ()), ROMSounds.PROC_MT_SPAWN.get(), SoundCategory.MASTER, 2, 2);
+                    }
+
+                    for (int i = 0; i < player.inventory.getContainerSize(); i++) {
+                        ItemStack itemStack = player.inventory.getItem(i);
+                        if (itemStack.getItem() == ROMItems.MONSTER_TOOTH) {
+                            world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, itemStack.getCount()));
+                            world.playSound(null, new BlockPos(player.getX(), player.getY(), player.getZ()), ROMSounds.PROC_MT_SPAWN.get(), SoundCategory.MASTER, 2, 2);
+
+                        }
+                    }
+                }
+
+            }
+        }
+        /**
+         Entity kill Player
+         */
+        if (event.getSource().getEntity() instanceof CreatureEntity && event.getEntityLiving() instanceof ServerPlayerEntity) {
+            CreatureEntity livingEntity = (CreatureEntity) event.getSource().getEntity();
+            ServerPlayerEntity player = (ServerPlayerEntity) event.getEntityLiving();
+            World world = player.level;
+            if (!world.isClientSide) {
+                if (event.getSource().isBypassInvul()) {
+                    return;
+                } else {
+                    if (livingEntity != null) {
+                        for (int i = 0; i < player.inventory.getContainerSize(); i++) {
+                            ItemStack itemStack = player.inventory.getItem(i);
+                            if (itemStack.getItem() == ROMItems.DIO_BEST_FRIEND) {
+                                if (player.isDeadOrDying() || player.getHealth() < 2.5f) {
+                                    player.setHealth(player.getMaxHealth());
+                                    player.removeAllEffects();
+                                    player.addEffect(new EffectInstance(Effects.REGENERATION, 1800, 2));
+                                    player.addEffect(new EffectInstance(Effects.ABSORPTION, 200, 2));
+                                    player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 1600, 1));
+                                    player.addEffect(new EffectInstance(Effects.JUMP, 600, 1));
+                                    player.level.broadcastEntityEvent(player, (byte) 35);
+
+
+                                    itemStack.shrink(1);
+
+
+                                }
+                            }
+
+
+                        }
+                        if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.DIO_BEST_FRIEND, player).isPresent()) {
+                            ItemStack curiosStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.DIO_BEST_FRIEND, player).get().right;
+                            if (curiosStack.getItem() == ROMItems.DIO_BEST_FRIEND) {
+                                if (player.isDeadOrDying() || player.getHealth() < 2.5f) {
+
+                                    player.setHealth(player.getMaxHealth());
+                                    player.removeAllEffects();
+                                    player.addEffect(new EffectInstance(Effects.REGENERATION, 1800, 2));
+                                    player.addEffect(new EffectInstance(Effects.ABSORPTION, 200, 2));
+                                    player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 1600, 1));
+                                    player.addEffect(new EffectInstance(Effects.JUMP, 600, 1));
+                                    player.level.broadcastEntityEvent(player, (byte) 35);
+
+                                    curiosStack.shrink(1);
+                                }
+
+                            }
+                        }
+
+
+                    }
+                }
+
+
+            }
+        }
+    }
+
+    /**
+     * onEntityUpdate worked code !!
+     * If item use updating entity
+     */
+    @SubscribeEvent
+    public void onEntityUpdate(LivingEvent.LivingUpdateEvent event) {
+        PlayerEntity player = Minecraft.getInstance().player;
+
+        LivingEntity livingEntity = event.getEntityLiving();
+
+        World world = livingEntity.level;
+        if (!world.isClientSide) {
+            if (player != null) {
+                for (int i = 0; i < player.inventory.getContainerSize(); i++) {
+                    ItemStack itemStack = player.inventory.getItem(i);
+                    if (itemStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
+                        if (livingEntity instanceof MobEntity) {
+                            float distance = player.distanceTo(livingEntity);
+
+                            if (distance <= 3.5) {
+                                livingEntity.hurt(DamageSource.ANVIL, ROMMathFormula.powerIncreasing(itemStack.getCount(), 5.0f));
+                                Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
+                            }
+
+
+                        }
+                    }
+
+
+                }
+                if (livingEntity instanceof MobEntity) {
+                    float distance = player.distanceTo(livingEntity);
+                    if (CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).isPresent()) {
+                        ItemStack curioStack = CuriosApi.getCuriosHelper().findEquippedCurio(ROMItems.FOCUS_CRYSTAL, player).get().right;
+                        if (curioStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
+
+                            if (distance <= 3.5) {
+                                livingEntity.hurt(DamageSource.ANVIL, curioStack.getCount());
+                                Minecraft.getInstance().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
+                            }
+                        }
+
+                    }
+                }
+
+                if(ROMUtils.checkInventory(player,ROMItems.POWER_ELIXIR)){
+                    if(player.getHealth()<=3f){
+                        player.setHealth(5);
+
+                        ROMUtils.replaceItem(new ItemStack(ROMItems.POWER_ELIXIR),new ItemStack(ROMItems.EMPTY_ELIXIR));
+                    }
+                }
+            }
+        }
+
 
     }
 }

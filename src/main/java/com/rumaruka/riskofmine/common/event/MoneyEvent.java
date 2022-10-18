@@ -3,6 +3,7 @@ package com.rumaruka.riskofmine.common.event;
 import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.common.cap.money.ROMMoney;
 import com.rumaruka.riskofmine.common.cap.money.data.Money;
+import com.rumaruka.riskofmine.common.entity.weapon.EntityStickyBomb;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -56,4 +57,4 @@ public class MoneyEvent {
         }
 
     }
- }
+}

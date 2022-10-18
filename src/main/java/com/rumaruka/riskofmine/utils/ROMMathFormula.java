@@ -13,7 +13,7 @@ public class ROMMathFormula {
     private final PlayerEntity player = Minecraft.getInstance().player;
     public static float powerIncreasing(float x,float y) {
 
-        return MathHelper.abs((float) ROMMathUtils.multiply(x,y))/30 - (ROMMathUtils.percent(15) * ROMMathUtils.percent(x*y));
+        return MathHelper.abs((float) ROMMathUtils.multiply(x,y))/30 - (ROMMathUtils.percent(5) + ROMMathUtils.percent(x*y));
 
 
     }

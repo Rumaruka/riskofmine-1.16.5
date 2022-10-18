@@ -11,9 +11,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-public class LunarCoinItem extends Item {
+public class LunarCoinItem extends GamePlayItem {
     public LunarCoinItem( ) {
-        super(new Properties().tab(ModSetup.ITEM_GROUP));
+        super();
+
     }
 
     @Override

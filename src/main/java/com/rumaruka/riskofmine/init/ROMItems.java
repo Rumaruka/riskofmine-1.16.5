@@ -1,28 +1,42 @@
 package com.rumaruka.riskofmine.init;
 
 
+import com.google.common.collect.Lists;
 import com.rumaruka.riskofmine.common.items.common.*;
-import com.rumaruka.riskofmine.common.items.equipment.*;
+import com.rumaruka.riskofmine.common.items.equipment.BlastShowerItem;
+import com.rumaruka.riskofmine.common.items.equipment.TheCrowdFunderItem;
 import com.rumaruka.riskofmine.common.items.gameplay.LunarCoinItem;
 import com.rumaruka.riskofmine.common.items.legendary.AlienHeadItem;
 import com.rumaruka.riskofmine.common.items.legendary.DioBestFriendItem;
 import com.rumaruka.riskofmine.common.items.lunar.BeadsOfFealtyItem;
 import com.rumaruka.riskofmine.common.items.lunar.ShapedGlassItem;
 import com.rumaruka.riskofmine.common.items.scrap.CommonItemScrapItem;
+import com.rumaruka.riskofmine.common.items.scrap.UnCommonItemScrapItem;
 import com.rumaruka.riskofmine.common.items.uncommon.ChronobaubleItem;
 import com.rumaruka.riskofmine.common.items.uncommon.InfusionItem;
 import com.rumaruka.riskofmine.common.items.uncommon.OldWarStealthkitItem;
-import com.rumaruka.riskofmine.common.items.scrap.UnCommonItemScrapItem;
+import com.rumaruka.riskofmine.common.items.voiditems.SaferSpacesItem;
 import com.rumaruka.riskofmine.common.items.voiditems.TentabaubleItem;
+import com.rumaruka.riskofmine.common.items.voiditems.WeepingFungusItem;
+import net.minecraft.item.Item;
 import net.minecraftforge.registries.ObjectHolder;
 import ru.timeconqueror.timecore.api.registry.ItemRegister;
 import ru.timeconqueror.timecore.api.registry.util.AutoRegistrable;
 
-import static com.rumaruka.riskofmine.RiskOfMine.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static com.rumaruka.riskofmine.RiskOfMine.MODID;
+import static com.rumaruka.riskofmine.RiskOfMine.tl;
 import static ru.timeconqueror.timecore.api.util.Hacks.promise;
 
 @ObjectHolder(MODID)
 public class ROMItems {
+
+
+
+
+
     public static final ArmorPiercingRoundsItem ARMOR_PIERCING_ROUNDS = promise();
     public static final BustlingFungusItem BUSTLING_FUNGUS = promise();
     public static final GasolineItem GASOLINE = promise();
@@ -50,7 +64,17 @@ public class ROMItems {
     public static final CommonItemScrapItem COMMON_ITEM_SCRAP = promise();
     public static final UnCommonItemScrapItem UNCOMMON_ITEM_SCRAP = promise();
 
-    public static final LunarCoinItem LUNAR_COIN =promise();
+    public static final WeepingFungusItem WEEPING_FUNGUS = promise();
+
+    public static final PowerElixirItem POWER_ELIXIR = promise();
+    public static final EmptyElixirItem EMPTY_ELIXIR = promise();
+    public static final  TougherTimesItem TOUGHER_TIMES = promise();
+
+    public static final SaferSpacesItem SAFER_SPACES = promise();
+
+
+    public static final LunarCoinItem LUNAR_COIN = promise();
+
 
     private static class Setup {
 
@@ -81,13 +105,58 @@ public class ROMItems {
             REGISTER.register("the_crowdfunder", TheCrowdFunderItem::new).defaultModel(tl("items/the_crowdfunder"));
             REGISTER.register("sticky_bomb", StickyBombItem::new).defaultModel(tl("items/sticky_bomb"));
             REGISTER.register("tentabauble", TentabaubleItem::new).defaultModel(tl("items/tentabauble"));
-            REGISTER.register("topaz_broosh", TopazBroochItem::new).defaultModel(tl("items/topaz_broosh"));
+            REGISTER.register("topaz_brooch", TopazBroochItem::new).defaultModel(tl("items/topaz_broosh"));
             REGISTER.register("bison_steak", BisonSteakItem::new).defaultModel(tl("items/bison_steak"));
             REGISTER.register("common_item_scrap", CommonItemScrapItem::new).defaultModel(tl("items/common_item_scrap"));
             REGISTER.register("uncommon_item_scrap", UnCommonItemScrapItem::new).defaultModel(tl("items/uncommon_item_scrap"));
+            REGISTER.register("weeping_fungus", WeepingFungusItem::new).defaultModel(tl("items/weeping_fungus"));
+            REGISTER.register("power_elixir", PowerElixirItem::new).defaultModel(tl("items/power_elixir"));
+            REGISTER.register("empty_elixir", EmptyElixirItem::new).defaultModel(tl("items/empty_elixir"));
+            REGISTER.register("tougher_times", TougherTimesItem::new).defaultModel(tl("items/tougher_times"));
+            REGISTER.register("safer_spaces", SaferSpacesItem::new).defaultModel(tl("items/safer_spaces"));
 
             REGISTER.register("lunar_coin", LunarCoinItem::new);
+
+
         }
+    }
+
+
+    public static ArrayList<Item> getAllItem(){
+        return (Lists.newArrayList(
+
+                ARMOR_PIERCING_ROUNDS,
+                BUSTLING_FUNGUS,
+                GASOLINE,
+                INFUSION,
+                SHAPED_GLASS,
+                SOLDIER_SYRINGE,
+                MONSTER_TOOTH,
+                CROWBAR,
+                ENERGY_DRINK,
+                BEADS_OF_FEALTY,
+                CHRONOBAUBLE,
+                BLAST_SHOWER,
+                FOCUS_CRYSTAL,
+                DIO_BEST_FRIEND,
+                ALIEN_HEAD,
+                OLD_WAR_STEALTHKIT,
+                TRI_TIP_DAGGER,
+                STUN_GRENADE,
+                WARBANNER,
+                THE_CROWDFUNDER,
+                STICKY_BOMB,
+                TOPAZ_BROOCH,
+                TENTABAUBLE,
+                BISON_STEAK,
+                COMMON_ITEM_SCRAP,
+                UNCOMMON_ITEM_SCRAP,
+                WEEPING_FUNGUS,
+                POWER_ELIXIR,
+                EMPTY_ELIXIR,
+                TOUGHER_TIMES,
+                SAFER_SPACES,
+                LUNAR_COIN));
     }
 
 

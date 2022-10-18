@@ -28,10 +28,7 @@ public class ROMModels {
     private static final TimeModelRegister REGISTER = new TimeModelRegister(MODID);
     public static TimeModelLocation SMALL_CHEST = REGISTER.register("models/tile/small_chest.json");
     public static TimeModelLocation STICKY_BOMB = REGISTER.register("models/entity/sticky_bomb.json");
+   // public static TimeModelLocation GOLDEN_BULLETS = REGISTER.register("models/entity/.json");
     public static TimeModelLocation MULTI_SHOP_OPEN = REGISTER.register("models/tile/multi_shop_open.json");
-    @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
-    public static void registerRenders(FMLCommonSetupEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(ROMEntitys.STICKY_BOMB, StickyBombRenderer::new);
-    }
+
 }

@@ -2,6 +2,7 @@ package com.rumaruka.riskofmine.api;
 
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.text.TextFormatting;
+import org.jetbrains.annotations.NotNull;
 
 public enum CategoryEnum implements IStringSerializable {
     DAMAGE("Damage", "damage", TextFormatting.DARK_RED),
@@ -21,7 +22,7 @@ public enum CategoryEnum implements IStringSerializable {
     }
 
     @Override
-    public String getSerializedName() {
+    public  String getSerializedName() {
         return unlocalizedName;
     }
 

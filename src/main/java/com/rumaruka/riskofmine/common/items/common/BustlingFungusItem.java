@@ -9,6 +9,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -45,7 +46,7 @@ public class BustlingFungusItem extends ItemCollectiblesBase {
         if (!worldIn.isClientSide()) {
             if (!MovingHandler.isMoving((ServerPlayerEntity) entityIn)) {
 
-                ((ServerPlayerEntity) entityIn).heal((stack.getCount() + 0.045f) / 20f);
+                ((PlayerEntity) entityIn).heal((stack.getCount() + 0.045f) / 20f);
 
             }
 
@@ -60,9 +61,9 @@ public class BustlingFungusItem extends ItemCollectiblesBase {
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
-        if (livingEntity instanceof ServerPlayerEntity) {
+        if (livingEntity instanceof PlayerEntity) {
             if (!livingEntity.level.isClientSide()) {
-                if (!MovingHandler.isMoving((ServerPlayerEntity) livingEntity)) {
+                if (!MovingHandler.isMoving((PlayerEntity) livingEntity)) {
 
                     livingEntity.heal((stack.getCount() + 0.045f) / 20f);
 

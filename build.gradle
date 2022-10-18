@@ -13,7 +13,7 @@ buildscript {
 
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7.+'
         classpath 'org.parchmentmc:librarian:1.+'
     }
 }
@@ -35,6 +35,78 @@ group = 'com.rumaruka.riskofmine'
 archivesBaseName = 'riskofmine'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+
+minecraft {
+
+    mappings channel: 'parchment', version: '2022.03.06-1.16.5'
+
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    def extraArgs = Arrays.asList('--mixin riskofmine.mixin.json'.split(' '))
+    def extraVmArgs = Arrays.asList('-Dmixin.debug.countInjections=true', '-Dmixin.debug.verbose=true', '-Dmixin.env.disableRefMap=true')
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            setArgs(extraArgs)
+            setJvmArgs(extraVmArgs)
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                riskofmine {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            setArgs(extraArgs)
+            setJvmArgs(extraVmArgs)
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                riskofmine {
+                    source sourceSets.main
+                }
+            }
+
+        }
+
+        data {
+            property 'forge.logging.console.level', 'debug'
+            property 'fml.earlyprogresswindow', 'false'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            ideaModule "${project.name}.main"
+            workingDirectory project.file('run')
+            forceExit false
+            args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'riskofmine.mixin.json'
+            setArgs(extraArgs)
+            setJvmArgs(extraVmArgs)
+            mods {
+                riskofmine {
+                    source sourceSets.main
+                }
+            }
+            args '--mod', 'riskofmine', '--all', '--output', file('src/generated/resources/'),
+                    '--existing', sourceSets.main.resources.srcDirs[0]
+            environment 'target', 'fmluserdevdata'
+        }
+
+    }
+}
+mixin {
+    add sourceSets.main, "riskofmine.mixin-refmap.json"
+}
 repositories {
     mavenLocal()
     maven {
@@ -51,91 +123,33 @@ repositories {
         name 'CurseMaven'
         url 'https://www.cursemaven.com/'
     }
+    maven { url 'https://maven.blamejared.com' }
     maven { url = "https://dvs1.progwml6.com/files/maven" }
     mavenCentral()
 }
-minecraft {
-
-    mappings channel: 'parchment', version: '2022.03.06-1.16.5'
-
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    def jvmArgs = Arrays.asList('-Dmixin.env.disableRefMap=true'.split(' '))
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-            setJvmArgs(jvmArgs)
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-            args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'riskofmine.mixin.json'
-            mods {
-                riskofmine {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-            setJvmArgs(jvmArgs)
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-            args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'riskofmine.mixin.json'
-            mods {
-                riskofmine {
-                    source sourceSets.main
-                }
-            }
-
-        }
-
-        data {
-            property 'forge.logging.console.level', 'debug'
-            property 'fml.earlyprogresswindow', 'false'
-            property 'mixin.env.disableRefMap', 'true'
-            ideaModule "${project.name}.main"
-            workingDirectory project.file('run')
-            forceExit false
-            args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker', '--mixin', 'riskofmine.mixin.json'
-            mods {
-                riskofmine {
-                    source sourceSets.main
-                }
-            }
-            args '--mod', 'riskofmine', '--all', '--output', file('src/generated/resources/'),
-                    '--existing', sourceSets.main.resources.srcDirs[0]
-            environment 'target', 'fmluserdevdata'
-        }
-
-    }
-}
-
 sourceSets.main.resources {
     srcDir 'src/generated/resources'
 }
 dependencies {
 
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.35'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.39'
 
     implementation fg.deobf('ru.timeconqueror:TimeCore:1.16.5-3.5.0.0:dev')
 
 
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.0")
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.0:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.8.2")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.8.2:api")
 
-    compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.6.1.75")
+    compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.1.152:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.1.152")
 
-    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:3336760") // JER
 
-    compile fg.deobf('curse.maven:catalogue-459701:3399554')
-    compile fg.deobf('curse.maven:configured-457570:3434071')
+
+
+    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:3545538") // JER
+
+    compile fg.deobf('curse.maven:catalogue-459701:3780550')
+    compile fg.deobf('curse.maven:configured-457570:3780620')
 
 
 
@@ -145,9 +159,17 @@ dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation  "org.jetbrains.kotlin:kotlin-reflect"
-    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
-    testAnnotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
 
+    if (System.getProperty("idea.sync.active") != "true") {
+        annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
+        testAnnotationProcessor("org.spongepowered:mixin:0.8.5:processor")
+    }
+
+}
+sourceSets {
+    main {
+        ext.refMap = "riskofmine.mixin-refmap.json"
+    }
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -159,9 +181,11 @@ jar {
                 "Specification-Version": "1",
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
-                "Implementation-Vendor" :"examplemodsareus",
+                "Implementation-Vendor" :"Rumaruka",
                 "FMLCorePluginContainsFMLMod": "true",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+
+                "MixinConfigs"            : "riskofmine.mixin.json"
         ])
     }
 }
