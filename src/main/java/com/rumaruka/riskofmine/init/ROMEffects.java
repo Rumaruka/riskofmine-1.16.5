@@ -3,6 +3,7 @@ package com.rumaruka.riskofmine.init;
 import com.rumaruka.riskofmine.common.effect.BleedEffect;
 import com.rumaruka.riskofmine.common.effect.NullifiedEffect;
 import com.rumaruka.riskofmine.common.effect.StunEffect;
+import com.rumaruka.riskofmine.common.entity.elites.*;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraft.potion.Potion;
@@ -24,4 +25,12 @@ public class ROMEffects {
     public static final RegistryObject<Effect> BLEED = EFFECTS.register("bleed", () -> new BleedEffect(EffectType.BENEFICIAL, 5646433));
     public static final RegistryObject<Effect> NULLIFIED = EFFECTS.register("nullified", () -> new NullifiedEffect(EffectType.BENEFICIAL, 5646433));
 
+
+
+    public static final RegistryObject<Effect> BLAZING = EFFECTS.register("blazing",()->new BlazingMobs(EffectType.BENEFICIAL,5646433));
+    public static final RegistryObject<Effect> CELESTINE = EFFECTS.register("celestine",()->new CelestineMobs(EffectType.BENEFICIAL,5646433));
+    public static final RegistryObject<Effect> GLACIAL = EFFECTS.register("glacial",()->new GlacialMobs(EffectType.BENEFICIAL,5646433));
+    public static final RegistryObject<Effect> MALACHITE = EFFECTS.register("malachite",()->new MalachiteMobs(EffectType.BENEFICIAL,5646433));
+    public static final RegistryObject<Effect> OVERLOADING = EFFECTS.register("overloading",()->new OverloadingMobs(EffectType.BENEFICIAL,5646433));
+    public static final RegistryObject<Effect> PERFECTED = EFFECTS.register("perfected",()->new PerfectedMobs(EffectType.BENEFICIAL,5646433));
 }

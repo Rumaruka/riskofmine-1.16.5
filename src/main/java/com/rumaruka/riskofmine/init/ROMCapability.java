@@ -13,6 +13,9 @@ import com.rumaruka.riskofmine.common.cap.money.ROMMoneyStorage;
 import com.rumaruka.riskofmine.common.cap.shields.IShields;
 import com.rumaruka.riskofmine.common.cap.shields.ROMShields;
 import com.rumaruka.riskofmine.common.cap.shields.ROMShieldsStorage;
+import com.rumaruka.riskofmine.common.cap.timer.ITimer;
+import com.rumaruka.riskofmine.common.cap.timer.ROMTimer;
+import com.rumaruka.riskofmine.common.cap.timer.ROMTimerStorage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -41,6 +44,9 @@ public class ROMCapability {
     public static final Capability<ROMShields> SHIELDS = promise();
     @CapabilityInject(IBarrier.class)
     public static final Capability<ROMBarrier> BARRIER = promise();
+
+    @CapabilityInject(ITimer.class)
+    public static final Capability<ROMTimer>TIMER = promise();
     @AutoRegistrable.InitMethod
     private static void register() {
 
@@ -48,6 +54,7 @@ public class ROMCapability {
         REGISTER.regCapability(ILunar.class,new ROMLunarStorage());
         REGISTER.regCapability(IShields.class,new ROMShieldsStorage());
         REGISTER.regCapability(IBarrier.class,new ROMBarrierStorage());
+        REGISTER.regCapability(ITimer.class,new ROMTimerStorage());
     }
 
     @SubscribeEvent
@@ -81,6 +88,15 @@ public class ROMCapability {
             TimeCore.INSTANCE.getCapabilityManager().attachStaticCoffeeCapability(CapabilityOwner.ENTITY,BARRIER,entity -> entity instanceof PlayerEntity, entity -> new ROMBarrier((PlayerEntity) entity));
             TimeCore.INSTANCE.getCapabilityManager().enableSyncingPlayerCapabilityOnJoin(entity -> {
                 ROMBarrier cap = ROMBarrier.from(entity);
+                if (cap != null) cap.sendAllData();
+            });
+        });
+
+
+        event.enqueueWork(()->{
+            TimeCore.INSTANCE.getCapabilityManager().attachStaticCoffeeCapability(CapabilityOwner.ENTITY,TIMER,entity -> entity instanceof PlayerEntity, entity -> new ROMTimer((PlayerEntity) entity));
+            TimeCore.INSTANCE.getCapabilityManager().enableSyncingPlayerCapabilityOnJoin(entity -> {
+                ROMTimer cap = ROMTimer.from(entity);
                 if (cap != null) cap.sendAllData();
             });
         });

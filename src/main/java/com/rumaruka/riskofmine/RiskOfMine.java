@@ -19,6 +19,7 @@ import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -31,16 +32,16 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.timeconqueror.timecore.api.TimeMod;
 import ru.timeconqueror.timecore.api.client.resource.location.TextureLocation;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
+
+import java.util.*;
 
 import static com.rumaruka.riskofmine.RiskOfMine.MODID;
 
@@ -50,7 +51,7 @@ public class RiskOfMine implements TimeMod {
     public static final String MODID = "riskofmine";
     public static final Logger logger = LogManager.getLogger(MODID);
     private static final ModList MOD_LIST = ModList.get();
-
+    private ArrayList<Enchantment> enchantmentList;
 
     public RiskOfMine() {
         logger.info("Risk Of Mine add in modpack");
@@ -130,6 +131,11 @@ public class RiskOfMine implements TimeMod {
     public static TextureLocation tl(String path) {
         return new TextureLocation(RiskOfMine.MODID, path);
     }
+
+
+
+
+    //Api
 
 
 }
