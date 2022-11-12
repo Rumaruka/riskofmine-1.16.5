@@ -22,6 +22,8 @@ public class ROMMoney extends CoffeeCapability<Entity> implements IMoney {
 
     private final PlayerEntity player;
 
+
+
     public ROMMoney(PlayerEntity player) {
         this.player = player;
     }

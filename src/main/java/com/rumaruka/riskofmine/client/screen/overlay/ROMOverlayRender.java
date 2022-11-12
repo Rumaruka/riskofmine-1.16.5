@@ -10,6 +10,8 @@ import com.rumaruka.riskofmine.common.cap.money.ROMMoney;
 import com.rumaruka.riskofmine.common.cap.money.data.Money;
 import com.rumaruka.riskofmine.common.cap.shields.ROMShields;
 import com.rumaruka.riskofmine.common.cap.shields.data.Shields;
+import com.rumaruka.riskofmine.common.cap.timer.ROMTimer;
+import com.rumaruka.riskofmine.common.cap.timer.data.Timer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
@@ -30,6 +32,7 @@ import java.awt.*;
 @Mod.EventBusSubscriber(modid = RiskOfMine.MODID, value = Dist.CLIENT)
 public class ROMOverlayRender {
     public static KeyBinding keyShowOverlay;
+    public static KeyBinding keyShowTimer;
     private static final Minecraft mc = Minecraft.getInstance();
     @SubscribeEvent
     public static void renderOverlays(RenderGameOverlayEvent.Post event) {
@@ -37,20 +40,28 @@ public class ROMOverlayRender {
 
         if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
 
-            if(keyShowOverlay.isDown()){
+            if (keyShowOverlay.isDown()) {
                 renderNearbyMoneyDisplay(event.getMatrixStack());
                 renderNearbyLunarDisplay(event.getMatrixStack());
 
 
-            }else {
+            } else {
                 renderNearbyShieldsDisplay(event.getMatrixStack());
                 renderNearbyBarrierDisplay(event.getMatrixStack());
+            }   if (keyShowTimer.isDown()) {{
+
+                    renderNearbyTimerDisplay(event.getMatrixStack());
+                }
+
+
             }
         }
     }
     public static void keyPressed(FMLClientSetupEvent event){
         keyShowOverlay=new KeyBinding("Show Overlay", GLFW.GLFW_KEY_M,"Risk of Mine");
+        keyShowTimer=new KeyBinding("Show Timer", GLFW.GLFW_KEY_T,"Risk of Mine");
         ClientRegistry.registerKeyBinding(keyShowOverlay);
+        ClientRegistry.registerKeyBinding(keyShowTimer);
 
     }
 
@@ -125,7 +136,23 @@ public class ROMOverlayRender {
         }
         stack.popPose();
     }
+    private static void renderNearbyTimerDisplay(MatrixStack stack) {
+        stack.pushPose();
+        PlayerEntity player = Minecraft.getInstance().player;
+        FontRenderer fontRenderer = Minecraft.getInstance().font;
+        if (!player.isDeadOrDying()) {
+            ROMTimer romTimer = ROMTimer.from(player);
+            Timer timer = romTimer.timer;
+            String toDisplay = getTimerDisplay(timer);
+            Color color = Color.magenta;
+//            mc.textureManager.bind();
 
+            DrawHelper.drawString(stack, fontRenderer, toDisplay, 145f, 20, color.getRGB());
+
+
+        }
+        stack.popPose();
+    }
     private static String getShieldsDisplay(Shields shields) {
         float currentShields = shields.getCurrentShields();
         return I18n.get("riskofmine.currentshields.name") + currentShields;
@@ -144,6 +171,13 @@ public class ROMOverlayRender {
     private static String getMoneyDisplay(Money money) {
         float currentMoney = money.getCurrentMoney();
         return I18n.get("riskofmine.currentmoney.name") + currentMoney;
+
+    }
+
+
+    private static String getTimerDisplay(Timer timer) {
+        float currentTimer = timer.getCurrentTimer();
+        return "Timer (Dev):" + currentTimer;
 
     }
 }

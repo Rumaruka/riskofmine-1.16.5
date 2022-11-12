@@ -11,7 +11,7 @@ public class Timer extends PropertyContainer {
     public final CoffeeProperty<Integer> timeout = prop("timeout", 0);
 
     public static float getMaxTimer(PlayerEntity player) {
-        return Float.MAX_VALUE;
+        return 10000;
     }
 
     public float getCurrentTimer() {

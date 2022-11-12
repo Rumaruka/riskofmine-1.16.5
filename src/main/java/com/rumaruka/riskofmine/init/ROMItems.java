@@ -111,7 +111,7 @@ public class ROMItems {
             REGISTER.register("uncommon_item_scrap", UnCommonItemScrapItem::new).defaultModel(tl("items/uncommon_item_scrap"));
             REGISTER.register("weeping_fungus", WeepingFungusItem::new).defaultModel(tl("items/weeping_fungus"));
             REGISTER.register("power_elixir", PowerElixirItem::new).defaultModel(tl("items/power_elixir"));
-            REGISTER.register("empty_elixir", EmptyElixirItem::new).defaultModel(tl("items/empty_elixir"));
+            REGISTER.register("empty_elixir", EmptyElixirItem::new).defaultModel(tl("items/empty_bottle"));
             REGISTER.register("tougher_times", TougherTimesItem::new).defaultModel(tl("items/tougher_times"));
             REGISTER.register("safer_spaces", SaferSpacesItem::new).defaultModel(tl("items/safer_spaces"));
 

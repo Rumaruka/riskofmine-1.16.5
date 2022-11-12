@@ -1,6 +1,7 @@
 package com.rumaruka.riskofmine;
 
 
+import com.mojang.brigadier.CommandDispatcher;
 import com.rumaruka.riskofmine.client.ROMEntityRegister;
 import com.rumaruka.riskofmine.client.render.layer.LayerMonsterTooth;
 import com.rumaruka.riskofmine.client.screen.BaseScreen;
@@ -14,17 +15,22 @@ import com.rumaruka.riskofmine.common.event.ShieldsEvent;
 import com.rumaruka.riskofmine.compat.jer.ROMJerPlugin;
 import com.rumaruka.riskofmine.events.GenerationEventHandler;
 import com.rumaruka.riskofmine.init.*;
+import com.rumaruka.riskofmine.ntw.cmd.MoneyAddCommand;
+import com.rumaruka.riskofmine.ntw.cmd.MoneySetCommand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
+import net.minecraft.command.CommandSource;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
@@ -46,6 +52,7 @@ import java.util.*;
 import static com.rumaruka.riskofmine.RiskOfMine.MODID;
 
 @Mod(MODID)
+@Mod.EventBusSubscriber
 public class RiskOfMine implements TimeMod {
     private static RiskOfMine instance;
     public static final String MODID = "riskofmine";
@@ -79,7 +86,12 @@ public class RiskOfMine implements TimeMod {
         MinecraftForge.EVENT_BUS.register(new LunarEvent());
         MinecraftForge.EVENT_BUS.register(new ShieldsEvent());
     }
-
+    @SubscribeEvent
+    public static void onRegisterCommandEvent(RegisterCommandsEvent event) {
+        CommandDispatcher<CommandSource> commandDispatcher = event.getDispatcher();
+        MoneyAddCommand.register(commandDispatcher);
+        MoneySetCommand.register(commandDispatcher);
+    }
 
     private void setup(final FMLCommonSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new GenerationEventHandler());
